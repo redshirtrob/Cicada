@@ -8,15 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Repl.h"
+
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        
-        // insert code here...
-        NSLog(@"Hello, World!");
-        
+        Repl *repl = [[Repl alloc] initWithPrompt:@"lisp> "];
+        [repl run];
     }
     return 0;
 }
-
