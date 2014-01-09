@@ -38,7 +38,9 @@
 
                 NSRange range = [input rangeOfString:@"\n"];
                 if (range.location != NSNotFound) {
-                    [stdout writeData:[input dataUsingEncoding:NSUTF8StringEncoding]];
+                    NSString *cleanedInput = [input stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                    NSArray *tokens = [self tokenize:cleanedInput];
+                    [stdout writeData:[[NSString stringWithFormat:@"%@\n", tokens] dataUsingEncoding:NSUTF8StringEncoding]];
                     readDone = YES;
                 }
             }
@@ -47,6 +49,18 @@
             }
         }
     }
+}
+
+#pragma mark - Private
+
+- (NSArray *)tokenize:(NSString *)string
+{
+    NSString *tmpString = [[string stringByReplacingOccurrencesOfString:@"(" withString:@" ( "]
+                              stringByReplacingOccurrencesOfString:@")" withString:@" ) "];
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.length > 0"];
+    return [[tmpString componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
+                                filteredArrayUsingPredicate:predicate];
 }
 
 @end
