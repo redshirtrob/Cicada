@@ -38,9 +38,16 @@
 
                 NSRange range = [input rangeOfString:@"\n"];
                 if (range.location != NSNotFound) {
+                    NSError *error;
                     NSString *cleanedInput = [input stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-                    NSArray *tokens = [self tokenize:cleanedInput];
-                    [stdout writeData:[[NSString stringWithFormat:@"%@\n", tokens] dataUsingEncoding:NSUTF8StringEncoding]];
+                    NSArray *sexp = [self parse:cleanedInput error:&error];
+
+                    if (!sexp) {
+                        [stdout writeData:[[NSString stringWithFormat:@"Error: %@\n", error] dataUsingEncoding:NSUTF8StringEncoding]];
+                    }
+                    else {
+                        [stdout writeData:[[NSString stringWithFormat:@"%@\n", sexp] dataUsingEncoding:NSUTF8StringEncoding]];
+                    }
                     readDone = YES;
                 }
             }
@@ -53,7 +60,86 @@
 
 #pragma mark - Private
 
-- (NSArray *)tokenize:(NSString *)string
+- (id)atom:(NSString *)token error:(NSError **)error
+{
+    id atom;
+    int intValue;
+    float floatValue;
+
+    NSScanner *scanner = [NSScanner scannerWithString:token];
+    if ([scanner scanInt:&intValue]) {
+        atom = @(intValue);
+    }
+    else if ([scanner scanFloat:&floatValue]) {
+        atom = @(floatValue);
+    }
+    else {
+        atom = token;
+    }
+
+    return atom;
+}
+
+- (id)readFrom:(NSMutableArray *)tokens error:(NSError **)error
+{
+    if (![tokens count]) {
+        if (error) {
+            *error = [NSError errorWithDomain:@"Unexpected EOF" code:-1 userInfo:nil];
+        }
+        return nil;
+    }
+
+    NSString *token = [tokens objectAtIndex:0];
+    [tokens removeObjectAtIndex:0];
+    if ([token isEqualToString:@"("]) {
+        NSMutableArray *array = [NSMutableArray array];
+
+        while (![tokens[0] isEqualToString:@")"]) {
+            id sexp = [self readFrom:tokens error:error];
+            if (!sexp) {
+                return nil;
+            }
+            [array addObject:sexp];
+        }
+        [tokens removeObjectAtIndex:0];
+
+        return array;
+    }
+    else if ([token isEqualToString:@")"]) {
+        if (error) {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Unexpected symbol: %@", token] code:-1 userInfo:nil];
+        }
+        return nil;
+    }
+    else {
+        return [self atom:token error:error];
+    }
+}
+
+- (NSArray *)parse:(NSString *)input error:(NSError **)error
+{
+    NSError *tmpError;
+    NSArray *sexp = nil;
+
+    NSArray *tokens = [self tokenize:input error:&tmpError];
+    if (tokens) {
+        sexp = [self readFrom:[NSMutableArray arrayWithArray:tokens] error:&tmpError];
+        if (!sexp) {
+            if (error) {
+                *error = tmpError;
+            }
+        }
+    }
+    else {
+        if (error) {
+            *error = tmpError;
+        }
+    }
+
+    return sexp;
+}
+
+- (NSArray *)tokenize:(NSString *)string error:(NSError **)error
 {
     NSString *tmpString = [[string stringByReplacingOccurrencesOfString:@"(" withString:@" ( "]
                               stringByReplacingOccurrencesOfString:@")" withString:@" ) "];
