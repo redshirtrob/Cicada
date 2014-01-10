@@ -7,6 +7,13 @@
 //
 
 #import "Repl.h"
+#import "RJEnv.h"
+
+@interface Repl ()
+
+@property (nonatomic, strong) RJEnv *globalEnvironment;
+
+@end
 
 @implementation Repl
 
@@ -15,6 +22,8 @@
     self = [super init];
     if (self) {
         _prompt = prompt;
+        _globalEnvironment = [[RJEnv alloc] init];
+        [_globalEnvironment initialize];
     }
     return self;
 }
@@ -42,6 +51,9 @@
                     NSString *cleanedInput = [input stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                     NSArray *sexp = [self parse:cleanedInput error:&error];
 
+                    id value = [self eval:sexp];
+                    NSLog(@"value=%@", value);
+
                     if (!sexp) {
                         [stdout writeData:[[NSString stringWithFormat:@"Error: %@\n", error] dataUsingEncoding:NSUTF8StringEncoding]];
                     }
@@ -59,6 +71,74 @@
 }
 
 #pragma mark - Private
+
+- (id)eval:(id)sexp environment:(RJEnv *)environment
+{
+    id value = nil;
+    if ([sexp isKindOfClass:[NSString class]]) {
+        value = [environment find:sexp][sexp];
+    }
+    else if (![sexp isKindOfClass:[NSArray class]]) {
+        value = sexp;
+    }
+    else if ([sexp[0] isEqualToString:@"quote"]) {
+        value = sexp[1];
+    }
+    else if ([sexp[0] isEqualToString:@"if"]) {
+        id test = sexp[1];
+        id conseq = sexp[2];
+        id alt = sexp[3];
+        if ([self eval:test environment:environment]) {
+            value = [self eval:conseq environment:environment];
+        }
+        else {
+            value = [self eval:alt environment:environment];
+        }
+    }
+    else if ([sexp[0] isEqualToString:@"set!"]) {
+        id var = sexp[1];
+        id exp = sexp[2];
+        [environment find:var][var] = [self eval:exp environment:environment];
+    }
+    else if ([sexp[0] isEqualToString:@"define"]) {
+        id var = sexp[1];
+        id exp = sexp[2];
+        [environment find:var][var] = [self eval:exp environment:environment];
+    }
+    else if ([sexp[0] isEqualToString:@"lambda"]) {
+        id var = sexp[1];
+        id exp = sexp[2];
+
+        id __weak weakSelf = self;
+        value = ^(NSArray *args) {
+            RJEnv *lambdaEnv = [[RJEnv alloc] initWithParameters:var values:args outerEnvironment:environment];
+            return [weakSelf eval:exp environment:lambdaEnv];
+        };
+    }
+    else if ([sexp[0] isEqualToString:@"begin"]) {
+        for (NSInteger i = 1; i < [sexp count]; i++) {
+            value = [self eval:sexp[i] environment:environment];
+        }
+    }
+    else {
+        NSMutableArray *exps = [NSMutableArray array];
+        for (id exp in sexp) {
+            [exps addObject:[self eval:exp environment:environment]];
+        }
+
+        lambda proc = (lambda)exps[0];
+        [exps removeObjectAtIndex:0];
+
+        value = proc(exps);
+    }
+
+    return value;
+}
+
+- (id)eval:(id)sexp
+{
+    return [self eval:sexp environment:self.globalEnvironment];
+}
 
 - (id)atom:(NSString *)token error:(NSError **)error
 {

@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
             endingLineNumber = "94"
-            landmarkName = "-readFrom:error:"
+            landmarkName = "-eval:environment:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

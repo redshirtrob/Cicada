@@ -11,6 +11,7 @@
 		D4A307A0187E6EE400B3B619 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A3079F187E6EE400B3B619 /* main.m */; };
 		D4A307A4187E6EE400B3B619 /* Lisp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4A307A3187E6EE400B3B619 /* Lisp.1 */; };
 		D4A307AC187E6F5100B3B619 /* Repl.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A307AB187E6F5100B3B619 /* Repl.m */; };
+		D4A307B6187FC0E600B3B619 /* RJEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A307B5187FC0E600B3B619 /* RJEnv.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		D4A307A3187E6EE400B3B619 /* Lisp.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Lisp.1; sourceTree = "<group>"; };
 		D4A307AA187E6F5100B3B619 /* Repl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repl.h; sourceTree = "<group>"; };
 		D4A307AB187E6F5100B3B619 /* Repl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Repl.m; sourceTree = "<group>"; };
+		D4A307B4187FC0E600B3B619 /* RJEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEnv.h; sourceTree = "<group>"; };
+		D4A307B5187FC0E600B3B619 /* RJEnv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEnv.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 				D4A307A1187E6EE400B3B619 /* Supporting Files */,
 				D4A307AA187E6F5100B3B619 /* Repl.h */,
 				D4A307AB187E6F5100B3B619 /* Repl.m */,
+				D4A307B4187FC0E600B3B619 /* RJEnv.h */,
+				D4A307B5187FC0E600B3B619 /* RJEnv.m */,
 			);
 			path = Lisp;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4A307B6187FC0E600B3B619 /* RJEnv.m in Sources */,
 				D4A307AC187E6F5100B3B619 /* Repl.m in Sources */,
 				D4A307A0187E6EE400B3B619 /* main.m in Sources */,
 			);
@@ -257,6 +263,7 @@
 				D4A307A9187E6EE400B3B619 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
