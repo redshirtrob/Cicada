@@ -275,6 +275,21 @@
         }
         return @(v);
     };
+
+    self.env[@"list"] = ^(NSArray *args, NSError **error) {
+        return [NSArray arrayWithArray:args];
+    };
+
+    self.env[@"list?"] = ^(NSArray *args, NSError **error) {
+        BOOL v = NO;
+        if ([args count] == 1) {
+            v = [args[0] isKindOfClass:[NSArray class]];
+        }
+        else {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error list?: wrong number of arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+        }
+        return @(v);
+    };
 }
 
 @end
