@@ -184,6 +184,28 @@
         return @(v);
     };
 
+    self.env[@"cons"] = ^(NSArray *args, NSError **error) {
+        id v = nil;
+        if ([args count] == 2) {
+            NSMutableArray *tmpList = nil;
+            if (![args[0] isKindOfClass:[NSArray class]]) {
+                tmpList = [NSMutableArray arrayWithObject:args[0]];
+            }
+            else {
+                tmpList = [NSMutableArray arrayWithArray:args[0]];
+            }
+
+            if (![args[1] isKindOfClass:[NSArray class]] || [args[1] count]) {
+                [tmpList addObject:args[1]];
+            }
+            v = [NSArray arrayWithArray:tmpList];
+        }
+        else {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error ==: wrong number of arguments (expected: 2 got: %lu)", [args count]] code:-1 userInfo:nil];
+        }
+        return v;
+    };
+
     self.env[@"car"] = ^(NSArray *args, NSError **error) {
         id v = nil;
         if ([args count] == 1) {
