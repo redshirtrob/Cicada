@@ -59,7 +59,9 @@
                         id value = [self eval:sexp error:&error];
 
                         if (!error) {
-                            [stdout writeData:[[NSString stringWithFormat:@"%@\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
+                            if (value) {
+                                [stdout writeData:[[NSString stringWithFormat:@"%@\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
+                            }
                         }
                         else {
                             NSLog(@"%@", error);
@@ -83,6 +85,9 @@
     id value = nil;
     if ([sexp isKindOfClass:[NSString class]]) {
         value = [environment find:sexp][sexp];
+        if (!value) {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error: unbound symbol: '%@'", sexp] code:-1 userInfo:nil];
+        }
     }
     else if (![sexp isKindOfClass:[NSArray class]]) {
         value = sexp;
