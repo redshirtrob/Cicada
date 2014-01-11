@@ -110,9 +110,7 @@
     self.env[@"not"] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 1) {
-            if (args[0] == [NSNull null]) {
-                v = YES;
-            }
+            v = (args[0] == [NSNull null]);
         }
         else {
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"not" expected:1 got:[args count]];
@@ -123,9 +121,7 @@
     self.env[@">"] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
-            if ([args[0] floatValue] > [args[1] floatValue]) {
-                v = YES;
-            }
+            v = ([args[0] floatValue] > [args[1] floatValue]);
         }
         else {
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">" expected:2 got:[args count]];
@@ -136,9 +132,7 @@
     self.env[@">="] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
-            if ([args[0] floatValue] >= [args[1] floatValue]) {
-                v = YES;
-            }
+            v = ([args[0] floatValue] >= [args[1] floatValue]);
         }
         else {
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">=" expected:2 got:[args count]];
@@ -149,9 +143,7 @@
     self.env[@"<"] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
-            if ([args[0] floatValue] < [args[1] floatValue]) {
-                v = YES;
-            }
+            v = ([args[0] floatValue] < [args[1] floatValue]);
         }
         else {
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<" expected:2 got:[args count]];
@@ -162,9 +154,7 @@
     self.env[@"<="] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
-            if ([args[0] floatValue] <= [args[1] floatValue]) {
-                v = YES;
-            }
+            v = ([args[0] floatValue] <= [args[1] floatValue]);
         }
         else {
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<=" expected:2 got:[args count]];
@@ -175,9 +165,7 @@
     self.env[@"="] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
-            if ([args[0] floatValue] == [args[1] floatValue]) {
-                v = YES;
-            }
+            v = ([args[0] floatValue] == [args[1] floatValue]);
         }
         else {
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"=" expected:2 got:[args count]];
