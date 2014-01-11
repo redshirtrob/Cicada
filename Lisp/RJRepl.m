@@ -1,21 +1,21 @@
 //
-//  Repl.m
+//  RJRepl.m
 //  Lisp
 //
 //  Created by Robert Jones on 1/8/14.
 //  Copyright (c) 2014 Robert Jones. All rights reserved.
 //
 
-#import "Repl.h"
+#import "RJRepl.h"
 #import "RJEnv.h"
 
-@interface Repl ()
+@interface RJRepl ()
 
 @property (nonatomic, strong) RJEnv *globalEnvironment;
 
 @end
 
-@implementation Repl
+@implementation RJRepl
 
 - (id)initWithPrompt:(NSString *)prompt
 {

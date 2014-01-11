@@ -1,5 +1,5 @@
 //
-//  Repl.h
+//  RJRepl.h
 //  Lisp
 //
 //  Created by Robert Jones on 1/8/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Repl : NSObject
+@interface RJRepl : NSObject
 
 @property (nonatomic, copy) NSString *prompt;
 

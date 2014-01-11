@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Repl.h"
+#import "RJRepl.h"
 
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        Repl *repl = [[Repl alloc] initWithPrompt:@"lisp> "];
+        RJRepl *repl = [[RJRepl alloc] initWithPrompt:@"lisp> "];
         [repl run];
     }
     return 0;
