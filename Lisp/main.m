@@ -14,7 +14,7 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        RJRepl *repl = [[RJRepl alloc] initWithPrompt:@"lisp> "];
+        RJRepl *repl = [[RJRepl alloc] initWithPrompt:@"rjlisp> "];
         [repl run];
     }
     return 0;

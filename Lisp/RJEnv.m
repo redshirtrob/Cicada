@@ -32,6 +32,25 @@
     return [self initWithParameters:nil values:nil outerEnvironment:nil];
 }
 
+- (id)objectForKeyedSubscript:(id)key
+{
+    return self.env[key];
+}
+
+- (void)setObject:(id)object forKeyedSubscript:(id < NSCopying >)aKey
+{
+    self.env[aKey] = object;
+}
+
+- (instancetype)find:(id)aKey
+{
+    id instance = self;
+    if (!self.env[aKey]) {
+        instance = [self.outerEnvironment find:aKey];
+    }
+    return instance;
+}
+
 - (void)initialize
 {
     self.env[@"+"] = ^(NSArray *args, NSError **error) {
@@ -99,25 +118,19 @@
         }
         return @(v);
     };
-}
 
-- (id)objectForKeyedSubscript:(id)key
-{
-    return self.env[key];
-}
-
-- (void)setObject:(id)object forKeyedSubscript:(id < NSCopying >)aKey
-{
-    self.env[aKey] = object;
-}
-
-- (instancetype)find:(id)aKey
-{
-    id instance = self;
-    if (!self.env[aKey]) {
-        instance = [self.outerEnvironment find:aKey];
-    }
-    return instance;
+    self.env[@">"] = ^(NSArray *args, NSError **error) {
+        BOOL v = NO;
+        if ([args count] == 2) {
+            if ([args[0] floatValue] > [args[1] floatValue]) {
+                v = YES;
+            }
+        }
+        else {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error >: too few arguments (expected: 2 got: %lu)", [args count]] code:-1 userInfo:nil];
+        }
+        return @(v);
+    };
 }
 
 @end
