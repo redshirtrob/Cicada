@@ -183,6 +183,54 @@
         }
         return @(v);
     };
+
+    self.env[@"car"] = ^(NSArray *args, NSError **error) {
+        id v = nil;
+        if ([args count] == 1) {
+            NSArray *list = args[0];
+            if ([list isKindOfClass:[NSArray class]]) {
+                if ([list count]) {
+                    v = list[0];
+                }
+                else {
+                    *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error car: attempt to apply car to empty list"] code:-1 userInfo:nil];
+                }
+            }
+            else {
+                *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error car: expected list"] code:-1 userInfo:nil];
+            }
+        }
+        else {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error car: too few arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+        }
+        return v;
+    };
+
+    self.env[@"cdr"] = ^(NSArray *args, NSError **error) {
+        id v = nil;
+        if ([args count] == 1) {
+            NSArray *list = args[0];
+            if ([list isKindOfClass:[NSArray class]]) {
+                NSInteger length = [list count];
+                if (length == 1) {
+                    v = [NSNull null];
+                }
+                else if (length > 1) {
+                    v = [list subarrayWithRange:NSMakeRange(1, length-1)];
+                }
+                else {
+                    *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error cdr: attempt to apply cdr to empty list"] code:-1 userInfo:nil];
+                }
+            }
+            else {
+                *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error cdr: expected list"] code:-1 userInfo:nil];
+            }
+        }
+        else {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error cdr: too few arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+        }
+        return v;
+    };
 }
 
 @end
