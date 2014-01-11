@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D4561AA91881CC09005454CF /* NSError+RJLisp.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AA81881CC09005454CF /* NSError+RJLisp.m */; };
 		D4A3079D187E6EE400B3B619 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A3079C187E6EE400B3B619 /* Foundation.framework */; };
 		D4A307A0187E6EE400B3B619 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A3079F187E6EE400B3B619 /* main.m */; };
 		D4A307A4187E6EE400B3B619 /* Lisp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4A307A3187E6EE400B3B619 /* Lisp.1 */; };
@@ -28,6 +29,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D4561AA71881CC09005454CF /* NSError+RJLisp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+RJLisp.h"; sourceTree = "<group>"; };
+		D4561AA81881CC09005454CF /* NSError+RJLisp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+RJLisp.m"; sourceTree = "<group>"; };
 		D4A30799187E6EE400B3B619 /* Lisp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lisp; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A3079C187E6EE400B3B619 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4A3079F187E6EE400B3B619 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -86,6 +89,8 @@
 				D4A307AB187E6F5100B3B619 /* RJRepl.m */,
 				D4A307B4187FC0E600B3B619 /* RJEnv.h */,
 				D4A307B5187FC0E600B3B619 /* RJEnv.m */,
+				D4561AA71881CC09005454CF /* NSError+RJLisp.h */,
+				D4561AA81881CC09005454CF /* NSError+RJLisp.m */,
 			);
 			path = Lisp;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4A307B6187FC0E600B3B619 /* RJEnv.m in Sources */,
+				D4561AA91881CC09005454CF /* NSError+RJLisp.m in Sources */,
 				D4A307AC187E6F5100B3B619 /* RJRepl.m in Sources */,
 				D4A307A0187E6EE400B3B619 /* main.m in Sources */,
 			);

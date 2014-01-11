@@ -8,6 +8,7 @@
 
 #import "RJRepl.h"
 #import "RJEnv.h"
+#import "NSError+RJLisp.h"
 
 @interface RJRepl ()
 
@@ -47,15 +48,14 @@
 
                 NSRange range = [input rangeOfString:@"\n"];
                 if (range.location != NSNotFound) {
-                    NSError *error;
+                    NSError *error = nil;
                     NSString *cleanedInput = [input stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                     NSArray *sexp = [self parse:cleanedInput error:&error];
 
                     if (!sexp) {
-                        [stdout writeData:[[NSString stringWithFormat:@"Error: %@\n", error] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [stdout writeData:[[NSString stringWithFormat:@"%@\n", error] dataUsingEncoding:NSUTF8StringEncoding]];
                     }
                     else {
-                        NSError *error = nil;
                         id value = [self eval:sexp error:&error];
 
                         if (!error) {
@@ -64,7 +64,7 @@
                             }
                         }
                         else {
-                            NSLog(@"%@", error);
+                            [stdout writeData:[[NSString stringWithFormat:@"%@\n", [error rjlispErrorString]] dataUsingEncoding:NSUTF8StringEncoding]];
                         }
                     }
 
@@ -86,7 +86,7 @@
     if ([sexp isKindOfClass:[NSString class]]) {
         value = [environment find:sexp][sexp];
         if (!value) {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error: unbound symbol: '%@'", sexp] code:-1 userInfo:nil];
+            *error = [NSError rjlispUnboundSymbolError:sexp];
         }
     }
     else if (![sexp isKindOfClass:[NSArray class]]) {
@@ -96,10 +96,14 @@
         value = [NSNull null];
     }
     else if (![sexp[0] isKindOfClass:[NSString class]]) {
-        *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error: unbound symbol: '%@'", sexp[0]] code:-1 userInfo:nil];
+        *error = [NSError rjlispUnboundSymbolError:sexp[0]];
     }
     else if ([sexp[0] isEqualToString:@"quote"]) {
-        value = sexp[1];
+        if ([sexp count] == 2) {
+            value = sexp[1];
+        }
+        else {
+        }
     }
     else if ([sexp[0] isEqualToString:@"if"]) {
         id test = sexp[1];
@@ -198,7 +202,7 @@
 {
     if (![tokens count]) {
         if (error) {
-            *error = [NSError errorWithDomain:@"Unexpected EOF" code:-1 userInfo:nil];
+            *error = [NSError rjlispParseErrorWithString:@"Unexpected EOF"];
         }
         return nil;
     }
@@ -221,7 +225,7 @@
     }
     else if ([token isEqualToString:@")"]) {
         if (error) {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Unexpected symbol: %@", token] code:-1 userInfo:nil];
+            *error = [NSError rjlispParseErrorWithString:[NSString stringWithFormat:@"Unexpected symbol: %@", token]];
         }
         return nil;
     }

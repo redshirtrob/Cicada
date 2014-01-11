@@ -7,6 +7,7 @@
 //
 
 #import "RJEnv.h"
+#import "NSError+RJLisp.h"
 
 @interface RJEnv ()
 
@@ -73,7 +74,7 @@
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error -: too few arguments (at least: 1 got: 0)"] code:-1 userInfo:nil];
+            *error = [NSError rjlispTooFewArgumentsErrorForSymbol:@"-" atLeast:1 got:0];
         }
         return @(v);
     };
@@ -96,12 +97,12 @@
                     v /= [args[i] floatValue];
                 }
                 else {
-                    *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error /: attempt to divide by zero"] code:-1 userInfo:nil];
+                    *error = [NSError rjlispEvalErrorWithString:@"Error /: attempt to divide by zero"];
                 }
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error /: too few arguments (at least: 1 got: 0)"] code:-1 userInfo:nil];
+            *error = [NSError rjlispTooFewArgumentsErrorForSymbol:@"/" atLeast:1 got:0];
         }
         return @(v);
     };
@@ -114,7 +115,7 @@
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error not: too few arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"not" expected:1 got:[args count]];
         }
         return @(v);
     };
@@ -127,7 +128,7 @@
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error >: too few arguments (expected: 2 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">" expected:2 got:[args count]];
         }
         return @(v);
     };
@@ -140,7 +141,7 @@
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error >=: too few arguments (expected: 2 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">=" expected:2 got:[args count]];
         }
         return @(v);
     };
@@ -153,7 +154,7 @@
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error <: too few arguments (expected: 2 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<" expected:2 got:[args count]];
         }
         return @(v);
     };
@@ -166,7 +167,7 @@
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error <=: too few arguments (expected: 2 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<=" expected:2 got:[args count]];
         }
         return @(v);
     };
@@ -179,7 +180,7 @@
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error ==: too few arguments (expected: 2 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"=" expected:2 got:[args count]];
         }
         return @(v);
     };
@@ -201,7 +202,7 @@
             v = [NSArray arrayWithArray:tmpList];
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error ==: wrong number of arguments (expected: 2 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cons" expected:2 got:[args count]];
         }
         return v;
     };
@@ -215,15 +216,15 @@
                     v = list[0];
                 }
                 else {
-                    *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error car: attempt to apply car to empty list"] code:-1 userInfo:nil];
+                    *error = [NSError rjlispEvalErrorWithString:@"Error car: attempt to apply car to empty list"];
                 }
             }
             else {
-                *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error car: expected list"] code:-1 userInfo:nil];
+                *error = [NSError rjlispEvalErrorWithString:@"Error car: expected list"];
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error car: too few arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"car" expected:1 got:[args count]];
         }
         return v;
     };
@@ -241,15 +242,15 @@
                     v = [list subarrayWithRange:NSMakeRange(1, length-1)];
                 }
                 else {
-                    *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error cdr: attempt to apply cdr to empty list"] code:-1 userInfo:nil];
+                    *error = [NSError rjlispEvalErrorWithString:@"Error car: attempt to apply cdr to empty list"];
                 }
             }
             else {
-                *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error cdr: expected list"] code:-1 userInfo:nil];
+                *error = [NSError rjlispEvalErrorWithString:@"Error cdr: expected list"];
             }
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error cdr: too few arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cdr" expected:1 got:[args count]];
         }
         return v;
     };
@@ -260,7 +261,7 @@
             v = args[0] == [NSNull null];
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error null?: wrong number of arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"null?" expected:1 got:[args count]];
         }
         return @(v);
     };
@@ -271,7 +272,7 @@
             v = [args[0] isKindOfClass:[NSString class]];
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error symbol?: wrong number of arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"symbol?" expected:1 got:[args count]];
         }
         return @(v);
     };
@@ -286,7 +287,7 @@
             v = [args[0] isKindOfClass:[NSArray class]];
         }
         else {
-            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error list?: wrong number of arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"list?" expected:1 got:[args count]];
         }
         return @(v);
     };
