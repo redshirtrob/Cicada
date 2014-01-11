@@ -95,6 +95,9 @@
     else if (![sexp count]) {
         value = [NSNull null];
     }
+    else if (![sexp[0] isKindOfClass:[NSString class]]) {
+        *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error: unbound symbol: '%@'", sexp[0]] code:-1 userInfo:nil];
+    }
     else if ([sexp[0] isEqualToString:@"quote"]) {
         value = sexp[1];
     }
