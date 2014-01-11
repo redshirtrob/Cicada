@@ -86,6 +86,19 @@
         }
         return @(v);
     };
+
+    self.env[@"not"] = ^(NSArray *args, NSError **error) {
+        BOOL v = NO;
+        if ([args count] == 1) {
+            if (args[0] == [NSNull null]) {
+                v = YES;
+            }
+        }
+        else {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error not: too few arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+        }
+        return @(v);
+    };
 }
 
 - (id)objectForKeyedSubscript:(id)key

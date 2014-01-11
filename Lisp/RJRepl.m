@@ -104,7 +104,7 @@
         id alt = sexp[3];
         id val = [self eval:test environment:environment error:error];
         if (!*error) {
-            if (val) {
+            if (val != [NSNull null]) {
                 value = [self eval:conseq environment:environment error:error];
             }
             else {
