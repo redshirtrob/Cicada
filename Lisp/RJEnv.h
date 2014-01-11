@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef id (^lambda)(NSArray *);
+typedef id (^lambda)(NSArray *, NSError **);
 
 @interface RJEnv : NSObject
 

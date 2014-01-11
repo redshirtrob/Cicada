@@ -34,7 +34,7 @@
 
 - (void)initialize
 {
-    self.env[@"+"] = ^(NSArray *args) {
+    self.env[@"+"] = ^(NSArray *args, NSError **error) {
         float sum = 0;
         for (NSNumber *number in args) {
             sum += [number floatValue];
@@ -42,12 +42,49 @@
         return @(sum);
     };
 
-    self.env[@"*"] = ^(NSArray *args) {
+    self.env[@"-"] = ^(NSArray *args, NSError **error) {
+        float v = 0;
+        if ([args count] == 1) {
+            v = -[args[0] floatValue];
+        }
+        else if ([args count] > 1) {
+            v = [args[0] floatValue];
+            for (NSInteger i = 1; i < [args count]; i++) {
+                v -= [args[i] floatValue];
+            }
+        }
+        else {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error -: too few arguments (at least: 1 got: 0)"] code:-1 userInfo:nil];
+        }
+        return @(v);
+    };
+
+    self.env[@"*"] = ^(NSArray *args, NSError **error) {
         float prod = 1;
         for (NSNumber *number in args) {
             prod *= [number floatValue];
         }
         return @(prod);
+    };
+
+    self.env[@"/"] = ^(NSArray *args, NSError **error) {
+        float v = 1;
+        if ([args count]) {
+            v = [args[0] floatValue];
+            for (NSInteger i = 1; i < [args count]; i++) {
+                float divisor = [args[i] floatValue];
+                if (divisor != 0) {
+                    v /= [args[i] floatValue];
+                }
+                else {
+                    *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error /: attempt to divide by zero"] code:-1 userInfo:nil];
+                }
+            }
+        }
+        else {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error /: too few arguments (at least: 1 got: 0)"] code:-1 userInfo:nil];
+        }
+        return @(v);
     };
 }
 

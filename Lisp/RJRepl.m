@@ -55,8 +55,15 @@
                         [stdout writeData:[[NSString stringWithFormat:@"Error: %@\n", error] dataUsingEncoding:NSUTF8StringEncoding]];
                     }
                     else {
-                        id value = [self eval:sexp];
-                        [stdout writeData:[[NSString stringWithFormat:@"%@\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
+                        NSError *error = nil;
+                        id value = [self eval:sexp error:&error];
+
+                        if (!error) {
+                            [stdout writeData:[[NSString stringWithFormat:@"%@\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
+                        }
+                        else {
+                            NSLog(@"%@", error);
+                        }
                     }
 
                     readDone = YES;
@@ -71,7 +78,7 @@
 
 #pragma mark - Private
 
-- (id)eval:(id)sexp environment:(RJEnv *)environment
+- (id)eval:(id)sexp environment:(RJEnv *)environment error:(NSError **)error
 {
     id value = nil;
     if ([sexp isKindOfClass:[NSString class]]) {
@@ -87,56 +94,77 @@
         id test = sexp[1];
         id conseq = sexp[2];
         id alt = sexp[3];
-        if ([self eval:test environment:environment]) {
-            value = [self eval:conseq environment:environment];
-        }
-        else {
-            value = [self eval:alt environment:environment];
+        id val = [self eval:test environment:environment error:error];
+        if (!*error) {
+            if (val) {
+                value = [self eval:conseq environment:environment error:error];
+            }
+            else {
+                value = [self eval:alt environment:environment error:error];
+            }
         }
     }
     else if ([sexp[0] isEqualToString:@"set!"]) {
         id var = sexp[1];
         id exp = sexp[2];
-        [environment find:var][var] = [self eval:exp environment:environment];
+        id val = [self eval:exp environment:environment error:error];
+        if (!*error) {
+            [environment find:var][var] = val;
+        }
     }
     else if ([sexp[0] isEqualToString:@"define"]) {
         id var = sexp[1];
         id exp = sexp[2];
-        environment[var] = [self eval:exp environment:environment];
+        id val = [self eval:exp environment:environment error:error];
+        if (!*error) {
+            environment[var] = val;
+        }
     }
     else if ([sexp[0] isEqualToString:@"lambda"]) {
         id var = sexp[1];
         id exp = sexp[2];
 
         id __weak weakSelf = self;
-        value = ^(NSArray *args) {
+        value = ^(NSArray *args, NSError **error) {
             RJEnv *lambdaEnv = [[RJEnv alloc] initWithParameters:var values:args outerEnvironment:environment];
-            return [weakSelf eval:exp environment:lambdaEnv];
+            return [weakSelf eval:exp environment:lambdaEnv error:error];
         };
     }
     else if ([sexp[0] isEqualToString:@"begin"]) {
         for (NSInteger i = 1; i < [sexp count]; i++) {
-            value = [self eval:sexp[i] environment:environment];
+            value = [self eval:sexp[i] environment:environment error:error];
+            if (error) {
+                break;
+            }
         }
     }
     else {
         NSMutableArray *exps = [NSMutableArray array];
+
+        id val = nil;
         for (id exp in sexp) {
-            [exps addObject:[self eval:exp environment:environment]];
+            val = [self eval:exp environment:environment error:error];
+            if (!*error) {
+                [exps addObject:val];
+            }
+            else {
+                break;
+            }
         }
 
-        lambda proc = (lambda)exps[0];
-        [exps removeObjectAtIndex:0];
-
-        value = proc(exps);
+        if (!*error) {
+            lambda proc = (lambda)exps[0];
+            [exps removeObjectAtIndex:0];
+            value = proc(exps, error);
+        }
     }
 
     return value;
 }
 
-- (id)eval:(id)sexp
+- (id)eval:(id)sexp error:(NSError **)error
 {
-    return [self eval:sexp environment:self.globalEnvironment];
+    return [self eval:sexp environment:self.globalEnvironment error:error];
 }
 
 - (id)atom:(NSString *)token error:(NSError **)error
