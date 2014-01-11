@@ -51,15 +51,14 @@
                     NSString *cleanedInput = [input stringByReplacingOccurrencesOfString:@"\n" withString:@""];
                     NSArray *sexp = [self parse:cleanedInput error:&error];
 
-                    id value = [self eval:sexp];
-                    NSLog(@"value=%@", value);
-
                     if (!sexp) {
                         [stdout writeData:[[NSString stringWithFormat:@"Error: %@\n", error] dataUsingEncoding:NSUTF8StringEncoding]];
                     }
                     else {
-                        [stdout writeData:[[NSString stringWithFormat:@"%@\n", sexp] dataUsingEncoding:NSUTF8StringEncoding]];
+                        id value = [self eval:sexp];
+                        [stdout writeData:[[NSString stringWithFormat:@"%@\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
                     }
+
                     readDone = YES;
                 }
             }
@@ -103,7 +102,7 @@
     else if ([sexp[0] isEqualToString:@"define"]) {
         id var = sexp[1];
         id exp = sexp[2];
-        [environment find:var][var] = [self eval:exp environment:environment];
+        environment[var] = [self eval:exp environment:environment];
     }
     else if ([sexp[0] isEqualToString:@"lambda"]) {
         id var = sexp[1];
@@ -143,14 +142,10 @@
 - (id)atom:(NSString *)token error:(NSError **)error
 {
     id atom;
-    int intValue;
     float floatValue;
 
     NSScanner *scanner = [NSScanner scannerWithString:token];
-    if ([scanner scanInt:&intValue]) {
-        atom = @(intValue);
-    }
-    else if ([scanner scanFloat:&floatValue]) {
+    if ([scanner scanFloat:&floatValue]) {
         atom = @(floatValue);
     }
     else {

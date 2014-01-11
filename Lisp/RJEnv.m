@@ -41,6 +41,14 @@
         }
         return @(sum);
     };
+
+    self.env[@"*"] = ^(NSArray *args) {
+        float prod = 1;
+        for (NSNumber *number in args) {
+            prod *= [number floatValue];
+        }
+        return @(prod);
+    };
 }
 
 - (id)objectForKeyedSubscript:(id)key
