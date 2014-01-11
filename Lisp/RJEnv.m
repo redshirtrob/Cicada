@@ -253,6 +253,17 @@
         }
         return v;
     };
+
+    self.env[@"null?"] = ^(NSArray *args, NSError **error) {
+        BOOL v = NO;
+        if ([args count] == 1) {
+            v = args[0] == [NSNull null];
+        }
+        else {
+            *error = [NSError errorWithDomain:[NSString stringWithFormat:@"Error ==: wrong number of arguments (expected: 1 got: %lu)", [args count]] code:-1 userInfo:nil];
+        }
+        return @(v);
+    };
 }
 
 @end
