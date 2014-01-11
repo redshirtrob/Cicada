@@ -54,6 +54,8 @@
 
 - (void)initialize
 {
+    RJEnv * __weak weakSelf = self;
+
     self.env[@"+"] = ^(NSArray *args, NSError **error) {
         float sum = 0;
         for (NSNumber *number in args) {
@@ -276,6 +278,23 @@
         }
         else {
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"list?" expected:1 got:[args count]];
+        }
+        return @(v);
+    };
+
+    self.env[@"eq?"] = ^(NSArray *args, NSError **error) {
+        BOOL v = NO;
+        if ([args count] == 2) {
+            if ([args[0] isKindOfClass:[NSNumber class]] && [args[1] isKindOfClass:[NSNumber class]]) {
+                lambda eq = weakSelf.env[@"="];
+                v = [((NSNumber *)eq(args, error)) boolValue];
+            }
+            else {
+                v = (args[0] == args[1]);
+            }
+        }
+        else {
+            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"eq?" expected:2 got:[args count]];
         }
         return @(v);
     };
