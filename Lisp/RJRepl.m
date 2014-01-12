@@ -8,21 +8,43 @@
 
 #import "RJRepl.h"
 #import "RJEnv.h"
+#import "RJSymbol.h"
+#import "RJSymbolTable.h"
 #import "NSError+RJLisp.h"
+
+#define DefineSymbol(s, v)                      \
+    do {                                        \
+        v = _globalSymbolTable[s];              \
+    } while (0)
 
 @interface RJRepl ()
 
 @property (nonatomic, strong) RJEnv *globalEnvironment;
+@property (nonatomic, strong) RJSymbolTable *globalSymbolTable;
 
 @end
 
-@implementation RJRepl
+@implementation RJRepl {
+    RJSymbol *_quote;
+    RJSymbol *_if;
+    RJSymbol *_set;
+    RJSymbol *_define;
+    RJSymbol *_lambda;
+    RJSymbol *_begin;
+    RJSymbol *_defineMacro;
+    RJSymbol *_quasiQuote;
+    RJSymbol *_unquote;
+    RJSymbol *_unquoteSplicing;
+}
 
 - (id)initWithPrompt:(NSString *)prompt
 {
     self = [super init];
     if (self) {
         _prompt = prompt;
+
+        [self initializeGlobalSymbolTable];
+
         _globalEnvironment = [[RJEnv alloc] init];
         [_globalEnvironment initialize];
     }
@@ -79,6 +101,22 @@
 }
 
 #pragma mark - Private
+
+- (void)initializeGlobalSymbolTable
+{
+    _globalSymbolTable = [[RJSymbolTable alloc] init];
+
+    DefineSymbol(@"quote", _quote);
+    DefineSymbol(@"if", _if);
+    DefineSymbol(@"set!", _set);
+    DefineSymbol(@"define", _define);
+    DefineSymbol(@"lambda", _lambda);
+    DefineSymbol(@"begin", _begin);
+    DefineSymbol(@"define-macro", _defineMacro);
+    DefineSymbol(@"quasiquote", _quasiQuote);
+    DefineSymbol(@"unquote", _unquote);
+    DefineSymbol(@"unquote-splicing", _unquoteSplicing);
+}
 
 - (id)eval:(id)sexp environment:(RJEnv *)environment error:(NSError **)error
 {
