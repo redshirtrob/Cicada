@@ -12,10 +12,7 @@
 #import "RJSymbolTable.h"
 #import "NSError+RJLisp.h"
 
-#define DefineSymbol(s, v)                      \
-    do {                                        \
-        v = _globalSymbolTable[s];              \
-    } while (0)
+//tokenizer = r'''\s*(,@|[('`,)]|"(?:[\\].|[^\\"])*"|;.*|[^\s('"`,;)]*)(.*)'''
 
 @interface RJRepl ()
 
@@ -35,6 +32,7 @@
     RJSymbol *_quasiQuote;
     RJSymbol *_unquote;
     RJSymbol *_unquoteSplicing;
+    RJSymbol *_eof;
 }
 
 - (id)initWithPrompt:(NSString *)prompt
@@ -106,16 +104,18 @@
 {
     _globalSymbolTable = [[RJSymbolTable alloc] init];
 
-    DefineSymbol(@"quote", _quote);
-    DefineSymbol(@"if", _if);
-    DefineSymbol(@"set!", _set);
-    DefineSymbol(@"define", _define);
-    DefineSymbol(@"lambda", _lambda);
-    DefineSymbol(@"begin", _begin);
-    DefineSymbol(@"define-macro", _defineMacro);
-    DefineSymbol(@"quasiquote", _quasiQuote);
-    DefineSymbol(@"unquote", _unquote);
-    DefineSymbol(@"unquote-splicing", _unquoteSplicing);
+    _quote = self.globalSymbolTable[@"quote"];
+    _if = self.globalSymbolTable[@"if"];
+    _set = self.globalSymbolTable[@"set!"];
+    _define = self.globalSymbolTable[@"define"];
+    _lambda = self.globalSymbolTable[@"lambda"];
+    _begin = self.globalSymbolTable[@"begin"];
+    _defineMacro = self.globalSymbolTable[@"define-macro"];
+    _quasiQuote = self.globalSymbolTable[@"quasiquote"];
+    _unquote = self.globalSymbolTable[@"unquote"];
+    _unquoteSplicing = self.globalSymbolTable[@"unquote-splicing"];
+
+    _eof = [RJSymbol symbolWithName:@"#<eof-object>"];
 }
 
 - (id)eval:(id)sexp environment:(RJEnv *)environment error:(NSError **)error
