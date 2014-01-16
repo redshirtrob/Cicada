@@ -12,7 +12,7 @@
 #import "RJSymbolTable.h"
 #import "NSError+RJLisp.h"
 
-//tokenizer = r'''\s*(,@|[('`,)]|"(?:[\\].|[^\\"])*"|;.*|[^\s('"`,;)]*)(.*)'''
+
 
 @interface RJRepl ()
 
@@ -115,7 +115,7 @@
     _unquote = self.globalSymbolTable[@"unquote"];
     _unquoteSplicing = self.globalSymbolTable[@"unquote-splicing"];
 
-    _eof = [RJSymbol symbolWithName:@"#<eof-object>"];
+    _eof = [RJSymbol EOFSymbol];
 }
 
 - (id)eval:(id)sexp environment:(RJEnv *)environment error:(NSError **)error

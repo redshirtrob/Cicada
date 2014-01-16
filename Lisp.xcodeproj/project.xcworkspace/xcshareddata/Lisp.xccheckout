@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>182D6D1B-1D6D-496D-BED7-AB9054CD9680</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Lisp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0B2C4FA3-9709-4E31-9907-9D30D880ED03</key>
+		<string>ssh://github.com/redshirtrob/RJLisp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Lisp.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0B2C4FA3-9709-4E31-9907-9D30D880ED03</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/redshirtrob/RJLisp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0B2C4FA3-9709-4E31-9907-9D30D880ED03</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0B2C4FA3-9709-4E31-9907-9D30D880ED03</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Lisp</string>
+		</dict>
+	</array>
+</dict>
+</plist>

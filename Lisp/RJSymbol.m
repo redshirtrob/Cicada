@@ -17,4 +17,19 @@
     return instance;
 }
 
++ (instancetype)EOFSymbol
+{
+    return [RJSymbol symbolWithName:@"#<eof-object>"];
+}
+
+- (BOOL)isEqual:(RJSymbol *)symbol
+{
+    return [self.name isEqualToString:symbol.name];
+}
+
+- (NSUInteger)hash
+{
+    return [self.name hash];
+}
+
 @end

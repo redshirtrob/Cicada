@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) NSString *name;
 
-+ (id)symbolWithName:(NSString *)name;
++ (instancetype)symbolWithName:(NSString *)name;
+
++ (instancetype)EOFSymbol;
 
 @end

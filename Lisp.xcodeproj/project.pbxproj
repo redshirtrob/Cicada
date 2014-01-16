@@ -10,6 +10,8 @@
 		D4561AA91881CC09005454CF /* NSError+RJLisp.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AA81881CC09005454CF /* NSError+RJLisp.m */; };
 		D4561AAC1882029F005454CF /* RJSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AAB1882029F005454CF /* RJSymbol.m */; };
 		D4561AAF18823380005454CF /* RJSymbolTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AAE18823380005454CF /* RJSymbolTable.m */; };
+		D48F555218879CAC00250214 /* NSFileHandle+RJLisp.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F555118879CAC00250214 /* NSFileHandle+RJLisp.m */; };
+		D48F555518879E9900250214 /* RJInPort.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F555418879E9900250214 /* RJInPort.m */; };
 		D4A3079D187E6EE400B3B619 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A3079C187E6EE400B3B619 /* Foundation.framework */; };
 		D4A307A0187E6EE400B3B619 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A3079F187E6EE400B3B619 /* main.m */; };
 		D4A307A4187E6EE400B3B619 /* Lisp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4A307A3187E6EE400B3B619 /* Lisp.1 */; };
@@ -37,6 +39,10 @@
 		D4561AAB1882029F005454CF /* RJSymbol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJSymbol.m; sourceTree = "<group>"; };
 		D4561AAD18823380005454CF /* RJSymbolTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJSymbolTable.h; sourceTree = "<group>"; };
 		D4561AAE18823380005454CF /* RJSymbolTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJSymbolTable.m; sourceTree = "<group>"; };
+		D48F555018879CAC00250214 /* NSFileHandle+RJLisp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+RJLisp.h"; sourceTree = "<group>"; };
+		D48F555118879CAC00250214 /* NSFileHandle+RJLisp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+RJLisp.m"; sourceTree = "<group>"; };
+		D48F555318879E9900250214 /* RJInPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJInPort.h; sourceTree = "<group>"; };
+		D48F555418879E9900250214 /* RJInPort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJInPort.m; sourceTree = "<group>"; };
 		D4A30799187E6EE400B3B619 /* Lisp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lisp; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A3079C187E6EE400B3B619 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D4A3079F187E6EE400B3B619 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -101,6 +107,10 @@
 				D4561AAB1882029F005454CF /* RJSymbol.m */,
 				D4561AAD18823380005454CF /* RJSymbolTable.h */,
 				D4561AAE18823380005454CF /* RJSymbolTable.m */,
+				D48F555018879CAC00250214 /* NSFileHandle+RJLisp.h */,
+				D48F555118879CAC00250214 /* NSFileHandle+RJLisp.m */,
+				D48F555318879E9900250214 /* RJInPort.h */,
+				D48F555418879E9900250214 /* RJInPort.m */,
 			);
 			path = Lisp;
 			sourceTree = "<group>";
@@ -168,6 +178,8 @@
 				D4561AAC1882029F005454CF /* RJSymbol.m in Sources */,
 				D4561AA91881CC09005454CF /* NSError+RJLisp.m in Sources */,
 				D4A307AC187E6F5100B3B619 /* RJRepl.m in Sources */,
+				D48F555218879CAC00250214 /* NSFileHandle+RJLisp.m in Sources */,
+				D48F555518879E9900250214 /* RJInPort.m in Sources */,
 				D4561AAF18823380005454CF /* RJSymbolTable.m in Sources */,
 				D4A307A0187E6EE400B3B619 /* main.m in Sources */,
 			);
