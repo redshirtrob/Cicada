@@ -13,7 +13,6 @@
 @interface RJInPort : NSObject
 
 + (instancetype)inPortWithStandardInput;
-+ (instancetype)inPortWithStandardOutput;
 
 - (instancetype)initWithFileHandle:(NSFileHandle *)fileHandle;
 

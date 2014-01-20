@@ -54,11 +54,6 @@ static NSString *const PNTokenizerRegEx = @"\\s*(,@|[('`,)]|\"(?:[\\\\].|[^\\\\\
     return [[RJInPort alloc] initWithFileHandle:[NSFileHandle fileHandleWithStandardInput]];
 }
 
-+ (instancetype)inPortWithStandardOutput
-{
-    return [[RJInPort alloc] initWithFileHandle:[NSFileHandle fileHandleWithStandardOutput]];
-}
-
 - (id)initWithFileHandle:(NSFileHandle *)fileHandle
 {
     self = [super init];
