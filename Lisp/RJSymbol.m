@@ -7,6 +7,7 @@
 //
 
 #import "RJSymbol.h"
+#import "NSString+RJLisp.h"
 
 @implementation RJSymbol
 
@@ -30,6 +31,11 @@
 - (NSUInteger)hash
 {
     return [self.name hash];
+}
+
+- (BOOL)isString
+{
+    return [self.name hasPrefix:@"\""];
 }
 
 @end

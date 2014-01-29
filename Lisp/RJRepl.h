@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class RJInPort;
+@class RJEnv;
+
 @interface RJRepl : NSObject
 
-@property (nonatomic, copy) NSString *prompt;
+- (void)replWithPrompt:(NSString *)prompt inPort:(RJInPort *)inPort output:(NSFileHandle *)output;
 
-- (id)initWithPrompt:(NSString *)prompt;
-- (void)run;
+- (id)eval:(id)sexp environment:(RJEnv *)environment error:(NSError **)error;
 
 @end

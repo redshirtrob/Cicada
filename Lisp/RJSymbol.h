@@ -16,4 +16,6 @@
 
 + (instancetype)EOFSymbol;
 
+- (BOOL)isString;
+
 @end

@@ -16,6 +16,6 @@
 
 - (instancetype)initWithFileHandle:(NSFileHandle *)fileHandle;
 
-- (NSString *)nextToken;
+- (RJSymbol *)nextToken;
 
 @end
