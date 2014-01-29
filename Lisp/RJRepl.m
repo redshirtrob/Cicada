@@ -64,7 +64,7 @@
     [stderr writeData:[@"RJLisp 2.0\n" dataUsingEncoding:NSUTF8StringEncoding]];
     while (YES) {
         if (prompt) {
-            [stderr writeData:[[NSString stringWithFormat:@"%@\n", prompt] dataUsingEncoding:NSUTF8StringEncoding]];
+            [stderr writeData:[[NSString stringWithFormat:@"%@", prompt] dataUsingEncoding:NSUTF8StringEncoding]];
         }
 
         id sexp = [self parseFromInPort:inPort error:&error];
