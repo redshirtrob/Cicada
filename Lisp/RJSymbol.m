@@ -38,4 +38,9 @@
     return [self.name hasPrefix:@"\""];
 }
 
+- (NSString *)description
+{
+    return self.name;
+}
+
 @end
