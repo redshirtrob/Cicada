@@ -8,14 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RJSymbol : NSObject
+@interface RJSymbol : NSObject <NSCopying>
 
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, copy) NSString *name;
 
 + (instancetype)symbolWithName:(NSString *)name;
 
 + (instancetype)EOFSymbol;
-
-- (BOOL)isString;
 
 @end

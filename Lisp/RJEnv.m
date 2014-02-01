@@ -7,6 +7,7 @@
 //
 
 #import "RJEnv.h"
+#import "RJSymbol.h"
 #import "NSError+RJLisp.h"
 
 @interface RJEnv ()
@@ -56,7 +57,7 @@
 {
     RJEnv * __weak weakSelf = self;
 
-    self.env[@"+"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"+"]] = ^(NSArray *args, NSError **error) {
         float sum = 0;
         for (NSNumber *number in args) {
             sum += [number floatValue];
@@ -64,7 +65,7 @@
         return @(sum);
     };
 
-    self.env[@"-"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"-"]] = ^(NSArray *args, NSError **error) {
         float v = 0;
         if ([args count] == 1) {
             v = -[args[0] floatValue];
@@ -81,7 +82,7 @@
         return @(v);
     };
 
-    self.env[@"*"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"*"]] = ^(NSArray *args, NSError **error) {
         float prod = 1;
         for (NSNumber *number in args) {
             prod *= [number floatValue];
@@ -89,7 +90,7 @@
         return @(prod);
     };
 
-    self.env[@"/"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"/"]] = ^(NSArray *args, NSError **error) {
         float v = 1;
         if ([args count]) {
             v = [args[0] floatValue];
@@ -109,7 +110,7 @@
         return @(v);
     };
 
-    self.env[@"not"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"not"]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 1) {
             v = (args[0] == [NSNull null]);
@@ -120,7 +121,7 @@
         return @(v);
     };
 
-    self.env[@">"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@">"]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
             v = ([args[0] floatValue] > [args[1] floatValue]);
@@ -131,7 +132,7 @@
         return @(v);
     };
 
-    self.env[@">="] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@">="]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
             v = ([args[0] floatValue] >= [args[1] floatValue]);
@@ -142,7 +143,7 @@
         return @(v);
     };
 
-    self.env[@"<"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"<"]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
             v = ([args[0] floatValue] < [args[1] floatValue]);
@@ -153,7 +154,7 @@
         return @(v);
     };
 
-    self.env[@"<="] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"<="]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
             v = ([args[0] floatValue] <= [args[1] floatValue]);
@@ -164,7 +165,7 @@
         return @(v);
     };
 
-    self.env[@"="] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"="]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
             v = ([args[0] floatValue] == [args[1] floatValue]);
@@ -175,7 +176,7 @@
         return @(v);
     };
 
-    self.env[@"cons"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"cons"]] = ^(NSArray *args, NSError **error) {
         id v = nil;
         if ([args count] == 2) {
             NSMutableArray *tmpList = nil;
@@ -197,7 +198,7 @@
         return v;
     };
 
-    self.env[@"car"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"car"]] = ^(NSArray *args, NSError **error) {
         id v = nil;
         if ([args count] == 1) {
             NSArray *list = args[0];
@@ -219,7 +220,7 @@
         return v;
     };
 
-    self.env[@"cdr"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"cdr"]] = ^(NSArray *args, NSError **error) {
         id v = nil;
         if ([args count] == 1) {
             NSArray *list = args[0];
@@ -245,7 +246,7 @@
         return v;
     };
 
-    self.env[@"null?"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"null?"]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 1) {
             v = args[0] == [NSNull null];
@@ -256,7 +257,7 @@
         return @(v);
     };
 
-    self.env[@"symbol?"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"symbol?"]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 1) {
             v = [args[0] isKindOfClass:[NSString class]];
@@ -267,11 +268,11 @@
         return @(v);
     };
 
-    self.env[@"list"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"list"]] = ^(NSArray *args, NSError **error) {
         return [NSArray arrayWithArray:args];
     };
 
-    self.env[@"list?"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"list?"]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 1) {
             v = [args[0] isKindOfClass:[NSArray class]];
@@ -282,7 +283,7 @@
         return @(v);
     };
 
-    self.env[@"eq?"] = ^(NSArray *args, NSError **error) {
+    self.env[[RJSymbol symbolWithName:@"eq?"]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 2) {
             if ([args[0] isKindOfClass:[NSNumber class]] && [args[1] isKindOfClass:[NSNumber class]]) {

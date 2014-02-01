@@ -23,19 +23,22 @@
     return [RJSymbol symbolWithName:@"#<eof-object>"];
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    return [[self class] symbolWithName:self.name];
+}
+
 - (BOOL)isEqual:(RJSymbol *)symbol
 {
-    return [self.name isEqualToString:symbol.name];
+    if ([symbol isKindOfClass:[RJSymbol class]]) {
+        return [self.name isEqualToString:symbol.name];
+    }
+    return NO;
 }
 
 - (NSUInteger)hash
 {
     return [self.name hash];
-}
-
-- (BOOL)isString
-{
-    return [self.name hasPrefix:@"\""];
 }
 
 - (NSString *)description

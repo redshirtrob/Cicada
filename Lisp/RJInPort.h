@@ -8,14 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "RJSymbol.h"
-
 @interface RJInPort : NSObject
 
 + (instancetype)inPortWithStandardInput;
 
 - (instancetype)initWithFileHandle:(NSFileHandle *)fileHandle;
 
-- (RJSymbol *)nextToken;
+- (id)nextToken;
 
 @end

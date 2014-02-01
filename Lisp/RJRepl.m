@@ -168,7 +168,6 @@
                 value = [self eval:sexp[i] environment:environment error:error];
             }
             sexp = sexp[[sexp count]-1];
-            done = YES;
         }
         else {
             NSMutableArray *exps = [NSMutableArray array];
@@ -176,7 +175,7 @@
             id val = nil;
             for (id exp in sexp) {
                 val = [self eval:exp environment:environment error:error];
-                [exps addObject:exp];
+                [exps addObject:val];
             }
 
             id proc = exps[0];
@@ -200,41 +199,41 @@
     return [self eval:sexp environment:self.globalEnvironment error:error];
 }
 
-- (id)atom:(RJSymbol *)token error:(NSError **)error
+- (id)atom:(id)token error:(NSError **)error
 {
     id atom;
 
-    if ([token isEqual:[RJSymbol symbolWithName:@"#t"]]) {
+    if ([token isEqualToString:@"#t"]) {
         atom = @YES;
     }
-    else if ([token isEqual:[RJSymbol symbolWithName:@"#f"]]) {
+    else if ([token isEqualToString:@"#f"]) {
         atom = @NO;
     }
-    else if ([token isString]) {
-        atom = [[token.name substringWithRange:NSMakeRange(1, [token.name length]-2)] decodeBackslash];
+    else if ([token hasPrefix:@"\""]) {
+        atom = [[token substringWithRange:NSMakeRange(1, [token length]-2)] decodeBackslash];
     }
     else {
         float floatValue;
 
-        NSScanner *scanner = [NSScanner scannerWithString:token.name];
+        NSScanner *scanner = [NSScanner scannerWithString:token];
         if ([scanner scanFloat:&floatValue]) {
             atom = @(floatValue);
         }
         else {
-            atom = self.globalSymbolTable[token.name];
+            atom = self.globalSymbolTable[token];
         }
     }
     return atom;
 }
 
-- (id)readAheadFromInPort:(RJInPort *)inPort token:(RJSymbol *)token error:(NSError **)error
+- (id)readAheadFromInPort:(RJInPort *)inPort token:(id)token error:(NSError **)error
 {
     NSInteger index;
-    if ([token isEqual:[RJSymbol symbolWithName:@"("]]) {
+    if ([token isEqualToString:@"("]) {
         NSMutableArray *array = [NSMutableArray array];
         while (YES) {
             token = [inPort nextToken];
-            if ([token isEqual:[RJSymbol symbolWithName:@")"]]) {
+            if ([token isEqualToString:@")"]) {
                 return array;
             }
             else {
@@ -248,7 +247,7 @@
             }
         }
     }
-    else if ([token isEqual:[RJSymbol symbolWithName:@")"]]) {
+    else if ([token isEqualToString:@")"]) {
         *error = [NSError rjlispParseErrorWithString:[NSString stringWithFormat:@"Unexpected symbol: %@", token]];
         return nil;
     }
@@ -267,7 +266,7 @@
 
 - (RJSymbol *)readFromInPort:(RJInPort *)inPort error:(NSError **)error
 {
-    RJSymbol *token = [inPort nextToken];
+    id token = [inPort nextToken];
     if (token != [RJSymbol EOFSymbol]) {
         token = [self readAheadFromInPort:inPort token:token error:error];
     }
@@ -282,12 +281,10 @@
     if (![exp isKindOfClass:[NSArray class]]) {
         expandedExp = sexp;
     }
-
-    if (![sexp count]) {
+    else if (![sexp count]) {
         *error = [NSError rjlispParseErrorWithString:@"Invalid length"];
     }
-
-    if (sexp[0] == _quote) {
+    else if (sexp[0] == _quote) {
         if ([sexp count] != 2) {
             *error = [NSError rjlispParseErrorWithString:@"Invalid length"];
         }
@@ -459,7 +456,7 @@
         NSMutableArray *array = [NSMutableArray arrayWithCapacity:[sexp count]];
         for (id exp in sexp) {
             id tmpExp = [self expand:exp topLevel:NO error:error];
-            if (!tmpExp) {
+            if (tmpExp) {
                 [array addObject:tmpExp];
             }
             else {
@@ -518,7 +515,7 @@
 - (id)parseFromInPort:(RJInPort *)inPort error:(NSError **)error
 {
     id sexp = [self readFromInPort:inPort error:error];
-    if (!error) {
+    if (!*error) {
         sexp = [self expand:sexp topLevel:YES error:error];
     }
     return sexp;

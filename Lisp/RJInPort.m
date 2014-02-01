@@ -7,6 +7,7 @@
 //
 
 #import "RJInPort.h"
+#import "RJSymbol.h"
 #import "NSFileHandle+RJLisp.h"
 
 /*
@@ -15,6 +16,9 @@
  *                    1            3              3                    1
  * tokenizer = r'''\s*(,@|[('`,)]|"(?:[\\].|[^\\"])*"|;.*|[^\s('"`,;)]*)(.*)'''
  *                        2     2     4  4  5    5        6          6  7  7
+ *
+ *                 \s*(,@|[('`,)]|"(?:[\\].|[^\\"])*"|;.*|[^\s('"`,;)]*)(.*)
+ * static NSString *const PNTokenizerRegEx = @"\\s*(,@|[('`,)]|\"(?:[\\\\].|[^\\\\\"])*\"|;.*|[^\\s('\"`,;)]*)(.*)";
  *
  * Briefly this means match:
  *  - Any number of whitespace characters, followed by
@@ -38,6 +42,7 @@
  */
 
 static NSString *const PNTokenizerRegEx = @"\\s*(,@|[('`,)]|\"(?:[\\\\].|[^\\\\\"])*\"|;.*|[^\\s('\"`,;)]*)(.*)";
+//static NSString *const PNTokenizerRegEx = @"(a)(b)";
 
 @interface RJInPort ()
 
@@ -71,7 +76,7 @@ static NSString *const PNTokenizerRegEx = @"\\s*(,@|[('`,)]|\"(?:[\\\\].|[^\\\\\
     return self;
 }
 
-- (RJSymbol *)nextToken
+- (id)nextToken
 {
     while (YES) {
         if (![self.line length]) {
@@ -81,16 +86,16 @@ static NSString *const PNTokenizerRegEx = @"\\s*(,@|[('`,)]|\"(?:[\\\\].|[^\\\\\
             return [RJSymbol EOFSymbol];
         }
 
-        NSArray *matches = [self.regex matchesInString:self.line options:0 range:NSMakeRange(0, [self.line length])];
-        if ([matches count] == 2) {
-            NSTextCheckingResult *result = matches[0];
-            NSString *token = [self.line substringWithRange:result.range];
+        NSTextCheckingResult *match = [self.regex firstMatchInString:self.line options:0 range:NSMakeRange(0, [self.line length])];
+        if (match) {
+            NSRange range = [match rangeAtIndex:1];
+            NSString *token = [self.line substringWithRange:range];
 
-            result = matches[1];
-            self.line = [self.line substringWithRange:result.range];
+            range = [match rangeAtIndex:2];
+            self.line = [self.line substringWithRange:range];
 
             if ([token length] && ![token hasPrefix:@";"]) {
-                return [RJSymbol symbolWithName:token];
+                return token;
             }
         }
     }
