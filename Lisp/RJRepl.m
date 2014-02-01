@@ -183,7 +183,7 @@
             if ([proc isKindOfClass:[RJProcedure class]]) {
                 RJProcedure *tmpProc = (RJProcedure *)proc;
                 sexp = tmpProc.expression;
-                environment = [[RJEnv alloc] initWithParameters:tmpProc.parameters values:exps outerEnvironment:environment];
+                environment = [[RJEnv alloc] initWithParameters:tmpProc.parameters values:exps outerEnvironment:tmpProc.environment];
             }
             else {
                 value = ((lambda)proc)(exps, error);
