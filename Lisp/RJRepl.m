@@ -39,7 +39,7 @@
     RJSymbol *_let;
     RJSymbol *_eof;
 
-    NSArray *_quotes;
+    NSDictionary *_quotes;
 }
 
 - (id)init
@@ -67,6 +67,7 @@
             [stderr writeData:[[NSString stringWithFormat:@"%@", prompt] dataUsingEncoding:NSUTF8StringEncoding]];
         }
 
+        error = nil;
         id sexp = [self parseFromInPort:inPort error:&error];
         if ([sexp isEqual:_eof]) {
             return;
@@ -104,7 +105,7 @@
     _append = self.globalSymbolTable[@"append"];
     _let = self.globalSymbolTable[@"let"];
 
-    _quotes = @[_quote, _quasiQuote, _unquote, _unquoteSplicing];
+    _quotes = @{@"'" : _quote, @"`" : _quasiQuote, @"," : _unquote, @",@" : _unquoteSplicing};
 
     _eof = [RJSymbol EOFSymbol];
 }
@@ -175,7 +176,12 @@
             id val = nil;
             for (id exp in sexp) {
                 val = [self eval:exp environment:environment error:error];
-                [exps addObject:val];
+                if (!*error) {
+                    [exps addObject:val];
+                }
+                else {
+                    exps = nil;
+                }
             }
 
             id proc = exps[0];
@@ -185,8 +191,11 @@
                 sexp = tmpProc.expression;
                 environment = [[RJEnv alloc] initWithParameters:tmpProc.parameters values:exps outerEnvironment:tmpProc.environment];
             }
-            else {
+            else if (proc) {
                 value = ((lambda)proc)(exps, error);
+                done = YES;
+            }
+            else {
                 done = YES;
             }
         }
@@ -228,7 +237,6 @@
 
 - (id)readAheadFromInPort:(RJInPort *)inPort token:(id)token error:(NSError **)error
 {
-    NSInteger index;
     if ([token isEqualToString:@"("]) {
         NSMutableArray *array = [NSMutableArray array];
         while (YES) {
@@ -251,9 +259,9 @@
         *error = [NSError rjlispParseErrorWithString:[NSString stringWithFormat:@"Unexpected symbol: %@", token]];
         return nil;
     }
-    else if ( (index = [_quotes indexOfObject:token]) != NSNotFound) {
-        token = [self readFromInPort:inPort error:error];
-        return @[_quotes[index], token];
+    else if ([[_quotes allKeys] indexOfObject:token] != NSNotFound) {
+        id tmpToken = [self readFromInPort:inPort error:error];
+        return @[_quotes[token], tmpToken];
     }
     else if ([token isEqual:[RJSymbol EOFSymbol]]) {
         *error = [NSError rjlispParseErrorWithString:@"Unexpected EOF"];
@@ -286,7 +294,7 @@
     }
     else if (sexp[0] == _quote) {
         if ([sexp count] != 2) {
-            *error = [NSError rjlispParseErrorWithString:@"Invalid length"];
+            *error = [NSError rjlispParseErrorWithString:@"quote: Invalid length"];
         }
         else {
         expandedExp = sexp;
@@ -299,7 +307,7 @@
             sexp = [NSArray arrayWithArray:array];
         }
         if ([sexp count] != 4) {
-            *error = [NSError rjlispParseErrorWithString:@"Invalid length"];
+            *error = [NSError rjlispParseErrorWithString:@"if: Invalid length"];
         }
         else {
             // TODO: Map
@@ -406,7 +414,7 @@
         }
         else {
             NSArray *vars = sexp[1];
-            id body = sexp[2];
+            id body = [sexp subarrayWithRange:NSMakeRange(2, [sexp count]-2)];
 
             BOOL valid = YES;
             if ([vars isKindOfClass:[NSArray class]]) {

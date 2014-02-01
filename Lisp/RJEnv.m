@@ -23,7 +23,12 @@
 {
     self = [super init];
     if (self) {
-        _env = [NSMutableDictionary dictionaryWithObjects:values forKeys:parameters];
+        if ([parameters isKindOfClass:[RJSymbol class]]) {
+            _env = [NSMutableDictionary dictionaryWithDictionary:@{(RJSymbol *)parameters : values}];
+        }
+        else {
+            _env = [NSMutableDictionary dictionaryWithObjects:values forKeys:parameters];
+        }
         _outerEnvironment = outerEnvironment;
     }
     return self;
@@ -298,6 +303,20 @@
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"eq?" expected:2 got:[args count]];
         }
         return @(v);
+    };
+
+    self.env[[RJSymbol symbolWithName:@"append"]] = ^(NSArray *args, NSError **error) {
+        NSMutableArray *array = [NSMutableArray array];
+        for (id arg in args) {
+            if ([arg isKindOfClass:[NSArray class]]) {
+                [array addObjectsFromArray:arg];
+            }
+            else {
+                *error = [NSError rjlispEvalErrorWithString:@"Error append: expected list"];
+                array = nil;
+            }
+        }
+        return array ? [NSArray arrayWithArray:array] : nil;
     };
 }
 
