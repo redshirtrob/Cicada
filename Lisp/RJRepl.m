@@ -306,11 +306,12 @@
             NSMutableArray *array = [NSMutableArray arrayWithCapacity:4];
             for (id exp in sexp) {
                 id tmpExp = [self expand:exp topLevel:NO error:error];
-                if (!tmpExp) {
-                    [array addObject:tmpExp];
+                if (*error) {
+                    array = nil;
+                    break;
                 }
                 else {
-                    array = nil;
+                    [array addObject:tmpExp];
                 }
             }
             if (array) {
@@ -342,7 +343,7 @@
         else {
             id def = sexp[0];
             id v = sexp[1];
-            id body = sexp[2];
+            id body = [sexp subarrayWithRange:NSMakeRange(2, [sexp count]-2)];
             if ([v isKindOfClass:[NSArray class]] && [((NSArray *)v) count]) {
                 id f = v[0];
                 id args = [v subarrayWithRange:NSMakeRange(1, [v count]-1)];
