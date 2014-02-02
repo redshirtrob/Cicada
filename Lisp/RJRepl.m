@@ -76,7 +76,7 @@
         id value = [self eval:sexp error:&error];
         if (!error) {
             if (value) {
-                [output writeData:[[NSString stringWithFormat:@"%@\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
+                [output writeData:[[NSString stringWithFormat:@"%@\n", [self toString:value]] dataUsingEncoding:NSUTF8StringEncoding]];
             }
         }
         else {
@@ -108,6 +108,43 @@
     _quotes = @{@"'" : _quote, @"`" : _quasiQuote, @"," : _unquote, @",@" : _unquoteSplicing};
 
     _eof = [RJSymbol EOFSymbol];
+}
+
+- (NSString *)toString:(id)exp
+{
+    NSString *stringValue = nil;
+    if ([exp isKindOfClass:[NSNumber class]]) {
+        CFNumberRef number = (__bridge CFNumberRef)exp;
+        if (number == (void *)kCFBooleanTrue) {
+            stringValue = @"#t";
+        }
+        else if (number == (void *)kCFBooleanFalse) {
+            stringValue = @"#f";
+        }
+        else {
+            stringValue = [(NSNumber *)exp stringValue];
+        }
+    }
+    else if ([exp isKindOfClass:[RJSymbol class]]) {
+        stringValue = ((RJSymbol *)exp).name;
+    }
+    else if ([exp isKindOfClass:[NSString class]]) {
+        stringValue = (NSString *)exp;
+    }
+    else if ([exp isKindOfClass:[NSArray class]]) {
+        NSMutableString *string = [NSMutableString stringWithString:@""];
+        for (id subExp in (NSArray *)exp) {
+            [string appendFormat:@"%@ ", [self toString:subExp]];
+        }
+        if ([string length]) {
+            [string deleteCharactersInRange:NSMakeRange([string length]-1, 1)];
+        }
+        stringValue = [NSString stringWithFormat:@"(%@)", string];
+    }
+    else {
+        stringValue = [exp stringValue];
+    }
+    return stringValue;
 }
 
 - (id)eval:(id)sexp environment:(RJEnv *)environment error:(NSError **)error
@@ -307,7 +344,7 @@
             sexp = [NSArray arrayWithArray:array];
         }
         if ([sexp count] != 4) {
-            *error = [NSError rjlispParseErrorWithString:@"if: Invalid length"];
+            *error = [NSError rjlispParseErrorWithString:[NSString stringWithFormat:@"if: Invalid length '%@'", [self toString:exp]]];
         }
         else {
             // TODO: Map
