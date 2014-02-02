@@ -75,7 +75,7 @@
 
         id value = [self eval:sexp error:&error];
         if (!error) {
-            if (value) {
+            if (value && value != [NSNull null]) {
                 [output writeData:[[NSString stringWithFormat:@"%@\n", [self toString:value]] dataUsingEncoding:NSUTF8StringEncoding]];
             }
         }
@@ -334,7 +334,7 @@
             *error = [NSError rjlispParseErrorWithString:@"quote: Invalid length"];
         }
         else {
-        expandedExp = sexp;
+            expandedExp = sexp;
         }
     }
     else if (sexp[0] == _if) {
