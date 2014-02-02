@@ -321,6 +321,17 @@
         }
         return array ? [NSArray arrayWithArray:array] : nil;
     };
+
+    self.env[[RJSymbol symbolWithName:@"length"]] = ^(NSArray *args, NSError **error) {
+        NSNumber *v = nil;
+        if ([args[0] isKindOfClass:[NSArray class]]) {
+            v = @([args[0] count]);
+        }
+        else {
+            *error = [NSError rjlispEvalErrorWithString:@"Error length: expected list"];
+        }
+        return v;
+    };
 }
 
 @end
