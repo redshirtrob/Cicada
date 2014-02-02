@@ -118,7 +118,7 @@
     self.env[[RJSymbol symbolWithName:@"not"]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 1) {
-            v = (args[0] == [NSNull null]);
+            v = ![args[0] boolValue];
         }
         else {
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"not" expected:1 got:[args count]];
