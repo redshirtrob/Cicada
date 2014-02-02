@@ -184,18 +184,24 @@
     self.env[[RJSymbol symbolWithName:@"cons"]] = ^(NSArray *args, NSError **error) {
         id v = nil;
         if ([args count] == 2) {
-            NSMutableArray *tmpList = nil;
-            if (![args[0] isKindOfClass:[NSArray class]]) {
+            if ([args[1] isKindOfClass:[NSArray class]]) {
+                /*
+                 * (cons 'a '()) => (a)
+                 * (cons '() '()) => (())
+                 * (cons '() '(a b)) => (() a b)
+                 * (cons '(a b) '()) => ((a b))
+                 * (cons '(a b) '(c d)) => ((a b) c d)
+                 */
+                NSMutableArray *tmpList = nil;
                 tmpList = [NSMutableArray arrayWithObject:args[0]];
+                if ([args[1] count]) {
+                    [tmpList addObjectsFromArray:args[1]];
+                }
+                v = [NSArray arrayWithArray:tmpList];
             }
             else {
-                tmpList = [NSMutableArray arrayWithArray:args[0]];
+                *error = [NSError rjlispParseErrorWithString:@"cons: Expected list"];
             }
-
-            if (![args[1] isKindOfClass:[NSArray class]] || [args[1] count]) {
-                [tmpList addObject:args[1]];
-            }
-            v = [NSArray arrayWithArray:tmpList];
         }
         else {
             *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cons" expected:2 got:[args count]];
@@ -231,14 +237,11 @@
             NSArray *list = args[0];
             if ([list isKindOfClass:[NSArray class]]) {
                 NSInteger length = [list count];
-                if (length == 1) {
-                    v = [NSNull null];
+                if (length <= 1) {
+                    v = [NSArray array];
                 }
                 else if (length > 1) {
                     v = [list subarrayWithRange:NSMakeRange(1, length-1)];
-                }
-                else {
-                    *error = [NSError rjlispEvalErrorWithString:@"Error car: attempt to apply cdr to empty list"];
                 }
             }
             else {
