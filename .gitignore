@@ -1,0 +1,23 @@
+# XCode
+#build
+#distribution
+#*.nib
+*.swp
+*.pbxuser
+#*.perspective
+#*.perspectivev3
+*.xcworkspace
+xcuserdata
+*.xcuserstate
+
+# OSX
+*.DS_Store
+
+.DS_Store
+
+# Temporary files
+*~
+\#*\#
+.#*
+
+lispy.py
