@@ -376,6 +376,24 @@
         }
         return v;
     };
+
+    self.env[[RJSymbol symbolWithName:@"boolean?"]] = ^(NSArray *args, NSError **error) {
+        BOOL v = NO;
+        if ([args count] == 1) {
+            if ([args[0] isKindOfClass:[NSNumber class]]) {
+                CFNumberRef number = (__bridge CFNumberRef)args[0];
+                if (number == (void *)kCFBooleanTrue || number == (void *)kCFBooleanFalse) {
+                    v = YES;
+                }
+            }
+        }
+        else {
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"boolean?" expected:1 got:[args count]];
+            }
+        }
+        return @(v);
+    };
 }
 
 @end
