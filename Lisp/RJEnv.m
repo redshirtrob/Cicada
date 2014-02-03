@@ -289,7 +289,7 @@
     self.env[[RJSymbol symbolWithName:@"null?"]] = ^(NSArray *args, NSError **error) {
         BOOL v = NO;
         if ([args count] == 1) {
-            v = args[0] == [NSNull null];
+            v = ([args[0] isKindOfClass:[NSArray class]] && ![(NSArray *)args[0] count]);
         }
         else {
             if (error) {
