@@ -1,12 +1,12 @@
 //
-//  RJRepl.m
+//  RJEval.m
 //  Lisp
 //
 //  Created by Robert Jones on 1/8/14.
 //  Copyright (c) 2014 Robert Jones. All rights reserved.
 //
 
-#import "RJRepl.h"
+#import "RJEval.h"
 #import "RJEnv.h"
 #import "RJSymbol.h"
 #import "RJProcedure.h"
@@ -15,7 +15,7 @@
 #import "NSError+RJLisp.h"
 #import "NSString+RJLisp.h"
 
-@interface RJRepl ()
+@interface RJEval ()
 
 @property (nonatomic, strong) RJEnv *globalEnvironment;
 @property (nonatomic, strong) RJSymbolTable *globalSymbolTable;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation RJRepl {
+@implementation RJEval {
     RJSymbol *_quote;
     RJSymbol *_if;
     RJSymbol *_set;

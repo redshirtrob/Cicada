@@ -7,18 +7,18 @@
 //
 
 #import "RJProcedure.h"
-#import "RJRepl.h"
+#import "RJEval.h"
 #import "RJEnv.h"
 
 @interface RJProcedure ()
 
-@property (nonatomic, strong) RJRepl *repl;
+@property (nonatomic, strong) RJEval *repl;
 
 @end
 
 @implementation RJProcedure
 
-- (instancetype)initWithParameters:(NSArray *)parameters expression:(id)expression environment:(RJEnv *)environment repl:(RJRepl *)repl
+- (instancetype)initWithParameters:(NSArray *)parameters expression:(id)expression environment:(RJEnv *)environment repl:(RJEval *)repl
 {
     self = [super init];
     if (self) {

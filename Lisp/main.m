@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-#import "RJRepl.h"
+#import "RJEval.h"
 #import "RJInPort.h"
 
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        RJRepl *repl = [[RJRepl alloc] init];
+        RJEval *repl = [[RJEval alloc] init];
         [repl replWithPrompt:@"> " inPort:[RJInPort inPortWithStandardInput] output:[NSFileHandle fileHandleWithStandardOutput]];
     }
     return 0;

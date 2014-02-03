@@ -10,7 +10,7 @@
 
 @class RJLisp;
 @class RJEnv;
-@class RJRepl;
+@class RJEval;
 
 @interface RJProcedure : NSObject
 
@@ -18,7 +18,7 @@
 @property (nonatomic, strong) id expression;
 @property (nonatomic, strong) RJEnv *environment;
 
-- (instancetype)initWithParameters:(NSArray *)parameters expression:(id)expression environment:(RJEnv *)environment repl:(RJRepl *)repl;
+- (instancetype)initWithParameters:(NSArray *)parameters expression:(id)expression environment:(RJEnv *)environment repl:(RJEval *)repl;
 - (id)evalWithValues:(NSArray *)values error:(NSError **)error;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  RJRepl.h
+//  RJEval.h
 //  Lisp
 //
 //  Created by Robert Jones on 1/8/14.
@@ -11,7 +11,7 @@
 @class RJInPort;
 @class RJEnv;
 
-@interface RJRepl : NSObject
+@interface RJEval : NSObject
 
 - (void)replWithPrompt:(NSString *)prompt inPort:(RJInPort *)inPort output:(NSFileHandle *)output;
 
