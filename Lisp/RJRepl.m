@@ -239,7 +239,7 @@
         }
     }
 
-    if (error) {
+    if (error && tmpError) {
         *error = tmpError;
     }
 
@@ -320,7 +320,7 @@
         value = [self atom:token error:&tmpError];
     }
 
-    if (error) {
+    if (error && tmpError) {
         *error = tmpError;
     }
 
@@ -533,7 +533,7 @@
         }
     }
 
-    if (error) {
+    if (error && tmpError) {
         *error = tmpError;
     }
 
@@ -580,7 +580,7 @@
         }
     }
 
-    if (error) {
+    if (error && tmpError) {
         *error = tmpError;
     }
 
@@ -596,7 +596,7 @@
         sexp = [self expand:sexp topLevel:YES error:&tmpError];
     }
 
-    if (error) {
+    if (error && tmpError) {
         *error = tmpError;
     }
 
