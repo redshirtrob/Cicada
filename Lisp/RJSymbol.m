@@ -20,7 +20,12 @@
 
 + (instancetype)EOFSymbol
 {
-    return [RJSymbol symbolWithName:@"#<eof-object>"];
+    static dispatch_once_t pred = 0;
+    static id __strong  _sharedObject = nil;
+    dispatch_once(&pred, ^{
+            _sharedObject = [RJSymbol symbolWithName:@"#<eof-object>"];
+        });
+    return _sharedObject;
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone
