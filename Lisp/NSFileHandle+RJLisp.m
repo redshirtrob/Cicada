@@ -20,11 +20,9 @@
         readData = [self readDataOfLength:1];
         if ([readData length]) {
             NSString *character = [[NSString alloc] initWithData:readData encoding:NSUTF8StringEncoding];
+            [readline appendString:character];
             if ([character isEqualToString:@"\n"]) {
                 done = YES;
-            }
-            else {
-                [readline appendString:character];
             }
         }
         else {
