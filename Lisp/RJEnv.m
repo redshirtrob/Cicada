@@ -82,7 +82,9 @@
             }
         }
         else {
-            *error = [NSError rjlispTooFewArgumentsErrorForSymbol:@"-" atLeast:1 got:0];
+            if (error) {
+                *error = [NSError rjlispTooFewArgumentsErrorForSymbol:@"-" atLeast:1 got:0];
+            }
         }
         return @(v);
     };
@@ -105,12 +107,16 @@
                     v /= [args[i] floatValue];
                 }
                 else {
-                    *error = [NSError rjlispEvalErrorWithString:@"Error /: attempt to divide by zero"];
+                    if (error) {
+                        *error = [NSError rjlispEvalErrorWithString:@"Error /: attempt to divide by zero"];
+                    }
                 }
             }
         }
         else {
-            *error = [NSError rjlispTooFewArgumentsErrorForSymbol:@"/" atLeast:1 got:0];
+            if (error) {
+                *error = [NSError rjlispTooFewArgumentsErrorForSymbol:@"/" atLeast:1 got:0];
+            }
         }
         return @(v);
     };
@@ -121,7 +127,9 @@
             v = ![args[0] boolValue];
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"not" expected:1 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"not" expected:1 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -132,7 +140,9 @@
             v = ([args[0] floatValue] > [args[1] floatValue]);
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">" expected:2 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">" expected:2 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -143,7 +153,9 @@
             v = ([args[0] floatValue] >= [args[1] floatValue]);
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">=" expected:2 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">=" expected:2 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -154,7 +166,9 @@
             v = ([args[0] floatValue] < [args[1] floatValue]);
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<" expected:2 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<" expected:2 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -165,7 +179,9 @@
             v = ([args[0] floatValue] <= [args[1] floatValue]);
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<=" expected:2 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<=" expected:2 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -176,7 +192,9 @@
             v = ([args[0] floatValue] == [args[1] floatValue]);
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"=" expected:2 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"=" expected:2 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -200,11 +218,15 @@
                 v = [NSArray arrayWithArray:tmpList];
             }
             else {
-                *error = [NSError rjlispParseErrorWithString:@"cons: Expected list"];
+                if (error) {
+                    *error = [NSError rjlispParseErrorWithString:@"cons: Expected list"];
+                }
             }
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cons" expected:2 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cons" expected:2 got:[args count]];
+            }
         }
         return v;
     };
@@ -218,15 +240,21 @@
                     v = list[0];
                 }
                 else {
-                    *error = [NSError rjlispEvalErrorWithString:@"Error car: attempt to apply car to empty list"];
+                    if (error) {
+                        *error = [NSError rjlispEvalErrorWithString:@"Error car: attempt to apply car to empty list"];
+                    }
                 }
             }
             else {
-                *error = [NSError rjlispEvalErrorWithString:@"Error car: expected list"];
+                if (error) {
+                    *error = [NSError rjlispEvalErrorWithString:@"Error car: expected list"];
+                }
             }
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"car" expected:1 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"car" expected:1 got:[args count]];
+            }
         }
         return v;
     };
@@ -245,11 +273,15 @@
                 }
             }
             else {
-                *error = [NSError rjlispEvalErrorWithString:@"Error cdr: expected list"];
+                if (error) {
+                    *error = [NSError rjlispEvalErrorWithString:@"Error cdr: expected list"];
+                }
             }
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cdr" expected:1 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cdr" expected:1 got:[args count]];
+            }
         }
         return v;
     };
@@ -260,7 +292,9 @@
             v = args[0] == [NSNull null];
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"null?" expected:1 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"null?" expected:1 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -271,7 +305,9 @@
             v = [args[0] isKindOfClass:[NSString class]];
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"symbol?" expected:1 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"symbol?" expected:1 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -286,7 +322,9 @@
             v = [args[0] isKindOfClass:[NSArray class]];
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"list?" expected:1 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"list?" expected:1 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -303,7 +341,9 @@
             }
         }
         else {
-            *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"eq?" expected:2 got:[args count]];
+            if (error) {
+                *error = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"eq?" expected:2 got:[args count]];
+            }
         }
         return @(v);
     };
@@ -315,7 +355,9 @@
                 [array addObjectsFromArray:arg];
             }
             else {
-                *error = [NSError rjlispEvalErrorWithString:@"Error append: expected list"];
+                if (error) {
+                    *error = [NSError rjlispEvalErrorWithString:@"Error append: expected list"];
+                }
                 array = nil;
             }
         }
@@ -328,7 +370,9 @@
             v = @([args[0] count]);
         }
         else {
-            *error = [NSError rjlispEvalErrorWithString:@"Error length: expected list"];
+            if (error) {
+                *error = [NSError rjlispEvalErrorWithString:@"Error length: expected list"];
+            }
         }
         return v;
     };
