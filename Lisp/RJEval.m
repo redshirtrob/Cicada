@@ -42,75 +42,9 @@
     NSDictionary *_quotes;
 }
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        [self initializeGlobalSymbolTable];
+#pragma mark Class Methods
 
-        _globalEnvironment = [[RJEnv alloc] init];
-        [_globalEnvironment initialize];
-
-        _macroTable = [NSMutableDictionary dictionary];
-    }
-    return self;
-}
-
-- (void)replWithPrompt:(NSString *)prompt inPort:(RJInPort *)inPort output:(NSFileHandle *)output
-{
-    NSError *error;
-    NSFileHandle *stderr = [NSFileHandle fileHandleWithStandardError];
-
-    [stderr writeData:[@"RJLisp 2.0\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    while (YES) {
-        if (prompt) {
-            [stderr writeData:[[NSString stringWithFormat:@"%@", prompt] dataUsingEncoding:NSUTF8StringEncoding]];
-        }
-
-        error = nil;
-        id sexp = [self parseFromInPort:inPort error:&error];
-        if ([sexp isEqual:_eof]) {
-            return;
-        }
-
-        id value = [self eval:sexp error:&error];
-        if (!error) {
-            if (value && value != [NSNull null]) {
-                [output writeData:[[NSString stringWithFormat:@"%@\n", [self toString:value]] dataUsingEncoding:NSUTF8StringEncoding]];
-            }
-        }
-        else {
-            [output writeData:[[NSString stringWithFormat:@"%@\n", [error rjlispErrorString]] dataUsingEncoding:NSUTF8StringEncoding]];
-        }
-    }
-}
-
-#pragma mark - Private
-
-- (void)initializeGlobalSymbolTable
-{
-    _globalSymbolTable = [[RJSymbolTable alloc] init];
-
-    _quote = self.globalSymbolTable[@"quote"];
-    _if = self.globalSymbolTable[@"if"];
-    _set = self.globalSymbolTable[@"set!"];
-    _define = self.globalSymbolTable[@"define"];
-    _lambda = self.globalSymbolTable[@"lambda"];
-    _begin = self.globalSymbolTable[@"begin"];
-    _defineMacro = self.globalSymbolTable[@"define-macro"];
-    _quasiQuote = self.globalSymbolTable[@"quasiquote"];
-    _unquote = self.globalSymbolTable[@"unquote"];
-    _unquoteSplicing = self.globalSymbolTable[@"unquote-splicing"];
-    _cons = self.globalSymbolTable[@"cons"];
-    _append = self.globalSymbolTable[@"append"];
-    _let = self.globalSymbolTable[@"let"];
-
-    _quotes = @{@"'" : _quote, @"`" : _quasiQuote, @"," : _unquote, @",@" : _unquoteSplicing};
-
-    _eof = [RJSymbol EOFSymbol];
-}
-
-- (NSString *)toString:(id)exp
++ (NSString *)toString:(id)exp
 {
     NSString *stringValue = nil;
     if ([exp isKindOfClass:[NSNumber class]]) {
@@ -145,6 +79,73 @@
         stringValue = [exp stringValue];
     }
     return stringValue;
+}
+
+#pragma mark Instance Methods
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self initializeGlobalSymbolTable];
+        [self initializeGlobalEnvironment];
+        _macroTable = [NSMutableDictionary dictionary];
+    }
+    return self;
+}
+
+- (void)replWithPrompt:(NSString *)prompt inPort:(RJInPort *)inPort output:(NSFileHandle *)output
+{
+    NSError *error;
+    NSFileHandle *stderr = [NSFileHandle fileHandleWithStandardError];
+
+    [stderr writeData:[@"RJLisp 2.0\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    while (YES) {
+        if (prompt) {
+            [stderr writeData:[[NSString stringWithFormat:@"%@", prompt] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+
+        error = nil;
+        id sexp = [self parseFromInPort:inPort error:&error];
+        if ([sexp isEqual:_eof]) {
+            return;
+        }
+
+        id value = [self eval:sexp error:&error];
+        if (!error) {
+            if (value && value != [NSNull null]) {
+                [output writeData:[[NSString stringWithFormat:@"%@\n", [RJEval toString:value]] dataUsingEncoding:NSUTF8StringEncoding]];
+            }
+        }
+        else {
+            [output writeData:[[NSString stringWithFormat:@"%@\n", [error rjlispErrorString]] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+    }
+}
+
+#pragma mark - Private
+
+- (void)initializeGlobalSymbolTable
+{
+    _globalSymbolTable = [[RJSymbolTable alloc] init];
+
+    _quote = self.globalSymbolTable[@"quote"];
+    _if = self.globalSymbolTable[@"if"];
+    _set = self.globalSymbolTable[@"set!"];
+    _define = self.globalSymbolTable[@"define"];
+    _lambda = self.globalSymbolTable[@"lambda"];
+    _begin = self.globalSymbolTable[@"begin"];
+    _defineMacro = self.globalSymbolTable[@"define-macro"];
+    _quasiQuote = self.globalSymbolTable[@"quasiquote"];
+    _unquote = self.globalSymbolTable[@"unquote"];
+    _unquoteSplicing = self.globalSymbolTable[@"unquote-splicing"];
+    _cons = self.globalSymbolTable[@"cons"];
+    _append = self.globalSymbolTable[@"append"];
+    _let = self.globalSymbolTable[@"let"];
+
+    _quotes = @{@"'" : _quote, @"`" : _quasiQuote, @"," : _unquote, @",@" : _unquoteSplicing};
+
+    _eof = [RJSymbol EOFSymbol];
 }
 
 - (id)eval:(id)sexp environment:(RJEnv *)environment error:(NSError **)error
@@ -363,7 +364,7 @@
             sexp = [NSArray arrayWithArray:array];
         }
         if ([sexp count] != 4) {
-            tmpError = [NSError rjlispParseErrorWithString:[NSString stringWithFormat:@"if: Invalid length '%@'", [self toString:exp]]];
+            tmpError = [NSError rjlispParseErrorWithString:[NSString stringWithFormat:@"if: Invalid length '%@'", [RJEval toString:exp]]];
         }
         else {
             // TODO: Map
@@ -601,6 +602,367 @@
     }
 
     return sexp;
+}
+
+#define COPY_ERROR(e, t) *e = t
+
+#pragma mark Primitive Procedures
+
+- (void)initializeGlobalEnvironment
+{
+    _globalEnvironment = [[RJEnv alloc] init];
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"+"]] = ^(NSArray *args, NSError **error) {
+        float sum = 0;
+        for (NSNumber *number in args) {
+            sum += [number floatValue];
+        }
+        return @(sum);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"-"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        float v = 0;
+        if ([args count] == 1) {
+            v = -[args[0] floatValue];
+        }
+        else if ([args count] > 1) {
+            v = [args[0] floatValue];
+            for (NSInteger i = 1; i < [args count]; i++) {
+                v -= [args[i] floatValue];
+            }
+        }
+        else {
+            tmpError = [NSError rjlispTooFewArgumentsErrorForSymbol:@"-" atLeast:1 got:0];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"*"]] = ^(NSArray *args, NSError **error) {
+        float prod = 1;
+        for (NSNumber *number in args) {
+            prod *= [number floatValue];
+        }
+        return @(prod);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"/"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        float v = 1;
+        if ([args count]) {
+            v = [args[0] floatValue];
+            for (NSInteger i = 1; i < [args count]; i++) {
+                float divisor = [args[i] floatValue];
+                if (divisor != 0) {
+                    v /= [args[i] floatValue];
+                }
+                else {
+                    tmpError = [NSError rjlispEvalErrorWithString:@"Error /: attempt to divide by zero"];
+                }
+            }
+        }
+        else {
+            tmpError = [NSError rjlispTooFewArgumentsErrorForSymbol:@"/" atLeast:1 got:0];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"not"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 1) {
+            v = ![args[0] boolValue];
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"not" expected:1 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@">"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 2) {
+            v = ([args[0] floatValue] > [args[1] floatValue]);
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">" expected:2 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@">="]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 2) {
+            v = ([args[0] floatValue] >= [args[1] floatValue]);
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@">=" expected:2 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"<"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 2) {
+            v = ([args[0] floatValue] < [args[1] floatValue]);
+        }
+        else {
+            tmpError= [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<" expected:2 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"<="]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 2) {
+            v = ([args[0] floatValue] <= [args[1] floatValue]);
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<=" expected:2 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"="]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 2) {
+            v = ([args[0] floatValue] == [args[1] floatValue]);
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"=" expected:2 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"cons"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        id v = nil;
+        if ([args count] == 2) {
+            if ([args[1] isKindOfClass:[NSArray class]]) {
+                NSMutableArray *tmpList = nil;
+                tmpList = [NSMutableArray arrayWithObject:args[0]];
+                if ([args[1] count]) {
+                    [tmpList addObjectsFromArray:args[1]];
+                }
+                v = [NSArray arrayWithArray:tmpList];
+            }
+            else {
+                tmpError = [NSError rjlispParseErrorWithString:@"cons: Expected list"];
+            }
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cons" expected:2 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return v;
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"car"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        id v = nil;
+        if ([args count] == 1) {
+            NSArray *list = args[0];
+            if ([list isKindOfClass:[NSArray class]]) {
+                if ([list count]) {
+                    v = list[0];
+                }
+                else {
+                    tmpError = [NSError rjlispEvalErrorWithString:@"Error car: attempt to apply car to empty list"];
+                }
+            }
+            else {
+                tmpError = [NSError rjlispEvalErrorWithString:@"Error car: expected list"];
+            }
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"car" expected:1 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return v;
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"cdr"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        id v = nil;
+        if ([args count] == 1) {
+            NSArray *list = args[0];
+            if ([list isKindOfClass:[NSArray class]]) {
+                NSInteger length = [list count];
+                if (length <= 1) {
+                    v = [NSArray array];
+                }
+                else if (length > 1) {
+                    v = [list subarrayWithRange:NSMakeRange(1, length-1)];
+                }
+            }
+            else {
+                tmpError = [NSError rjlispEvalErrorWithString:@"Error cdr: expected list"];
+            }
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cdr" expected:1 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return v;
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"null?"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 1) {
+            v = ([args[0] isKindOfClass:[NSArray class]] && ![(NSArray *)args[0] count]);
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"null?" expected:1 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"symbol?"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 1) {
+            v = [args[0] isKindOfClass:[NSString class]];
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"symbol?" expected:1 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"list"]] = ^(NSArray *args, NSError **error) {
+        return [NSArray arrayWithArray:args];
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"list?"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 1) {
+            v = [args[0] isKindOfClass:[NSArray class]];
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"list?" expected:1 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"eq?"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 2) {
+            if ([args[0] isKindOfClass:[NSNumber class]] && [args[1] isKindOfClass:[NSNumber class]]) {
+                v = ([args[0] floatValue] == [args[1] floatValue]);
+            }
+            else {
+                v = (args[0] == args[1]);
+            }
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"eq?" expected:2 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"append"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        NSMutableArray *array = [NSMutableArray array];
+        for (id arg in args) {
+            if ([arg isKindOfClass:[NSArray class]]) {
+                [array addObjectsFromArray:arg];
+            }
+            else {
+                tmpError = [NSError rjlispEvalErrorWithString:@"Error append: expected list"];
+                array = nil;
+                break;
+            }
+        }
+
+        COPY_ERROR(error, tmpError);
+        return array ? [NSArray arrayWithArray:array] : nil;
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"length"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        NSNumber *v = nil;
+        if ([args[0] isKindOfClass:[NSArray class]]) {
+            v = @([args[0] count]);
+        }
+        else {
+            tmpError = [NSError rjlispEvalErrorWithString:@"Error length: expected list"];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return v;
+    };
+
+    _globalEnvironment[[RJSymbol symbolWithName:@"boolean?"]] = ^(NSArray *args, NSError **error) {
+        NSError *tmpError = nil;
+
+        BOOL v = NO;
+        if ([args count] == 1) {
+            if ([args[0] isKindOfClass:[NSNumber class]]) {
+                CFNumberRef number = (__bridge CFNumberRef)args[0];
+                if (number == (void *)kCFBooleanTrue || number == (void *)kCFBooleanFalse) {
+                    v = YES;
+                }
+            }
+        }
+        else {
+            tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"boolean?" expected:1 got:[args count]];
+        }
+
+        COPY_ERROR(error, tmpError);
+        return @(v);
+    };
 }
 
 @end

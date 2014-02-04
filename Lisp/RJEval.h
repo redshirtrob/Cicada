@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef id (^lambda)(NSArray *, NSError **);
+
 @class RJInPort;
 @class RJEnv;
 
 @interface RJEval : NSObject
 
-- (void)replWithPrompt:(NSString *)prompt inPort:(RJInPort *)inPort output:(NSFileHandle *)output;
++ (NSString *)toString:(id)exp;
 
+- (void)replWithPrompt:(NSString *)prompt inPort:(RJInPort *)inPort output:(NSFileHandle *)output;
 - (id)eval:(id)sexp environment:(RJEnv *)environment error:(NSError **)error;
 
 @end

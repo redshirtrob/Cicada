@@ -8,15 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef id (^lambda)(NSArray *, NSError **);
-
 @interface RJEnv : NSObject
 
 - (id)initWithParameters:(NSArray *)parameters values:(NSArray *)values outerEnvironment:(id)outerEnvironment;
-- (instancetype)find:(id)aKey;
-- (void)initialize;
+- (id)find:(id)aKey;
 
 - (id)objectForKeyedSubscript:(id)key;
-- (void)setObject:(id)object forKeyedSubscript:(id < NSCopying >)aKey;
+- (void)setObject:(id)object forKeyedSubscript:(id <NSCopying>)aKey;
 
 @end
