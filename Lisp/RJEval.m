@@ -15,6 +15,14 @@
 #import "NSError+RJLisp.h"
 #import "NSString+RJLisp.h"
 
+#define COPY_ERROR(e, t)     \
+    do {                     \
+        if (e && t) {        \
+            *e = t;          \
+        }                    \
+    }                        \
+    while (0)
+
 @interface RJEval ()
 
 @property (nonatomic, strong) RJEnv *globalEnvironment;
@@ -240,10 +248,7 @@
         }
     }
 
-    if (error && tmpError) {
-        *error = tmpError;
-    }
-
+    COPY_ERROR(error, tmpError);
     return value;
 }
 
@@ -321,10 +326,7 @@
         value = [self atom:token error:&tmpError];
     }
 
-    if (error && tmpError) {
-        *error = tmpError;
-    }
-
+    COPY_ERROR(error, tmpError);
     return value;
 }
 
@@ -534,10 +536,7 @@
         }
     }
 
-    if (error && tmpError) {
-        *error = tmpError;
-    }
-
+    COPY_ERROR(error, tmpError);
     return expandedExp;
 }
 
@@ -581,10 +580,7 @@
         }
     }
 
-    if (error && tmpError) {
-        *error = tmpError;
-    }
-
+    COPY_ERROR(error, tmpError);
     return expandedExp;
 }
 
@@ -597,14 +593,9 @@
         sexp = [self expand:sexp topLevel:YES error:&tmpError];
     }
 
-    if (error && tmpError) {
-        *error = tmpError;
-    }
-
+    COPY_ERROR(error, tmpError);
     return sexp;
 }
-
-#define COPY_ERROR(e, t) *e = t
 
 #pragma mark Primitive Procedures
 
