@@ -184,12 +184,11 @@
             id alt = sexp[3];
             id val = [self eval:test environment:environment error:&tmpError];
             if ([val boolValue]) {
-                value = [self eval:conseq environment:environment error:&tmpError];
+                sexp = [self eval:conseq environment:environment error:&tmpError];
             }
             else {
-                value = [self eval:alt environment:environment error:&tmpError];
+                sexp = [self eval:alt environment:environment error:&tmpError];
             }
-            done = YES;
         }
         else if (sexp[0] == _set) {
             id var = sexp[1];
@@ -223,10 +222,13 @@
             id val = nil;
             for (id exp in sexp) {
                 val = [self eval:exp environment:environment error:&tmpError];
-                if (!tmpError) {
+
+                // the successful guess is getting inserted into the array here
+                if (val) {
                     [exps addObject:val];
                 }
-                else {
+
+                if (tmpError) {
                     exps = nil;
                 }
             }
