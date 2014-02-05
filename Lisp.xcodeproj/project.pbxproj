@@ -7,6 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D41D345918A1F8E2008167C2 /* RJPlusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */; };
+		D41D345C18A1F8FB008167C2 /* RJMinusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345B18A1F8FB008167C2 /* RJMinusProcedure.m */; };
+		D41D345F18A1F916008167C2 /* RJMultiplyProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345E18A1F916008167C2 /* RJMultiplyProcedure.m */; };
+		D41D346218A1F930008167C2 /* RJDivideProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346118A1F930008167C2 /* RJDivideProcedure.m */; };
+		D41D346518A1F94D008167C2 /* RJNotProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346418A1F94D008167C2 /* RJNotProcedure.m */; };
+		D41D346818A1F968008167C2 /* RJGreaterThanProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346718A1F968008167C2 /* RJGreaterThanProcedure.m */; };
+		D41D346B18A1F983008167C2 /* RJGreaterThanEqualProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346A18A1F983008167C2 /* RJGreaterThanEqualProcedure.m */; };
+		D41D346E18A1F995008167C2 /* RJLessThanProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346D18A1F995008167C2 /* RJLessThanProcedure.m */; };
+		D41D347118A1F9A3008167C2 /* RJLessThanEqualProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347018A1F9A3008167C2 /* RJLessThanEqualProcedure.m */; };
+		D41D347418A1F9B7008167C2 /* RJEqualProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347318A1F9B7008167C2 /* RJEqualProcedure.m */; };
+		D41D347718A1F9C7008167C2 /* RJConsProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347618A1F9C7008167C2 /* RJConsProcedure.m */; };
+		D41D347A18A1F9D9008167C2 /* RJCarProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347918A1F9D9008167C2 /* RJCarProcedure.m */; };
+		D41D347D18A1F9E6008167C2 /* RJCdrProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347C18A1F9E6008167C2 /* RJCdrProcedure.m */; };
+		D41D348018A1F9FF008167C2 /* RJIsNullProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347F18A1F9FF008167C2 /* RJIsNullProcedure.m */; };
+		D41D348318A1FA0F008167C2 /* RJIsSymbolProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348218A1FA0F008167C2 /* RJIsSymbolProcedure.m */; };
+		D41D348618A1FA1E008167C2 /* RJListProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348518A1FA1E008167C2 /* RJListProcedure.m */; };
+		D41D348918A1FA2A008167C2 /* RJIsListProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348818A1FA2A008167C2 /* RJIsListProcedure.m */; };
+		D41D348C18A1FA3F008167C2 /* RJEqProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348B18A1FA3F008167C2 /* RJEqProcedure.m */; };
+		D41D348F18A1FA5B008167C2 /* RJAppendProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348E18A1FA5B008167C2 /* RJAppendProcedure.m */; };
+		D41D349218A1FA6B008167C2 /* RJLengthProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D349118A1FA6B008167C2 /* RJLengthProcedure.m */; };
+		D41D349518A1FA77008167C2 /* RJIsBooleanProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D349418A1FA77008167C2 /* RJIsBooleanProcedure.m */; };
+		D41D349918A207BD008167C2 /* RJPrimitiveProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D349818A207BD008167C2 /* RJPrimitiveProcedure.m */; };
 		D4561AA91881CC09005454CF /* NSError+RJLisp.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AA81881CC09005454CF /* NSError+RJLisp.m */; };
 		D4561AAC1882029F005454CF /* RJSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AAB1882029F005454CF /* RJSymbol.m */; };
 		D4561AAF18823380005454CF /* RJSymbolTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AAE18823380005454CF /* RJSymbolTable.m */; };
@@ -35,6 +57,51 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D41D345718A1F8E2008167C2 /* RJPlusProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJPlusProcedure.h; sourceTree = "<group>"; };
+		D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJPlusProcedure.m; sourceTree = "<group>"; };
+		D41D345A18A1F8FB008167C2 /* RJMinusProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJMinusProcedure.h; sourceTree = "<group>"; };
+		D41D345B18A1F8FB008167C2 /* RJMinusProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJMinusProcedure.m; sourceTree = "<group>"; };
+		D41D345D18A1F916008167C2 /* RJMultiplyProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJMultiplyProcedure.h; sourceTree = "<group>"; };
+		D41D345E18A1F916008167C2 /* RJMultiplyProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJMultiplyProcedure.m; sourceTree = "<group>"; };
+		D41D346018A1F930008167C2 /* RJDivideProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJDivideProcedure.h; sourceTree = "<group>"; };
+		D41D346118A1F930008167C2 /* RJDivideProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJDivideProcedure.m; sourceTree = "<group>"; };
+		D41D346318A1F94D008167C2 /* RJNotProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJNotProcedure.h; sourceTree = "<group>"; };
+		D41D346418A1F94D008167C2 /* RJNotProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJNotProcedure.m; sourceTree = "<group>"; };
+		D41D346618A1F968008167C2 /* RJGreaterThanProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJGreaterThanProcedure.h; sourceTree = "<group>"; };
+		D41D346718A1F968008167C2 /* RJGreaterThanProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJGreaterThanProcedure.m; sourceTree = "<group>"; };
+		D41D346918A1F983008167C2 /* RJGreaterThanEqualProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJGreaterThanEqualProcedure.h; sourceTree = "<group>"; };
+		D41D346A18A1F983008167C2 /* RJGreaterThanEqualProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJGreaterThanEqualProcedure.m; sourceTree = "<group>"; };
+		D41D346C18A1F995008167C2 /* RJLessThanProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLessThanProcedure.h; sourceTree = "<group>"; };
+		D41D346D18A1F995008167C2 /* RJLessThanProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLessThanProcedure.m; sourceTree = "<group>"; };
+		D41D346F18A1F9A3008167C2 /* RJLessThanEqualProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLessThanEqualProcedure.h; sourceTree = "<group>"; };
+		D41D347018A1F9A3008167C2 /* RJLessThanEqualProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLessThanEqualProcedure.m; sourceTree = "<group>"; };
+		D41D347218A1F9B7008167C2 /* RJEqualProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEqualProcedure.h; sourceTree = "<group>"; };
+		D41D347318A1F9B7008167C2 /* RJEqualProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEqualProcedure.m; sourceTree = "<group>"; };
+		D41D347518A1F9C7008167C2 /* RJConsProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJConsProcedure.h; sourceTree = "<group>"; };
+		D41D347618A1F9C7008167C2 /* RJConsProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJConsProcedure.m; sourceTree = "<group>"; };
+		D41D347818A1F9D9008167C2 /* RJCarProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCarProcedure.h; sourceTree = "<group>"; };
+		D41D347918A1F9D9008167C2 /* RJCarProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCarProcedure.m; sourceTree = "<group>"; };
+		D41D347B18A1F9E6008167C2 /* RJCdrProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJCdrProcedure.h; sourceTree = "<group>"; };
+		D41D347C18A1F9E6008167C2 /* RJCdrProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJCdrProcedure.m; sourceTree = "<group>"; };
+		D41D347E18A1F9FF008167C2 /* RJIsNullProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJIsNullProcedure.h; sourceTree = "<group>"; };
+		D41D347F18A1F9FF008167C2 /* RJIsNullProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJIsNullProcedure.m; sourceTree = "<group>"; };
+		D41D348118A1FA0F008167C2 /* RJIsSymbolProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJIsSymbolProcedure.h; sourceTree = "<group>"; };
+		D41D348218A1FA0F008167C2 /* RJIsSymbolProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJIsSymbolProcedure.m; sourceTree = "<group>"; };
+		D41D348418A1FA1E008167C2 /* RJListProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJListProcedure.h; sourceTree = "<group>"; };
+		D41D348518A1FA1E008167C2 /* RJListProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJListProcedure.m; sourceTree = "<group>"; };
+		D41D348718A1FA2A008167C2 /* RJIsListProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJIsListProcedure.h; sourceTree = "<group>"; };
+		D41D348818A1FA2A008167C2 /* RJIsListProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJIsListProcedure.m; sourceTree = "<group>"; };
+		D41D348A18A1FA3F008167C2 /* RJEqProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEqProcedure.h; sourceTree = "<group>"; };
+		D41D348B18A1FA3F008167C2 /* RJEqProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEqProcedure.m; sourceTree = "<group>"; };
+		D41D348D18A1FA5B008167C2 /* RJAppendProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJAppendProcedure.h; sourceTree = "<group>"; };
+		D41D348E18A1FA5B008167C2 /* RJAppendProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJAppendProcedure.m; sourceTree = "<group>"; };
+		D41D349018A1FA6B008167C2 /* RJLengthProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLengthProcedure.h; sourceTree = "<group>"; };
+		D41D349118A1FA6B008167C2 /* RJLengthProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLengthProcedure.m; sourceTree = "<group>"; };
+		D41D349318A1FA77008167C2 /* RJIsBooleanProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJIsBooleanProcedure.h; sourceTree = "<group>"; };
+		D41D349418A1FA77008167C2 /* RJIsBooleanProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJIsBooleanProcedure.m; sourceTree = "<group>"; };
+		D41D349618A2056C008167C2 /* RJPrimitiveProcedures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJPrimitiveProcedures.h; sourceTree = "<group>"; };
+		D41D349718A207BD008167C2 /* RJPrimitiveProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJPrimitiveProcedure.h; sourceTree = "<group>"; };
+		D41D349818A207BD008167C2 /* RJPrimitiveProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJPrimitiveProcedure.m; sourceTree = "<group>"; };
 		D4561AA71881CC09005454CF /* NSError+RJLisp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+RJLisp.h"; sourceTree = "<group>"; };
 		D4561AA81881CC09005454CF /* NSError+RJLisp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+RJLisp.m"; sourceTree = "<group>"; };
 		D4561AAA1882029F005454CF /* RJSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJSymbol.h; sourceTree = "<group>"; };
@@ -72,6 +139,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D41D345618A1F89E008167C2 /* Primitives */ = {
+			isa = PBXGroup;
+			children = (
+				D41D349718A207BD008167C2 /* RJPrimitiveProcedure.h */,
+				D41D349818A207BD008167C2 /* RJPrimitiveProcedure.m */,
+				D41D349618A2056C008167C2 /* RJPrimitiveProcedures.h */,
+				D41D345718A1F8E2008167C2 /* RJPlusProcedure.h */,
+				D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */,
+				D41D345A18A1F8FB008167C2 /* RJMinusProcedure.h */,
+				D41D345B18A1F8FB008167C2 /* RJMinusProcedure.m */,
+				D41D345D18A1F916008167C2 /* RJMultiplyProcedure.h */,
+				D41D345E18A1F916008167C2 /* RJMultiplyProcedure.m */,
+				D41D346018A1F930008167C2 /* RJDivideProcedure.h */,
+				D41D346118A1F930008167C2 /* RJDivideProcedure.m */,
+				D41D346318A1F94D008167C2 /* RJNotProcedure.h */,
+				D41D346418A1F94D008167C2 /* RJNotProcedure.m */,
+				D41D346618A1F968008167C2 /* RJGreaterThanProcedure.h */,
+				D41D346718A1F968008167C2 /* RJGreaterThanProcedure.m */,
+				D41D346918A1F983008167C2 /* RJGreaterThanEqualProcedure.h */,
+				D41D346A18A1F983008167C2 /* RJGreaterThanEqualProcedure.m */,
+				D41D346C18A1F995008167C2 /* RJLessThanProcedure.h */,
+				D41D346D18A1F995008167C2 /* RJLessThanProcedure.m */,
+				D41D346F18A1F9A3008167C2 /* RJLessThanEqualProcedure.h */,
+				D41D347018A1F9A3008167C2 /* RJLessThanEqualProcedure.m */,
+				D41D347218A1F9B7008167C2 /* RJEqualProcedure.h */,
+				D41D347318A1F9B7008167C2 /* RJEqualProcedure.m */,
+				D41D347518A1F9C7008167C2 /* RJConsProcedure.h */,
+				D41D347618A1F9C7008167C2 /* RJConsProcedure.m */,
+				D41D347818A1F9D9008167C2 /* RJCarProcedure.h */,
+				D41D347918A1F9D9008167C2 /* RJCarProcedure.m */,
+				D41D347B18A1F9E6008167C2 /* RJCdrProcedure.h */,
+				D41D347C18A1F9E6008167C2 /* RJCdrProcedure.m */,
+				D41D347E18A1F9FF008167C2 /* RJIsNullProcedure.h */,
+				D41D347F18A1F9FF008167C2 /* RJIsNullProcedure.m */,
+				D41D348118A1FA0F008167C2 /* RJIsSymbolProcedure.h */,
+				D41D348218A1FA0F008167C2 /* RJIsSymbolProcedure.m */,
+				D41D348418A1FA1E008167C2 /* RJListProcedure.h */,
+				D41D348518A1FA1E008167C2 /* RJListProcedure.m */,
+				D41D348718A1FA2A008167C2 /* RJIsListProcedure.h */,
+				D41D348818A1FA2A008167C2 /* RJIsListProcedure.m */,
+				D41D348A18A1FA3F008167C2 /* RJEqProcedure.h */,
+				D41D348B18A1FA3F008167C2 /* RJEqProcedure.m */,
+				D41D348D18A1FA5B008167C2 /* RJAppendProcedure.h */,
+				D41D348E18A1FA5B008167C2 /* RJAppendProcedure.m */,
+				D41D349018A1FA6B008167C2 /* RJLengthProcedure.h */,
+				D41D349118A1FA6B008167C2 /* RJLengthProcedure.m */,
+				D41D349318A1FA77008167C2 /* RJIsBooleanProcedure.h */,
+				D41D349418A1FA77008167C2 /* RJIsBooleanProcedure.m */,
+			);
+			name = Primitives;
+			sourceTree = "<group>";
+		};
 		D4A30790187E6EE400B3B619 = {
 			isa = PBXGroup;
 			children = (
@@ -100,9 +219,10 @@
 		D4A3079E187E6EE400B3B619 /* Lisp */ = {
 			isa = PBXGroup;
 			children = (
+				D4A307A1187E6EE400B3B619 /* Supporting Files */,
+				D41D345618A1F89E008167C2 /* Primitives */,
 				D4A3079F187E6EE400B3B619 /* main.m */,
 				D4A307A3187E6EE400B3B619 /* Lisp.1 */,
-				D4A307A1187E6EE400B3B619 /* Supporting Files */,
 				D4A307AA187E6F5100B3B619 /* RJEval.h */,
 				D4A307AB187E6F5100B3B619 /* RJEval.m */,
 				D4A307B4187FC0E600B3B619 /* RJEnv.h */,
@@ -184,14 +304,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D41D346B18A1F983008167C2 /* RJGreaterThanEqualProcedure.m in Sources */,
+				D41D346218A1F930008167C2 /* RJDivideProcedure.m in Sources */,
+				D41D347418A1F9B7008167C2 /* RJEqualProcedure.m in Sources */,
 				D4A307B6187FC0E600B3B619 /* RJEnv.m in Sources */,
+				D41D346518A1F94D008167C2 /* RJNotProcedure.m in Sources */,
+				D41D348618A1FA1E008167C2 /* RJListProcedure.m in Sources */,
 				D4561AAC1882029F005454CF /* RJSymbol.m in Sources */,
+				D41D345C18A1F8FB008167C2 /* RJMinusProcedure.m in Sources */,
 				D4561AA91881CC09005454CF /* NSError+RJLisp.m in Sources */,
+				D41D347A18A1F9D9008167C2 /* RJCarProcedure.m in Sources */,
+				D41D348918A1FA2A008167C2 /* RJIsListProcedure.m in Sources */,
 				D4A307AC187E6F5100B3B619 /* RJEval.m in Sources */,
+				D41D348018A1F9FF008167C2 /* RJIsNullProcedure.m in Sources */,
 				D48F555218879CAC00250214 /* NSFileHandle+RJLisp.m in Sources */,
+				D41D347718A1F9C7008167C2 /* RJConsProcedure.m in Sources */,
+				D41D349918A207BD008167C2 /* RJPrimitiveProcedure.m in Sources */,
+				D41D345F18A1F916008167C2 /* RJMultiplyProcedure.m in Sources */,
 				D48F555518879E9900250214 /* RJInPort.m in Sources */,
+				D41D347D18A1F9E6008167C2 /* RJCdrProcedure.m in Sources */,
 				D49982BA188E0D8C00A46D9E /* NSString+RJLisp.m in Sources */,
+				D41D349218A1FA6B008167C2 /* RJLengthProcedure.m in Sources */,
+				D41D348F18A1FA5B008167C2 /* RJAppendProcedure.m in Sources */,
+				D41D345918A1F8E2008167C2 /* RJPlusProcedure.m in Sources */,
+				D41D348318A1FA0F008167C2 /* RJIsSymbolProcedure.m in Sources */,
+				D41D349518A1FA77008167C2 /* RJIsBooleanProcedure.m in Sources */,
+				D41D348C18A1FA3F008167C2 /* RJEqProcedure.m in Sources */,
+				D41D346E18A1F995008167C2 /* RJLessThanProcedure.m in Sources */,
 				D4C4057F18961A77000FB608 /* RJProcedure.m in Sources */,
+				D41D346818A1F968008167C2 /* RJGreaterThanProcedure.m in Sources */,
+				D41D347118A1F9A3008167C2 /* RJLessThanEqualProcedure.m in Sources */,
 				D4561AAF18823380005454CF /* RJSymbolTable.m in Sources */,
 				D4A307A0187E6EE400B3B619 /* main.m in Sources */,
 			);
