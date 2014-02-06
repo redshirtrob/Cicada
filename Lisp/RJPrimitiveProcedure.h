@@ -20,6 +20,7 @@
 
 @interface RJPrimitiveProcedure : NSObject
 
+- (instancetype)initWithName:(NSString *)name;
 - (id)evalWithValues:(NSArray *)values error:(NSError **)error;
 - (NSString *)stringValue;
 

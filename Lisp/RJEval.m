@@ -603,27 +603,27 @@
 - (void)initializeGlobalEnvironment
 {
     _globalEnvironment = [[RJEnv alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"+"]] = [[RJPlusProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"-"]] = [[RJMinusProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"*"]] = [[RJMultiplyProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"/"]] = [[RJDivideProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"not"]] = [[RJNotProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@">"]] = [[RJGreaterThanProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@">="]] = [[RJGreaterThanEqualProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"<"]] = [[RJLessThanProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"<="]] = [[RJLessThanEqualProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"="]] = [[RJEqualProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"cons"]] = [[RJConsProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"car"]] = [[RJCarProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"cdr"]] = [[RJCdrProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"null?"]] = [[RJIsNullProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"symbol?"]] = [[RJIsSymbolProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"list"]] = [[RJListProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"list?"]] = [[RJIsListProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"eq?"]] = [[RJEqProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"append"]] = [[RJAppendProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"length"]] = [[RJLengthProcedure alloc] init];
-    _globalEnvironment[[RJSymbol symbolWithName:@"boolean?"]] = [[RJIsBooleanProcedure alloc] init];
+    _globalEnvironment[[RJSymbol symbolWithName:@"+"]] = [[RJPlusProcedure alloc] initWithName:@"+"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"-"]] = [[RJMinusProcedure alloc] initWithName:@"-"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"*"]] = [[RJMultiplyProcedure alloc] initWithName:@"*"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"/"]] = [[RJDivideProcedure alloc] initWithName:@"/"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"not"]] = [[RJNotProcedure alloc] initWithName:@"not"];
+    _globalEnvironment[[RJSymbol symbolWithName:@">"]] = [[RJGreaterThanProcedure alloc] initWithName:@">"];
+    _globalEnvironment[[RJSymbol symbolWithName:@">="]] = [[RJGreaterThanEqualProcedure alloc] initWithName:@">="];
+    _globalEnvironment[[RJSymbol symbolWithName:@"<"]] = [[RJLessThanProcedure alloc] initWithName:@"<"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"<="]] = [[RJLessThanEqualProcedure alloc] initWithName:@"<="];
+    _globalEnvironment[[RJSymbol symbolWithName:@"="]] = [[RJEqualProcedure alloc] initWithName:@"="];
+    _globalEnvironment[[RJSymbol symbolWithName:@"cons"]] = [[RJConsProcedure alloc] initWithName:@"cons"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"car"]] = [[RJCarProcedure alloc] initWithName:@"car"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"cdr"]] = [[RJCdrProcedure alloc] initWithName:@"cdr"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"null?"]] = [[RJIsNullProcedure alloc] initWithName:@"null?"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"symbol?"]] = [[RJIsSymbolProcedure alloc] initWithName:@"symbol?"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"list"]] = [[RJListProcedure alloc] initWithName:@"list"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"list?"]] = [[RJIsListProcedure alloc] initWithName:@"list?"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"eq?"]] = [[RJEqProcedure alloc] initWithName:@"eq?"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"append"]] = [[RJAppendProcedure alloc] initWithName:@"append"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"length"]] = [[RJLengthProcedure alloc] initWithName:@"length"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"boolean?"]] = [[RJIsBooleanProcedure alloc] initWithName:@"boolean?"];
 }
 
 @end

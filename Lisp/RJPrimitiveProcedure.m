@@ -8,7 +8,22 @@
 
 #import "RJPrimitiveProcedure.h"
 
+@interface RJPrimitiveProcedure ()
+
+@property (nonatomic, strong) NSString *name;
+
+@end
+
 @implementation RJPrimitiveProcedure
+
+- (instancetype)initWithName:(NSString *)name
+{
+    self = [super init];
+    if (self) {
+        _name = name;
+    }
+    return self;
+}
 
 - (id)evalWithValues:(NSArray *)values error:(NSError **)error
 {
@@ -17,7 +32,7 @@
 
 - (NSString *)stringValue
 {
-    return [self description];
+    return [NSString stringWithFormat:@"#<Function %@>", self.name];
 }
 
 @end
