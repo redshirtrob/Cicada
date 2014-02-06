@@ -15,4 +15,9 @@
     return nil;
 }
 
+- (NSString *)stringValue
+{
+    return [self description];
+}
+
 @end

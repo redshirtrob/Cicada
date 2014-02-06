@@ -36,4 +36,9 @@
     return [self.repl eval:self.expression environment:evalEnv error:error];
 }
 
+- (NSString *)stringValue
+{
+    return [self description];
+}
+
 @end

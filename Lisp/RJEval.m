@@ -205,7 +205,7 @@
         }
         else if (sexp[0] == _begin) {
             for (NSInteger i = 1; i < [sexp count]-1; i++) {
-                value = [self eval:sexp[i] environment:environment error:&tmpError];
+                [self eval:sexp[i] environment:environment error:&tmpError];
             }
             sexp = sexp[[sexp count]-1];
         }
@@ -216,7 +216,6 @@
             for (id exp in sexp) {
                 val = [self eval:exp environment:environment error:&tmpError];
 
-                // the successful guess is getting inserted into the array here
                 if (val) {
                     [exps addObject:val];
                 }
@@ -485,7 +484,14 @@
             }
 
             if (valid) {
-                id exp = [body count] == 1 ? body[0] : @[_begin, body];
+                if ([body count] == 1) {
+                    exp = body[0];
+                }
+                else {
+                    NSMutableArray *array = [NSMutableArray arrayWithObject:_begin];
+                    [array addObjectsFromArray:body];
+                    exp = [NSArray arrayWithArray:array];
+                }
                 id tmpExp = [self expand:exp topLevel:NO error:&tmpError];
                 expandedExp = @[_lambda, vars, tmpExp];
             }

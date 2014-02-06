@@ -21,5 +21,6 @@
 @interface RJPrimitiveProcedure : NSObject
 
 - (id)evalWithValues:(NSArray *)values error:(NSError **)error;
+- (NSString *)stringValue;
 
 @end
