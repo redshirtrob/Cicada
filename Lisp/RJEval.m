@@ -433,6 +433,7 @@
                             }
                             else {
                                 self.macroTable[v] = proc;
+                                expandedExp = [NSNull null];
                             }
                         }
                     }
