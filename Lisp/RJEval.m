@@ -114,6 +114,13 @@ NSString *RJLocalDefinitions = @"(begin \
     }
 }
 
+- (void)loadFile:(NSString *)filename
+{
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:filename];
+    RJInPort *inPort = [[RJInPort alloc] initWithFileHandle:fileHandle];
+    [self replWithPrompt:nil inPort:inPort output:nil];
+}
+
 - (void)replWithPrompt:(NSString *)prompt inPort:(RJInPort *)inPort output:(NSFileHandle *)output
 {
     NSError *error;
@@ -121,7 +128,9 @@ NSString *RJLocalDefinitions = @"(begin \
 
     [self evalString:RJLocalDefinitions];
 
-    [stderr writeData:[@"RJLisp 2.0\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    if (output) {
+        [stderr writeData:[@"RJLisp 2.0\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    }
     while (YES) {
         if (prompt) {
             [stderr writeData:[[NSString stringWithFormat:@"%@", prompt] dataUsingEncoding:NSUTF8StringEncoding]];
