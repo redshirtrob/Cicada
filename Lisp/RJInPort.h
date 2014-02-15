@@ -13,6 +13,7 @@
 + (instancetype)inPortWithStandardInput;
 
 - (instancetype)initWithFileHandle:(NSFileHandle *)fileHandle;
+- (instancetype)initWithInputString:(NSString *)inputString;
 
 - (id)nextToken;
 

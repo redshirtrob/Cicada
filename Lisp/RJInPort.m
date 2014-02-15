@@ -9,6 +9,7 @@
 #import "RJInPort.h"
 #import "RJSymbol.h"
 #import "NSFileHandle+RJLisp.h"
+#import "NSMutableString+RJLisp.h"
 
 /*
  * Peter Norvig's Lisp Regex
@@ -16,9 +17,6 @@
  *                    1            3              3                    1
  * tokenizer = r'''\s*(,@|[('`,)]|"(?:[\\].|[^\\"])*"|;.*|[^\s('"`,;)]*)(.*)'''
  *                        2     2     4  4  5    5        6          6  7  7
- *
- *                 \s*(,@|[('`,)]|"(?:[\\].|[^\\"])*"|;.*|[^\s('"`,;)]*)(.*)
- * static NSString *const PNTokenizerRegEx = @"\\s*(,@|[('`,)]|\"(?:[\\\\].|[^\\\\\"])*\"|;.*|[^\\s('\"`,;)]*)(.*)";
  *
  * Briefly this means match:
  *  - Any number of whitespace characters, followed by
@@ -42,11 +40,17 @@
  */
 
 static NSString *const PNTokenizerRegEx = @"\\s*(,@|[('`,)]|\"(?:[\\\\].|[^\\\\\"])*\"|;.*|[^\\s('\"`,;)]*)(.*)";
-//static NSString *const PNTokenizerRegEx = @"(a)(b)";
+
+typedef NS_ENUM(NSInteger, RJInPortType) {
+    RJInPortFileType,
+    RJInPortStringType,
+};
 
 @interface RJInPort ()
 
+@property (nonatomic) RJInPortType type;
 @property (nonatomic, strong) NSFileHandle *fileHandle;
+@property (nonatomic, strong) NSMutableString *inputString;
 @property (nonatomic, strong) NSString *line;
 @property (nonatomic, strong) NSRegularExpression *regex;
 
@@ -59,13 +63,11 @@ static NSString *const PNTokenizerRegEx = @"\\s*(,@|[('`,)]|\"(?:[\\\\].|[^\\\\\
     return [[RJInPort alloc] initWithFileHandle:[NSFileHandle fileHandleWithStandardInput]];
 }
 
-- (id)initWithFileHandle:(NSFileHandle *)fileHandle
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        _fileHandle = fileHandle;
         _line = @"";
-
         NSError *error;
         _regex = [NSRegularExpression regularExpressionWithPattern:PNTokenizerRegEx options:0 error:&error];
         if (error) {
@@ -76,11 +78,46 @@ static NSString *const PNTokenizerRegEx = @"\\s*(,@|[('`,)]|\"(?:[\\\\].|[^\\\\\
     return self;
 }
 
+- (instancetype)initWithFileHandle:(NSFileHandle *)fileHandle
+{
+    self = [self init];
+    if (self) {
+        _fileHandle = fileHandle;
+        _type = RJInPortFileType;
+
+    }
+    return self;
+}
+
+- (instancetype)initWithInputString:(NSString *)inputString
+{
+    self = [self init];
+    if (self) {
+        _inputString = [NSMutableString stringWithString:inputString];
+        _type = RJInPortStringType;
+    }
+    return self;
+}
+
+- (NSString *)readline
+{
+    NSString *line = nil;
+    switch (self.type) {
+    case RJInPortFileType:
+        line = [self.fileHandle readline];
+        break;
+    case RJInPortStringType:
+        line = [self.inputString readline];
+        break;
+    }
+    return line;
+}
+
 - (id)nextToken
 {
     while (YES) {
         if (![self.line length]) {
-            self.line = [self.fileHandle readline];
+            self.line = [self readline];
         }
         if (![self.line length]) {
             return [RJSymbol EOFSymbol];

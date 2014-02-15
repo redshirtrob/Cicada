@@ -40,6 +40,7 @@
 		D4A307A4187E6EE400B3B619 /* Lisp.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D4A307A3187E6EE400B3B619 /* Lisp.1 */; };
 		D4A307AC187E6F5100B3B619 /* RJEval.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A307AB187E6F5100B3B619 /* RJEval.m */; };
 		D4A307B6187FC0E600B3B619 /* RJEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A307B5187FC0E600B3B619 /* RJEnv.m */; };
+		D4B9444518AF37B20079C03E /* NSMutableString+RJLisp.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B9444418AF37B20079C03E /* NSMutableString+RJLisp.m */; };
 		D4C4057F18961A77000FB608 /* RJProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C4057E18961A77000FB608 /* RJProcedure.m */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,8 @@
 		D4A307AB187E6F5100B3B619 /* RJEval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEval.m; sourceTree = "<group>"; };
 		D4A307B4187FC0E600B3B619 /* RJEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJEnv.h; sourceTree = "<group>"; };
 		D4A307B5187FC0E600B3B619 /* RJEnv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJEnv.m; sourceTree = "<group>"; };
+		D4B9444318AF37B20079C03E /* NSMutableString+RJLisp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+RJLisp.h"; sourceTree = "<group>"; };
+		D4B9444418AF37B20079C03E /* NSMutableString+RJLisp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+RJLisp.m"; sourceTree = "<group>"; };
 		D4C4057D18961A77000FB608 /* RJProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJProcedure.h; sourceTree = "<group>"; };
 		D4C4057E18961A77000FB608 /* RJProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJProcedure.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -241,6 +244,8 @@
 				D49982B9188E0D8C00A46D9E /* NSString+RJLisp.m */,
 				D4C4057D18961A77000FB608 /* RJProcedure.h */,
 				D4C4057E18961A77000FB608 /* RJProcedure.m */,
+				D4B9444318AF37B20079C03E /* NSMutableString+RJLisp.h */,
+				D4B9444418AF37B20079C03E /* NSMutableString+RJLisp.m */,
 			);
 			path = Lisp;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				D4A307B6187FC0E600B3B619 /* RJEnv.m in Sources */,
 				D41D346518A1F94D008167C2 /* RJNotProcedure.m in Sources */,
 				D41D348618A1FA1E008167C2 /* RJListProcedure.m in Sources */,
+				D4B9444518AF37B20079C03E /* NSMutableString+RJLisp.m in Sources */,
 				D4561AAC1882029F005454CF /* RJSymbol.m in Sources */,
 				D41D345C18A1F8FB008167C2 /* RJMinusProcedure.m in Sources */,
 				D4561AA91881CC09005454CF /* NSError+RJLisp.m in Sources */,
