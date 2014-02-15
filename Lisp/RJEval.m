@@ -16,6 +16,14 @@
 #import "NSError+RJLisp.h"
 #import "NSString+RJLisp.h"
 
+NSString *RJLocalDefinitions = @"(begin \
+(define-macro and (lambda args \
+   (if (null? args) #t \
+       (if (= (length args) 1) (car args) \
+           `(if ,(car args) (and ,@(cdr args)) #f))))) \
+\
+)";
+
 @interface RJEval ()
 
 @property (nonatomic, strong) RJEnv *globalEnvironment;
@@ -95,10 +103,23 @@
     return self;
 }
 
+- (void)evalString:(NSString *)string
+{
+    RJInPort *inport = [[RJInPort alloc] initWithInputString:string];
+
+    NSError *error;
+    id sexp = [self parseFromInPort:inport error:&error];
+    if (!error) {
+        [self eval:sexp error:&error];
+    }
+}
+
 - (void)replWithPrompt:(NSString *)prompt inPort:(RJInPort *)inPort output:(NSFileHandle *)output
 {
     NSError *error;
     NSFileHandle *stderr = [NSFileHandle fileHandleWithStandardError];
+
+    [self evalString:RJLocalDefinitions];
 
     [stderr writeData:[@"RJLisp 2.0\n" dataUsingEncoding:NSUTF8StringEncoding]];
     while (YES) {
