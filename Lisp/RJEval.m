@@ -22,6 +22,7 @@ NSString *RJLocalDefinitions = @"(begin \
        (if (= (length args) 1) (car args) \
            `(if ,(car args) (and ,@(cdr args)) #f))))) \
 \
+;; Add more definitions here \n\
 )";
 
 @interface RJEval ()
@@ -410,7 +411,7 @@ NSString *RJLocalDefinitions = @"(begin \
             }
         }
     }
-   else if (sexp[0] == _set) {
+    else if (sexp[0] == _set) {
         if ([sexp count] != 3) {
             tmpError = [NSError rjlispParseErrorWithString:@"Invalid length"];
         }
