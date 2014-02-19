@@ -1,4 +1,4 @@
-RJLisp
+Cicada
 ======
 
 A scheme interpreter using Objective-C
@@ -10,12 +10,12 @@ This is a pedagogical endeavor.  I doubt anyone will find this too useful.  I ca
 Primtives
 ---------
 
-RJLisp supports the primitives 'quote', 'if', 'set!', 'define', 'lambda', and 'begin' as part of eval.
+Cicada supports the primitives 'quote', 'if', 'set!', 'define', 'lambda', and 'begin' as part of eval.
 
 Global Environment
 ------------------
 
-RJLisp adds a number of useful functions to the global environment, including 'cons', 'car', 'cdr', 'list', 'null?', 'symbol?', 'eq?', and 'list?'.  You'll also find the basic arithmetic and inequality operatos.
+Cicada adds a number of useful functions to the global environment, including 'cons', 'car', 'cdr', 'list', 'null?', 'symbol?', 'eq?', and 'list?'.  You'll also find the basic arithmetic and inequality operatos.
 
 Bugs
 ----
