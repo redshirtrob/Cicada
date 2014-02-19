@@ -104,15 +104,18 @@ NSString *RJLocalDefinitions = @"(begin \
     return self;
 }
 
-- (void)evalString:(NSString *)string
+- (id)evalString:(NSString *)string error:(NSError **)error
 {
     RJInPort *inport = [[RJInPort alloc] initWithInputString:string];
+    id value = nil;
 
-    NSError *error;
-    id sexp = [self parseFromInPort:inport error:&error];
-    if (!error) {
-        [self eval:sexp error:&error];
+    NSError *tmpError;
+    id sexp = [self parseFromInPort:inport error:&tmpError];
+    if (!tmpError) {
+        value = [self eval:sexp error:&tmpError];
     }
+    COPY_ERROR(error, tmpError);
+    return value;
 }
 
 - (void)loadFile:(NSString *)filename
@@ -127,7 +130,7 @@ NSString *RJLocalDefinitions = @"(begin \
     NSError *error;
     NSFileHandle *stderr = [NSFileHandle fileHandleWithStandardError];
 
-    [self evalString:RJLocalDefinitions];
+    [self evalString:RJLocalDefinitions error:nil];
 
     if (output) {
         [stderr writeData:[@"Cicada 1.0\n" dataUsingEncoding:NSUTF8StringEncoding]];

@@ -20,5 +20,6 @@ typedef id (^lambda)(NSArray *, NSError **);
 - (void)replWithPrompt:(NSString *)prompt inPort:(RJInPort *)inPort output:(NSFileHandle *)output;
 - (id)eval:(id)sexp environment:(RJEnv *)environment error:(NSError **)error;
 - (void)loadFile:(NSString *)filename;
+- (id)evalString:(NSString *)string error:(NSError **)error;
 
 @end

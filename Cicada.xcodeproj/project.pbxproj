@@ -7,6 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D4011A3618B48AD900710628 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4011A3518B48AD900710628 /* XCTest.framework */; };
+		D4011A3C18B48AD900710628 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4011A3A18B48AD900710628 /* InfoPlist.strings */; };
+		D4011A3E18B48AD900710628 /* ArithmeticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4011A3D18B48AD900710628 /* ArithmeticTests.m */; };
+		D414CFE318B5BF52009A250F /* NSError+RJScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AA81881CC09005454CF /* NSError+RJScheme.m */; };
+		D414CFE418B5BF55009A250F /* NSFileHandle+RJScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F555118879CAC00250214 /* NSFileHandle+RJScheme.m */; };
+		D414CFE518B5BF59009A250F /* NSMutableString+RJScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B9444418AF37B20079C03E /* NSMutableString+RJScheme.m */; };
+		D414CFE618B5BF5D009A250F /* NSString+RJScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D49982B9188E0D8C00A46D9E /* NSString+RJScheme.m */; };
+		D414CFE718B5BF67009A250F /* RJScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A307AB187E6F5100B3B619 /* RJScheme.m */; };
+		D414CFE818B5BF6B009A250F /* RJEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A307B5187FC0E600B3B619 /* RJEnv.m */; };
+		D414CFE918B5BF6E009A250F /* RJSymbol.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AAB1882029F005454CF /* RJSymbol.m */; };
+		D414CFEA18B5BF72009A250F /* RJSymbolTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AAE18823380005454CF /* RJSymbolTable.m */; };
+		D414CFEB18B5BF75009A250F /* RJInPort.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F555418879E9900250214 /* RJInPort.m */; };
+		D414CFEC18B5BF78009A250F /* RJProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C4057E18961A77000FB608 /* RJProcedure.m */; };
+		D414CFED18B5BF81009A250F /* RJPrimitiveProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D349818A207BD008167C2 /* RJPrimitiveProcedure.m */; };
+		D414CFEE18B5BF8B009A250F /* RJPlusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */; };
+		D414CFEF18B5BF8E009A250F /* RJMinusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345B18A1F8FB008167C2 /* RJMinusProcedure.m */; };
+		D414CFF018B5BF93009A250F /* RJMultiplyProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345E18A1F916008167C2 /* RJMultiplyProcedure.m */; };
+		D414CFF118B5BF97009A250F /* RJDivideProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346118A1F930008167C2 /* RJDivideProcedure.m */; };
+		D414CFF218B5BF9A009A250F /* RJNotProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346418A1F94D008167C2 /* RJNotProcedure.m */; };
+		D414CFF318B5BF9D009A250F /* RJGreaterThanProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346718A1F968008167C2 /* RJGreaterThanProcedure.m */; };
+		D414CFF418B5BFA0009A250F /* RJGreaterThanEqualProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346A18A1F983008167C2 /* RJGreaterThanEqualProcedure.m */; };
+		D414CFF518B5BFA3009A250F /* RJLessThanProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D346D18A1F995008167C2 /* RJLessThanProcedure.m */; };
+		D414CFF618B5BFA7009A250F /* RJLessThanEqualProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347018A1F9A3008167C2 /* RJLessThanEqualProcedure.m */; };
+		D414CFF718B5BFAB009A250F /* RJEqualProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347318A1F9B7008167C2 /* RJEqualProcedure.m */; };
+		D414CFF818B5BFAE009A250F /* RJConsProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347618A1F9C7008167C2 /* RJConsProcedure.m */; };
+		D414CFF918B5BFB1009A250F /* RJCarProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347918A1F9D9008167C2 /* RJCarProcedure.m */; };
+		D414CFFA18B5BFB9009A250F /* RJCdrProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347C18A1F9E6008167C2 /* RJCdrProcedure.m */; };
+		D414CFFB18B5BFBD009A250F /* RJIsNullProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D347F18A1F9FF008167C2 /* RJIsNullProcedure.m */; };
+		D414CFFC18B5BFC1009A250F /* RJIsSymbolProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348218A1FA0F008167C2 /* RJIsSymbolProcedure.m */; };
+		D414CFFD18B5BFC4009A250F /* RJListProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348518A1FA1E008167C2 /* RJListProcedure.m */; };
+		D414CFFE18B5BFC7009A250F /* RJIsListProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348818A1FA2A008167C2 /* RJIsListProcedure.m */; };
+		D414CFFF18B5BFCA009A250F /* RJEqProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348B18A1FA3F008167C2 /* RJEqProcedure.m */; };
+		D414D00018B5BFCF009A250F /* RJAppendProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348E18A1FA5B008167C2 /* RJAppendProcedure.m */; };
+		D414D00118B5BFD4009A250F /* RJLengthProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D349118A1FA6B008167C2 /* RJLengthProcedure.m */; };
+		D414D00218B5BFD7009A250F /* RJIsBooleanProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D349418A1FA77008167C2 /* RJIsBooleanProcedure.m */; };
 		D41D345918A1F8E2008167C2 /* RJPlusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */; };
 		D41D345C18A1F8FB008167C2 /* RJMinusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345B18A1F8FB008167C2 /* RJMinusProcedure.m */; };
 		D41D345F18A1F916008167C2 /* RJMultiplyProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345E18A1F916008167C2 /* RJMultiplyProcedure.m */; };
@@ -44,6 +79,16 @@
 		D4C4057F18961A77000FB608 /* RJProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C4057E18961A77000FB608 /* RJProcedure.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D4011A4018B48AD900710628 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4A30791187E6EE400B3B619 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4A30798187E6EE400B3B619;
+			remoteInfo = Cicada;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		D4A30797187E6EE400B3B619 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -58,6 +103,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D4011A3418B48AD900710628 /* Cicada Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cicada Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4011A3518B48AD900710628 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D4011A3918B48AD900710628 /* Cicada Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cicada Tests-Info.plist"; sourceTree = "<group>"; };
+		D4011A3B18B48AD900710628 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D4011A3D18B48AD900710628 /* ArithmeticTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArithmeticTests.m; sourceTree = "<group>"; };
+		D4011A3F18B48AD900710628 /* Cicada Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cicada Tests-Prefix.pch"; sourceTree = "<group>"; };
 		D41D345718A1F8E2008167C2 /* RJPlusProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJPlusProcedure.h; sourceTree = "<group>"; };
 		D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJPlusProcedure.m; sourceTree = "<group>"; };
 		D41D345A18A1F8FB008167C2 /* RJMinusProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJMinusProcedure.h; sourceTree = "<group>"; };
@@ -131,6 +182,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D4011A3118B48AD900710628 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4011A3618B48AD900710628 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4A30796187E6EE400B3B619 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -142,6 +201,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D4011A3718B48AD900710628 /* Cicada Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D4011A3D18B48AD900710628 /* ArithmeticTests.m */,
+				D4011A3818B48AD900710628 /* Supporting Files */,
+			);
+			path = "Cicada Tests";
+			sourceTree = "<group>";
+		};
+		D4011A3818B48AD900710628 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D4011A3918B48AD900710628 /* Cicada Tests-Info.plist */,
+				D4011A3A18B48AD900710628 /* InfoPlist.strings */,
+				D4011A3F18B48AD900710628 /* Cicada Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		D41D345618A1F89E008167C2 /* Primitives */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				D4A3079E187E6EE400B3B619 /* Cicada */,
+				D4011A3718B48AD900710628 /* Cicada Tests */,
 				D4A3079B187E6EE400B3B619 /* Frameworks */,
 				D4A3079A187E6EE400B3B619 /* Products */,
 			);
@@ -207,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				D4A30799187E6EE400B3B619 /* Cicada */,
+				D4011A3418B48AD900710628 /* Cicada Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				D4A3079C187E6EE400B3B619 /* Foundation.framework */,
+				D4011A3518B48AD900710628 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -285,6 +366,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D4011A3318B48AD900710628 /* Cicada Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4011A4418B48AD900710628 /* Build configuration list for PBXNativeTarget "Cicada Tests" */;
+			buildPhases = (
+				D4011A3018B48AD900710628 /* Sources */,
+				D4011A3118B48AD900710628 /* Frameworks */,
+				D4011A3218B48AD900710628 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D4011A4118B48AD900710628 /* PBXTargetDependency */,
+			);
+			name = "Cicada Tests";
+			productName = "Cicada Tests";
+			productReference = D4011A3418B48AD900710628 /* Cicada Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D4A30798187E6EE400B3B619 /* Cicada */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4A307A7187E6EE400B3B619 /* Build configuration list for PBXNativeTarget "Cicada" */;
@@ -311,6 +410,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Robert Jones";
+				TargetAttributes = {
+					D4011A3318B48AD900710628 = {
+						TestTargetID = D4A30798187E6EE400B3B619;
+					};
+				};
 			};
 			buildConfigurationList = D4A30794187E6EE400B3B619 /* Build configuration list for PBXProject "Cicada" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -325,9 +429,21 @@
 			projectRoot = "";
 			targets = (
 				D4A30798187E6EE400B3B619 /* Cicada */,
+				D4011A3318B48AD900710628 /* Cicada Tests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D4011A3218B48AD900710628 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4011A3C18B48AD900710628 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		D4FD751C18B33A1300BA25E4 /* ShellScript */ = {
@@ -346,6 +462,46 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D4011A3018B48AD900710628 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D414CFE318B5BF52009A250F /* NSError+RJScheme.m in Sources */,
+				D414CFF418B5BFA0009A250F /* RJGreaterThanEqualProcedure.m in Sources */,
+				D414CFEA18B5BF72009A250F /* RJSymbolTable.m in Sources */,
+				D414CFF518B5BFA3009A250F /* RJLessThanProcedure.m in Sources */,
+				D4011A3E18B48AD900710628 /* ArithmeticTests.m in Sources */,
+				D414CFFF18B5BFCA009A250F /* RJEqProcedure.m in Sources */,
+				D414CFFD18B5BFC4009A250F /* RJListProcedure.m in Sources */,
+				D414CFEE18B5BF8B009A250F /* RJPlusProcedure.m in Sources */,
+				D414CFF918B5BFB1009A250F /* RJCarProcedure.m in Sources */,
+				D414CFF718B5BFAB009A250F /* RJEqualProcedure.m in Sources */,
+				D414D00018B5BFCF009A250F /* RJAppendProcedure.m in Sources */,
+				D414CFF018B5BF93009A250F /* RJMultiplyProcedure.m in Sources */,
+				D414CFE718B5BF67009A250F /* RJScheme.m in Sources */,
+				D414CFE418B5BF55009A250F /* NSFileHandle+RJScheme.m in Sources */,
+				D414CFE618B5BF5D009A250F /* NSString+RJScheme.m in Sources */,
+				D414CFFC18B5BFC1009A250F /* RJIsSymbolProcedure.m in Sources */,
+				D414CFFE18B5BFC7009A250F /* RJIsListProcedure.m in Sources */,
+				D414CFF118B5BF97009A250F /* RJDivideProcedure.m in Sources */,
+				D414CFE518B5BF59009A250F /* NSMutableString+RJScheme.m in Sources */,
+				D414CFFB18B5BFBD009A250F /* RJIsNullProcedure.m in Sources */,
+				D414CFEB18B5BF75009A250F /* RJInPort.m in Sources */,
+				D414D00118B5BFD4009A250F /* RJLengthProcedure.m in Sources */,
+				D414D00218B5BFD7009A250F /* RJIsBooleanProcedure.m in Sources */,
+				D414CFF218B5BF9A009A250F /* RJNotProcedure.m in Sources */,
+				D414CFF818B5BFAE009A250F /* RJConsProcedure.m in Sources */,
+				D414CFEC18B5BF78009A250F /* RJProcedure.m in Sources */,
+				D414CFE818B5BF6B009A250F /* RJEnv.m in Sources */,
+				D414CFFA18B5BFB9009A250F /* RJCdrProcedure.m in Sources */,
+				D414CFE918B5BF6E009A250F /* RJSymbol.m in Sources */,
+				D414CFF318B5BF9D009A250F /* RJGreaterThanProcedure.m in Sources */,
+				D414CFEF18B5BF8E009A250F /* RJMinusProcedure.m in Sources */,
+				D414CFED18B5BF81009A250F /* RJPrimitiveProcedure.m in Sources */,
+				D414CFF618B5BFA7009A250F /* RJLessThanEqualProcedure.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D4A30795187E6EE400B3B619 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,7 +544,62 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D4011A4118B48AD900710628 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4A30798187E6EE400B3B619 /* Cicada */;
+			targetProxy = D4011A4018B48AD900710628 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D4011A3A18B48AD900710628 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4011A3B18B48AD900710628 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		D4011A4218B48AD900710628 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cicada Tests/Cicada Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Cicada Tests/Cicada Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D4011A4318B48AD900710628 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cicada Tests/Cicada Tests-Prefix.pch";
+				INFOPLIST_FILE = "Cicada Tests/Cicada Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		D4A307A5187E6EE400B3B619 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -478,6 +689,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D4011A4418B48AD900710628 /* Build configuration list for PBXNativeTarget "Cicada Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4011A4218B48AD900710628 /* Debug */,
+				D4011A4318B48AD900710628 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D4A30794187E6EE400B3B619 /* Build configuration list for PBXProject "Cicada" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
