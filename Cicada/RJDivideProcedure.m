@@ -23,12 +23,12 @@
                 v /= [values[i] floatValue];
             }
             else {
-                tmpError = [NSError rjlispEvalErrorWithString:@"Error /: attempt to divide by zero"];
+                tmpError = [NSError rjschemeEvalErrorWithString:@"Error /: attempt to divide by zero"];
             }
         }
     }
     else {
-        tmpError = [NSError rjlispTooFewArgumentsErrorForSymbol:@"/" atLeast:1 got:0];
+        tmpError = [NSError rjschemeTooFewArgumentsErrorForSymbol:@"/" atLeast:1 got:0];
     }
 
     COPY_ERROR(error, tmpError);

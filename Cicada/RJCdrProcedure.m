@@ -27,11 +27,11 @@
             }
         }
         else {
-            tmpError = [NSError rjlispEvalErrorWithString:@"Error cdr: expected list"];
+            tmpError = [NSError rjschemeEvalErrorWithString:@"Error cdr: expected list"];
         }
     }
     else {
-        tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cdr" expected:1 got:[values count]];
+        tmpError = [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"cdr" expected:1 got:[values count]];
     }
 
     COPY_ERROR(error, tmpError);

@@ -18,14 +18,14 @@ extern NSString *const RJSchemeSymbolKey;
 
 @interface NSError (RJScheme)
 
-+ (id)rjlispParseErrorWithString:(NSString *)string;
-+ (id)rjlispUnexpectedSymbolError:(NSString *)symbol;
++ (id)rjschemeParseErrorWithString:(NSString *)string;
++ (id)rjschemeUnexpectedSymbolError:(NSString *)symbol;
 
-+ (id)rjlispEvalErrorWithString:(NSString *)string;
-+ (id)rjlispUnboundSymbolError:(NSString *)symbol;
-+ (id)rjlispTooFewArgumentsErrorForSymbol:(NSString *)symbol atLeast:(long)atLeast got:(long)got;
-+ (id)rjlispIncorrectNumberOfArgumentsErrorForSymbol:(NSString *)symbol expected:(long)expected got:(long)got;
++ (id)rjschemeEvalErrorWithString:(NSString *)string;
++ (id)rjschemeUnboundSymbolError:(NSString *)symbol;
++ (id)rjschemeTooFewArgumentsErrorForSymbol:(NSString *)symbol atLeast:(long)atLeast got:(long)got;
++ (id)rjschemeIncorrectNumberOfArgumentsErrorForSymbol:(NSString *)symbol expected:(long)expected got:(long)got;
 
-- (NSString *)rjlispErrorString;
+- (NSString *)rjschemeErrorString;
 
 @end

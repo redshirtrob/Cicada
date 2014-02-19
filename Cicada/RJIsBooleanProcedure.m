@@ -24,7 +24,7 @@
         }
     }
     else {
-        tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"boolean?" expected:1 got:[values count]];
+        tmpError = [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"boolean?" expected:1 got:[values count]];
     }
 
     COPY_ERROR(error, tmpError);

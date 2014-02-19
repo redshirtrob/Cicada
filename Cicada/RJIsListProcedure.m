@@ -19,7 +19,7 @@
         v = [values[0] isKindOfClass:[NSArray class]];
     }
     else {
-        tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"list?" expected:1 got:[values count]];
+        tmpError = [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"list?" expected:1 got:[values count]];
     }
 
     COPY_ERROR(error, tmpError);

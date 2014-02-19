@@ -24,7 +24,7 @@
         }
     }
     else {
-        tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"eq?" expected:2 got:[values count]];
+        tmpError = [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"eq?" expected:2 got:[values count]];
     }
 
     COPY_ERROR(error, tmpError);

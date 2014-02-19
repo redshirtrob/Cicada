@@ -25,7 +25,7 @@
         }
     }
     else {
-        tmpError = [NSError rjlispTooFewArgumentsErrorForSymbol:@"-" atLeast:1 got:0];
+        tmpError = [NSError rjschemeTooFewArgumentsErrorForSymbol:@"-" atLeast:1 got:0];
     }
 
     COPY_ERROR(error, tmpError);

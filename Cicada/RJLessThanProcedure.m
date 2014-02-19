@@ -19,7 +19,7 @@
         v = ([values[0] floatValue] < [values[1] floatValue]);
     }
     else {
-        tmpError= [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"<" expected:2 got:[values count]];
+        tmpError= [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"<" expected:2 got:[values count]];
     }
 
     COPY_ERROR(error, tmpError);

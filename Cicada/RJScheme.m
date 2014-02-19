@@ -150,7 +150,7 @@ NSString *RJLocalDefinitions = @"(begin \
             }
         }
         else {
-            [output writeData:[[NSString stringWithFormat:@"%@\n", [error rjlispErrorString]] dataUsingEncoding:NSUTF8StringEncoding]];
+            [output writeData:[[NSString stringWithFormat:@"%@\n", [error rjschemeErrorString]] dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
 }
@@ -190,7 +190,7 @@ NSString *RJLocalDefinitions = @"(begin \
         if ([sexp isKindOfClass:[RJSymbol class]]) {
             value = [environment find:sexp][sexp];
             if (!value) {
-                tmpError = [NSError rjlispUnboundSymbolError:sexp];
+                tmpError = [NSError rjschemeUnboundSymbolError:sexp];
             }
             done = YES;
         }
@@ -336,7 +336,7 @@ NSString *RJLocalDefinitions = @"(begin \
         }
     }
     else if ([token isEqualToString:@")"]) {
-        tmpError = [NSError rjlispParseErrorWithString:[NSString stringWithFormat:@"Unexpected symbol: %@", token]];
+        tmpError = [NSError rjschemeParseErrorWithString:[NSString stringWithFormat:@"Unexpected symbol: %@", token]];
         value = nil;
     }
     else if ([[_quotes allKeys] indexOfObject:token] != NSNotFound) {
@@ -344,7 +344,7 @@ NSString *RJLocalDefinitions = @"(begin \
         value = @[_quotes[token], tmpToken];
     }
     else if ([token isEqual:[RJSymbol EOFSymbol]]) {
-        tmpError = [NSError rjlispParseErrorWithString:@"Unexpected EOF"];
+        tmpError = [NSError rjschemeParseErrorWithString:@"Unexpected EOF"];
         value = nil;
     }
     else {
@@ -374,11 +374,11 @@ NSString *RJLocalDefinitions = @"(begin \
         expandedExp = sexp;
     }
     else if (![sexp count]) {
-        tmpError = [NSError rjlispParseErrorWithString:@"Invalid length"];
+        tmpError = [NSError rjschemeParseErrorWithString:@"Invalid length"];
     }
     else if (sexp[0] == _quote) {
         if ([sexp count] != 2) {
-            tmpError = [NSError rjlispParseErrorWithString:@"quote: Invalid length"];
+            tmpError = [NSError rjschemeParseErrorWithString:@"quote: Invalid length"];
         }
         else {
             expandedExp = sexp;
@@ -391,7 +391,7 @@ NSString *RJLocalDefinitions = @"(begin \
             sexp = [NSArray arrayWithArray:array];
         }
         if ([sexp count] != 4) {
-            tmpError = [NSError rjlispParseErrorWithString:[NSString stringWithFormat:@"if: Invalid length '%@'", [RJScheme toString:exp]]];
+            tmpError = [NSError rjschemeParseErrorWithString:[NSString stringWithFormat:@"if: Invalid length '%@'", [RJScheme toString:exp]]];
         }
         else {
             // TODO: Map
@@ -413,12 +413,12 @@ NSString *RJLocalDefinitions = @"(begin \
     }
     else if (sexp[0] == _set) {
         if ([sexp count] != 3) {
-            tmpError = [NSError rjlispParseErrorWithString:@"Invalid length"];
+            tmpError = [NSError rjschemeParseErrorWithString:@"Invalid length"];
         }
         else {
             RJSymbol *var = sexp[1];
             if (![var isKindOfClass:[RJSymbol class]]) {
-                tmpError = [NSError rjlispParseErrorWithString:@"Can only set! a symbol"];
+                tmpError = [NSError rjschemeParseErrorWithString:@"Can only set! a symbol"];
             }
             else {
                 id tmpExp = [self expand:sexp[2] topLevel:NO error:&tmpError];
@@ -430,7 +430,7 @@ NSString *RJLocalDefinitions = @"(begin \
     }
     else if (sexp[0] == _define || sexp[0] == _defineMacro) {
         if ([sexp count] < 3) {
-            tmpError = [NSError rjlispParseErrorWithString:@"Invalid length"];
+            tmpError = [NSError rjschemeParseErrorWithString:@"Invalid length"];
         }
         else {
             id def = sexp[0];
@@ -446,21 +446,21 @@ NSString *RJLocalDefinitions = @"(begin \
             }
             else {
                 if ([sexp count] != 3) {
-                    tmpError = [NSError rjlispParseErrorWithString:@"Invalid length"];
+                    tmpError = [NSError rjschemeParseErrorWithString:@"Invalid length"];
                 }
                 else if (![v isKindOfClass:[RJSymbol class]]) {
-                    tmpError = [NSError rjlispParseErrorWithString:@"Can only define a symbol"];
+                    tmpError = [NSError rjschemeParseErrorWithString:@"Can only define a symbol"];
                 }
                 else {
                     id exp = [self expand:sexp[2] topLevel:NO error:&tmpError];
                     if (def == _defineMacro) {
                         if (topLevel == NO) {
-                            tmpError = [NSError rjlispParseErrorWithString:@"define-macro only allowed at top level"];
+                            tmpError = [NSError rjschemeParseErrorWithString:@"define-macro only allowed at top level"];
                         }
                         else {
                             RJProcedure *proc = [self eval:exp environment:self.globalEnvironment error:&tmpError];
                             if (![proc isKindOfClass:[RJProcedure class]]) {
-                                tmpError = [NSError rjlispParseErrorWithString:@"macro must be a procedure"];
+                                tmpError = [NSError rjschemeParseErrorWithString:@"macro must be a procedure"];
                             }
                             else {
                                 self.macroTable[v] = proc;
@@ -495,7 +495,7 @@ NSString *RJLocalDefinitions = @"(begin \
     }
     else if (sexp[0] == _lambda) {
         if ([sexp count] < 3) {
-            tmpError = [NSError rjlispParseErrorWithString:@"lambda missing parameter list or body"];
+            tmpError = [NSError rjschemeParseErrorWithString:@"lambda missing parameter list or body"];
         }
         else {
             NSArray *vars = sexp[1];
@@ -528,13 +528,13 @@ NSString *RJLocalDefinitions = @"(begin \
                 expandedExp = @[_lambda, vars, tmpExp];
             }
             else {
-                tmpError = [NSError rjlispParseErrorWithString:@"illegal lambda argument list"];
+                tmpError = [NSError rjschemeParseErrorWithString:@"illegal lambda argument list"];
             }
         }
     }
     else if (sexp[0] == _quasiQuote) {
         if ([sexp count] != 2) {
-            tmpError = [NSError rjlispParseErrorWithString:@"Invalid length"];
+            tmpError = [NSError rjschemeParseErrorWithString:@"Invalid length"];
         }
         else {
             expandedExp = [self expandQuasiQuote:sexp[1] error:&tmpError];
@@ -585,7 +585,7 @@ NSString *RJLocalDefinitions = @"(begin \
     else {
         NSArray *sexp = (NSArray *)exp;
         if (sexp[0] == _unquoteSplicing) {
-            tmpError = [NSError rjlispParseErrorWithString:@"can't splice here'"];
+            tmpError = [NSError rjschemeParseErrorWithString:@"can't splice here'"];
         }
         else {
             if (sexp[0] == _unquote) {
@@ -593,7 +593,7 @@ NSString *RJLocalDefinitions = @"(begin \
                     expandedExp = sexp[1];
                 }
                 else {
-                    tmpError = [NSError rjlispParseErrorWithString:@"Invalid length"];
+                    tmpError = [NSError rjschemeParseErrorWithString:@"Invalid length"];
                 }
             }
             else if (IsPair(sexp[0]) && sexp[0][0] == _unquoteSplicing) {
@@ -602,7 +602,7 @@ NSString *RJLocalDefinitions = @"(begin \
                     expandedExp = @[_append, sexp[0][1], tmpQuasiQuote];
                 }
                 else {
-                    tmpError = [NSError rjlispParseErrorWithString:@"Invalid length"];
+                    tmpError = [NSError rjschemeParseErrorWithString:@"Invalid length"];
                 }
             }
             else {

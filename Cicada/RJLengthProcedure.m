@@ -19,7 +19,7 @@
         v = @([values[0] count]);
     }
     else {
-        tmpError = [NSError rjlispEvalErrorWithString:@"Error length: expected list"];
+        tmpError = [NSError rjschemeEvalErrorWithString:@"Error length: expected list"];
     }
 
     COPY_ERROR(error, tmpError);

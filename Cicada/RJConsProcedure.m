@@ -25,11 +25,11 @@
             v = [NSArray arrayWithArray:tmpList];
         }
         else {
-            tmpError = [NSError rjlispParseErrorWithString:@"cons: Expected list"];
+            tmpError = [NSError rjschemeParseErrorWithString:@"cons: Expected list"];
         }
     }
     else {
-        tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"cons" expected:2 got:[values count]];
+        tmpError = [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"cons" expected:2 got:[values count]];
     }
 
     COPY_ERROR(error, tmpError);

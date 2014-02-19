@@ -22,15 +22,15 @@
                 v = list[0];
             }
             else {
-                tmpError = [NSError rjlispEvalErrorWithString:@"Error car: attempt to apply car to empty list"];
+                tmpError = [NSError rjschemeEvalErrorWithString:@"Error car: attempt to apply car to empty list"];
             }
         }
         else {
-            tmpError = [NSError rjlispEvalErrorWithString:@"Error car: expected list"];
+            tmpError = [NSError rjschemeEvalErrorWithString:@"Error car: expected list"];
         }
     }
     else {
-        tmpError = [NSError rjlispIncorrectNumberOfArgumentsErrorForSymbol:@"car" expected:1 got:[values count]];
+        tmpError = [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"car" expected:1 got:[values count]];
     }
 
     COPY_ERROR(error, tmpError);

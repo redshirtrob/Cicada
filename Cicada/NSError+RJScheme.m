@@ -8,7 +8,7 @@
 
 #import "NSError+RJScheme.h"
 
-NSString *const RJSchemeErrorDomain = @"com.robertjones.rjlisp";
+NSString *const RJSchemeErrorDomain = @"com.robertjones.rjscheme";
 
 NSString *const RJSchemeErrorStringKey = @"errorString";
 NSString *const RJSchemeSymbolKey = @"symbol";
@@ -17,45 +17,45 @@ NSString *const RJSchemeSymbolKey = @"symbol";
 
 #pragma mark Parse Errors
 
-+ (id)rjlispParseErrorWithString:(NSString *)string
++ (id)rjschemeParseErrorWithString:(NSString *)string
 {
     return [NSError errorWithDomain:RJSchemeErrorDomain
                                code:RJSchemeParseError
                            userInfo:@{RJSchemeErrorStringKey : string}];
 }
 
-+ (id)rjlispUnexpectedSymbolError:(NSString *)symbol
++ (id)rjschemeUnexpectedSymbolError:(NSString *)symbol
 {
-    return [NSError rjlispParseErrorWithString:[NSString stringWithFormat:@"Error: unexpected symbol: '%@'", symbol]];
+    return [NSError rjschemeParseErrorWithString:[NSString stringWithFormat:@"Error: unexpected symbol: '%@'", symbol]];
 }
 
 #pragma mark Eval Errors
 
-+ (id)rjlispEvalErrorWithString:(NSString *)string
++ (id)rjschemeEvalErrorWithString:(NSString *)string
 {
     return [NSError errorWithDomain:RJSchemeErrorDomain
                                code:RJSchemeEvalError
                            userInfo:@{RJSchemeErrorStringKey : string}];
 }
 
-+ (id)rjlispUnboundSymbolError:(NSString *)symbol
++ (id)rjschemeUnboundSymbolError:(NSString *)symbol
 {
-    return [NSError rjlispEvalErrorWithString:[NSString stringWithFormat:@"Error: unbound symbol: '%@'", symbol]];
+    return [NSError rjschemeEvalErrorWithString:[NSString stringWithFormat:@"Error: unbound symbol: '%@'", symbol]];
 }
 
-+ (id)rjlispTooFewArgumentsErrorForSymbol:(NSString *)symbol atLeast:(long)atLeast got:(long)got
++ (id)rjschemeTooFewArgumentsErrorForSymbol:(NSString *)symbol atLeast:(long)atLeast got:(long)got
 {
-    return [NSError rjlispEvalErrorWithString:[NSString stringWithFormat:@"Error %@: too few arguments (at least: %ld got: %ld)", symbol, atLeast, got]];
+    return [NSError rjschemeEvalErrorWithString:[NSString stringWithFormat:@"Error %@: too few arguments (at least: %ld got: %ld)", symbol, atLeast, got]];
 }
 
-+ (id)rjlispIncorrectNumberOfArgumentsErrorForSymbol:(NSString *)symbol expected:(long)expected got:(long)got
++ (id)rjschemeIncorrectNumberOfArgumentsErrorForSymbol:(NSString *)symbol expected:(long)expected got:(long)got
 {
-    return [NSError rjlispEvalErrorWithString:[NSString stringWithFormat:@"Error %@: incorrect number of arguments (expected: %ld got: %ld)", symbol, expected, got]];
+    return [NSError rjschemeEvalErrorWithString:[NSString stringWithFormat:@"Error %@: incorrect number of arguments (expected: %ld got: %ld)", symbol, expected, got]];
 }
 
 #pragma mark Instance Methods
 
-- (NSString *)rjlispErrorString
+- (NSString *)rjschemeErrorString
 {
     return self.userInfo[RJSchemeErrorStringKey];
 }

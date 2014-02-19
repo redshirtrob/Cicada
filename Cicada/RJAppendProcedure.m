@@ -20,7 +20,7 @@
             [array addObjectsFromArray:arg];
         }
         else {
-            tmpError = [NSError rjlispEvalErrorWithString:@"Error append: expected list"];
+            tmpError = [NSError rjschemeEvalErrorWithString:@"Error append: expected list"];
             array = nil;
             break;
         }
