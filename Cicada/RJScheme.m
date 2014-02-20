@@ -70,7 +70,7 @@ NSString *RJLocalDefinitions = @"(begin \
         }
     }
     else if ([exp isKindOfClass:[RJSymbol class]]) {
-        stringValue = ((RJSymbol *)exp).name;
+        stringValue = [(RJSymbol *)exp stringValue];
     }
     else if ([exp isKindOfClass:[NSString class]]) {
         stringValue = (NSString *)exp;
@@ -190,7 +190,12 @@ NSString *RJLocalDefinitions = @"(begin \
         if ([sexp isKindOfClass:[RJSymbol class]]) {
             value = [environment find:sexp][sexp];
             if (!value) {
-                tmpError = [NSError rjschemeUnboundSymbolError:sexp];
+                if ([(RJSymbol *)sexp isSyntax]) {
+                    value = sexp;
+                }
+                else {
+                    tmpError = [NSError rjschemeUnboundSymbolError:sexp];
+                }
             }
             done = YES;
         }

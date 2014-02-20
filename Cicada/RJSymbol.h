@@ -16,4 +16,7 @@
 
 + (instancetype)EOFSymbol;
 
+- (BOOL)isSyntax;
+- (NSString *)stringValue;
+
 @end

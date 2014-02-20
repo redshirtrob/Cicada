@@ -51,4 +51,20 @@
     return self.name;
 }
 
+- (BOOL)isSyntax
+{
+    return ([self.name isEqualToString:@"quote"] ||
+            [self.name isEqualToString:@"if"] ||
+            [self.name isEqualToString:@"set"] ||
+            [self.name isEqualToString:@"define"] ||
+            [self.name isEqualToString:@"lambda"] ||
+            [self.name isEqualToString:@"begin"] ||
+            [self.name isEqualToString:@"define-macro"]);
+}
+
+- (NSString *)stringValue
+{
+    return [self isSyntax] ? [NSString stringWithFormat:@"#<Syntax %@>", self.name] : self.name;
+}
+
 @end
