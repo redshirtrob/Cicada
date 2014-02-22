@@ -161,14 +161,19 @@ NSString *RJLocalDefinitions = @"(begin \
             return;
         }
 
-        id value = [self eval:sexp error:&error];
-        if (!error) {
-            if (value && value != [NSNull null]) {
-                [output writeData:[[NSString stringWithFormat:@"%@\n", [RJScheme toString:value]] dataUsingEncoding:NSUTF8StringEncoding]];
-            }
+        if ([sexp isKindOfClass:[RJSymbol class]] && [(RJSymbol *)sexp isSyntax]) {
+            [output writeData:[[NSString stringWithFormat:@"%@\n", [sexp scalarStringValue]] dataUsingEncoding:NSUTF8StringEncoding]];
         }
         else {
-            [output writeData:[[NSString stringWithFormat:@"%@\n", [error rjschemeErrorString]] dataUsingEncoding:NSUTF8StringEncoding]];
+            id value = [self eval:sexp error:&error];
+            if (!error) {
+                if (value && value != [NSNull null]) {
+                    [output writeData:[[NSString stringWithFormat:@"%@\n", [RJScheme toString:value]] dataUsingEncoding:NSUTF8StringEncoding]];
+                }
+            }
+            else {
+                [output writeData:[[NSString stringWithFormat:@"%@\n", [error rjschemeErrorString]] dataUsingEncoding:NSUTF8StringEncoding]];
+            }
         }
     }
 }

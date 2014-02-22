@@ -64,6 +64,11 @@
 
 - (NSString *)stringValue
 {
+    return self.name;
+}
+
+- (NSString *)scalarStringValue
+{
     return [self isSyntax] ? [NSString stringWithFormat:@"#<Syntax %@>", self.name] : self.name;
 }
 

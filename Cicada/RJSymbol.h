@@ -18,5 +18,6 @@
 
 - (BOOL)isSyntax;
 - (NSString *)stringValue;
+- (NSString *)scalarStringValue;
 
 @end
