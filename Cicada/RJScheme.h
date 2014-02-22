@@ -22,4 +22,7 @@ typedef id (^lambda)(NSArray *, NSError **);
 - (void)loadFile:(NSString *)filename;
 - (id)evalString:(NSString *)string error:(NSError **)error;
 
+// Test harness: calls through to evalString:error: and then stringifies the result
+- (NSString *)testEvalWithString:(NSString *)string error:(NSError **)error;
+
 @end

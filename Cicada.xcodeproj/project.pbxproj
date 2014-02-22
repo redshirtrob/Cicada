@@ -42,6 +42,7 @@
 		D414D00018B5BFCF009A250F /* RJAppendProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D348E18A1FA5B008167C2 /* RJAppendProcedure.m */; };
 		D414D00118B5BFD4009A250F /* RJLengthProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D349118A1FA6B008167C2 /* RJLengthProcedure.m */; };
 		D414D00218B5BFD7009A250F /* RJIsBooleanProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D349418A1FA77008167C2 /* RJIsBooleanProcedure.m */; };
+		D414D01918B87D4E009A250F /* ListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D414D01818B87D4E009A250F /* ListTests.m */; };
 		D41D345918A1F8E2008167C2 /* RJPlusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */; };
 		D41D345C18A1F8FB008167C2 /* RJMinusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345B18A1F8FB008167C2 /* RJMinusProcedure.m */; };
 		D41D345F18A1F916008167C2 /* RJMultiplyProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345E18A1F916008167C2 /* RJMultiplyProcedure.m */; };
@@ -109,6 +110,7 @@
 		D4011A3B18B48AD900710628 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4011A3D18B48AD900710628 /* ArithmeticTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArithmeticTests.m; sourceTree = "<group>"; };
 		D4011A3F18B48AD900710628 /* Cicada Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cicada Tests-Prefix.pch"; sourceTree = "<group>"; };
+		D414D01818B87D4E009A250F /* ListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTests.m; sourceTree = "<group>"; };
 		D41D345718A1F8E2008167C2 /* RJPlusProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJPlusProcedure.h; sourceTree = "<group>"; };
 		D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJPlusProcedure.m; sourceTree = "<group>"; };
 		D41D345A18A1F8FB008167C2 /* RJMinusProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJMinusProcedure.h; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				D4011A3D18B48AD900710628 /* ArithmeticTests.m */,
+				D414D01818B87D4E009A250F /* ListTests.m */,
 				D4011A3818B48AD900710628 /* Supporting Files */,
 			);
 			path = "Cicada Tests";
@@ -467,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D414CFE318B5BF52009A250F /* NSError+RJScheme.m in Sources */,
+				D414D01918B87D4E009A250F /* ListTests.m in Sources */,
 				D414CFF418B5BFA0009A250F /* RJGreaterThanEqualProcedure.m in Sources */,
 				D414CFEA18B5BF72009A250F /* RJSymbolTable.m in Sources */,
 				D414CFF518B5BFA3009A250F /* RJLessThanProcedure.m in Sources */,
@@ -619,6 +623,8 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",

@@ -114,6 +114,21 @@ NSString *RJLocalDefinitions = @"(begin \
     if (!tmpError) {
         value = [self eval:sexp error:&tmpError];
     }
+
+    COPY_ERROR(error, tmpError);
+    return value;
+}
+
+- (NSString *)testEvalWithString:(NSString *)string error:(NSError **)error
+{
+    NSString *value = nil;
+
+    NSError *tmpError;
+    id tmpValue = [self evalString:string error:&tmpError];
+    if (!tmpError) {
+        value = [RJScheme toString:tmpValue];
+    }
+
     COPY_ERROR(error, tmpError);
     return value;
 }
