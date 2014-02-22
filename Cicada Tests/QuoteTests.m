@@ -63,6 +63,30 @@ static RJScheme *_scheme = nil;
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
+// '
+- (void)testShorthandQuote
+{
+    NSString *exp = @"'x";
+    NSString *expectedValue = @"x";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+
+    exp = @"'()";
+    expectedValue = @"()";
+    actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+
+    exp = @"'(x)";
+    expectedValue = @"(x)";
+    actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+
+    exp = @"'('x)";
+    expectedValue = @"((quote x))";
+    actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
 - (void)testQuoteDisplay
 {
     NSString *exp = @"quote";
