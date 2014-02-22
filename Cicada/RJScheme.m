@@ -106,11 +106,11 @@ NSString *RJLocalDefinitions = @"(begin \
 
 - (id)evalString:(NSString *)string error:(NSError **)error
 {
-    RJInPort *inport = [[RJInPort alloc] initWithInputString:string];
+    RJInPort *inPort = [[RJInPort alloc] initWithInputString:string];
     id value = nil;
 
     NSError *tmpError;
-    id sexp = [self parseFromInPort:inport error:&tmpError];
+    id sexp = [self parseFromInPort:inPort error:&tmpError];
     if (!tmpError) {
         value = [self eval:sexp error:&tmpError];
     }
@@ -119,18 +119,28 @@ NSString *RJLocalDefinitions = @"(begin \
     return value;
 }
 
-- (NSString *)testEvalWithString:(NSString *)string error:(NSError **)error
+- (NSString *)stringFromSExpression:(id)sexp error:(NSError **)error
 {
-    NSString *value = nil;
-
     NSError *tmpError;
-    id tmpValue = [self evalString:string error:&tmpError];
-    if (!tmpError) {
-        value = [RJScheme toString:tmpValue];
+
+    NSString *stringValue = nil;
+    if ([sexp isKindOfClass:[RJSymbol class]] && [(RJSymbol *)sexp isSyntax]) {
+        stringValue = [sexp scalarStringValue];
+    }
+    else {
+        id value = [self eval:sexp error:&tmpError];
+        if (!tmpError) {
+            if (value && value != [NSNull null]) {
+                stringValue = [RJScheme toString:value];
+            }
+        }
+        else {
+            stringValue = [tmpError rjschemeErrorString];
+        }
     }
 
     COPY_ERROR(error, tmpError);
-    return value;
+    return stringValue;
 }
 
 - (void)loadFile:(NSString *)filename
@@ -161,21 +171,25 @@ NSString *RJLocalDefinitions = @"(begin \
             return;
         }
 
-        if ([sexp isKindOfClass:[RJSymbol class]] && [(RJSymbol *)sexp isSyntax]) {
-            [output writeData:[[NSString stringWithFormat:@"%@\n", [sexp scalarStringValue]] dataUsingEncoding:NSUTF8StringEncoding]];
-        }
-        else {
-            id value = [self eval:sexp error:&error];
-            if (!error) {
-                if (value && value != [NSNull null]) {
-                    [output writeData:[[NSString stringWithFormat:@"%@\n", [RJScheme toString:value]] dataUsingEncoding:NSUTF8StringEncoding]];
-                }
-            }
-            else {
-                [output writeData:[[NSString stringWithFormat:@"%@\n", [error rjschemeErrorString]] dataUsingEncoding:NSUTF8StringEncoding]];
-            }
-        }
+        NSString *stringValue = [self stringFromSExpression:sexp error:&error];
+        [output writeData:[[NSString stringWithFormat:@"%@\n", stringValue] dataUsingEncoding:NSUTF8StringEncoding]];
     }
+}
+
+- (NSString *)testEvalWithString:(NSString *)string error:(NSError **)error
+{
+    RJInPort *inPort = [[RJInPort alloc] initWithInputString:string];
+
+    NSError *tmpError = nil;
+    id sexp = [self parseFromInPort:inPort error:&tmpError];
+    if ([sexp isEqual:_eof]) {
+        return [(RJSymbol *)sexp stringValue];
+    }
+
+    NSString *stringValue = [self stringFromSExpression:sexp error:&tmpError];
+
+    COPY_ERROR(error, tmpError);
+    return stringValue;
 }
 
 #pragma mark - Private

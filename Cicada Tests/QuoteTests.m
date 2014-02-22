@@ -63,4 +63,12 @@ static RJScheme *_scheme = nil;
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
+- (void)testQuoteDisplay
+{
+    NSString *exp = @"quote";
+    NSString *expectedValue = @"#<Syntax quote>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
 @end
