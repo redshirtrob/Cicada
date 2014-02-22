@@ -383,7 +383,12 @@ NSString *RJLocalDefinitions = @"(begin \
     }
     else if ([[_quotes allKeys] indexOfObject:token] != NSNotFound) {
         id tmpToken = [self readFromInPort:inPort error:&tmpError];
-        value = @[_quotes[token], tmpToken];
+        if (tmpToken) {
+            value = @[_quotes[token], tmpToken];
+        }
+        else {
+            value = @[_quotes[token]];
+        }
     }
     else if ([token isEqual:[RJSymbol EOFSymbol]]) {
         tmpError = [NSError rjschemeParseErrorWithString:@"Unexpected EOF"];
