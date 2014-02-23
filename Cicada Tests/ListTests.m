@@ -184,4 +184,20 @@ static RJScheme *_scheme = nil;
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
+// append
+
+// length
+- (void)testLength
+{
+    NSString *exp = @"(length '(a))";
+    NSString *expectedValue = @"1";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+
+    NSError *error = nil;
+    exp = @"(length)";
+    [_scheme evalString:exp error:&error];
+    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
+}
+
 @end
