@@ -15,11 +15,16 @@
     NSError *tmpError = nil;
 
     NSNumber *v = nil;
-    if ([values[0] isKindOfClass:[NSArray class]]) {
-        v = @([values[0] count]);
+    if ([values count]) {
+        if ([values[0] isKindOfClass:[NSArray class]]) {
+            v = @([values[0] count]);
+        }
+        else {
+            tmpError = [NSError rjschemeEvalErrorWithString:@"Error length: expected list"];
+        }
     }
     else {
-        tmpError = [NSError rjschemeEvalErrorWithString:@"Error length: expected list"];
+        tmpError = [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"length" expected:1 got:[values count]];
     }
 
     COPY_ERROR(error, tmpError);
