@@ -15,15 +15,20 @@
     NSError *tmpError = nil;
 
     NSMutableArray *array = [NSMutableArray array];
-    for (id arg in values) {
-        if ([arg isKindOfClass:[NSArray class]]) {
-            [array addObjectsFromArray:arg];
+    if ([values count] == 2) {
+        for (id arg in values) {
+            if ([arg isKindOfClass:[NSArray class]]) {
+                [array addObjectsFromArray:arg];
+            }
+            else {
+                tmpError = [NSError rjschemeEvalErrorWithString:@"Error append: expected list"];
+                array = nil;
+                break;
+            }
         }
-        else {
-            tmpError = [NSError rjschemeEvalErrorWithString:@"Error append: expected list"];
-            array = nil;
-            break;
-        }
+    }
+    else {
+        tmpError = [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"append" expected:2 got:[values count]];
     }
 
     COPY_ERROR(error, tmpError);
