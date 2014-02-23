@@ -121,25 +121,31 @@ NSString *RJLocalDefinitions = @"(begin \
 
 - (NSString *)stringFromSExpression:(id)sexp error:(NSError **)error
 {
-    NSError *tmpError;
-
     NSString *stringValue = nil;
-    if ([sexp isKindOfClass:[RJSymbol class]] && [(RJSymbol *)sexp isSyntax]) {
-        stringValue = [sexp scalarStringValue];
-    }
-    else {
-        id value = [self eval:sexp error:&tmpError];
-        if (!tmpError) {
-            if (value && value != [NSNull null]) {
-                stringValue = [RJScheme toString:value];
-            }
+
+    if (!*error) {
+        NSError *tmpError = nil;
+        if ([sexp isKindOfClass:[RJSymbol class]] && [(RJSymbol *)sexp isSyntax]) {
+            stringValue = [sexp scalarStringValue];
         }
         else {
-            stringValue = [tmpError rjschemeErrorString];
+            id value = [self eval:sexp error:&tmpError];
+            if (!tmpError) {
+                if (value && value != [NSNull null]) {
+                    stringValue = [RJScheme toString:value];
+                }
+            }
+            else {
+                stringValue = [tmpError rjschemeErrorString];
+            }
         }
+
+        COPY_ERROR(error, tmpError);
+    }
+    else {
+        stringValue = [*error rjschemeErrorString];
     }
 
-    COPY_ERROR(error, tmpError);
     return stringValue;
 }
 
@@ -172,7 +178,9 @@ NSString *RJLocalDefinitions = @"(begin \
         }
 
         NSString *stringValue = [self stringFromSExpression:sexp error:&error];
-        [output writeData:[[NSString stringWithFormat:@"%@\n", stringValue] dataUsingEncoding:NSUTF8StringEncoding]];
+        if (stringValue) {
+            [output writeData:[[NSString stringWithFormat:@"%@\n", stringValue] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
     }
 }
 
