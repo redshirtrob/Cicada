@@ -186,6 +186,57 @@ static RJScheme *_scheme = nil;
 
 // append
 
+- (void)testAppend
+{
+    NSString *exp = @"(append '() '())";
+    NSString *expectedValue = @"()";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+
+    exp = @"(append '(a) '())";
+    expectedValue = @"(a)";
+    actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+
+    exp = @"(append '() '(a))";
+    expectedValue = @"(a)";
+    actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+
+    exp = @"(append '(a) '(b))";
+    expectedValue = @"(a b)";
+    actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
+- (void)testAppendErrors
+{
+    NSError *error = nil;
+    NSString *exp = @"(append '())";
+    [_scheme testEvalWithString:exp error:&error];
+    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
+
+    exp = @"(append 'a 'b)";
+    [_scheme testEvalWithString:exp error:&error];
+    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
+
+    exp = @"(append '() 'a)";
+    [_scheme testEvalWithString:exp error:&error];
+    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
+
+    exp = @"(append 'a '())";
+    [_scheme testEvalWithString:exp error:&error];
+    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
+}
+
+- (void)testAppendDisplay
+{
+    NSString *exp = @"append";
+    NSString *expectedValue = @"#<Function append>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
 // length
 - (void)testLength
 {
@@ -194,10 +245,30 @@ static RJScheme *_scheme = nil;
     NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 
+    exp = @"(length '())";
+    expectedValue = @"0";
+    actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
+- (void)testLengthErrors
+{
     NSError *error = nil;
-    exp = @"(length)";
+    NSString *exp = @"(length)";
     [_scheme evalString:exp error:&error];
     XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
+
+    exp = @"(length 1)";
+    [_scheme evalString:exp error:&error];
+    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
+}
+
+- (void)testLengthDisplay
+{
+    NSString *exp = @"length";
+    NSString *expectedValue = @"#<Function length>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
 @end
