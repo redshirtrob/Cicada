@@ -48,6 +48,14 @@ static RJScheme *_scheme = nil;
     XCTAssertEqualWithAccuracy([number floatValue], 4.3f, FLT_EPSILON, @"%@ !=~ %@", exp, number);
 }
 
+- (void)testAddDisplay
+{
+    NSString *exp = @"+";
+    NSString *expectedValue = @"#<Function +>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
 - (void)testSubtractInteger
 {
     NSString *exp = @"(- 2 2)";
@@ -60,6 +68,14 @@ static RJScheme *_scheme = nil;
     NSString *exp = @"(- 2.1 1.8)";
     NSNumber *number = [_scheme evalString:exp error:nil];
     XCTAssertEqualWithAccuracy([number floatValue], 0.3f, FLT_EPSILON, @"%@ !=~ %@", exp, number);
+}
+
+- (void)testSubtractDisplay
+{
+    NSString *exp = @"-";
+    NSString *expectedValue = @"#<Function ->";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
 - (void)testSubtractNegative
@@ -83,6 +99,14 @@ static RJScheme *_scheme = nil;
     XCTAssertEqualWithAccuracy([number floatValue], 6.72f, FLT_EPSILON, @"%@ !=~ %@", exp, number);
 }
 
+- (void)testMultiplyDisplay
+{
+    NSString *exp = @"*";
+    NSString *expectedValue = @"#<Function *>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
 - (void)testDivideInteger
 {
     NSString *exp = @"(/ 3 3)";
@@ -102,6 +126,14 @@ static RJScheme *_scheme = nil;
     NSError *error = nil;
     [_scheme evalString:@"(/ 1 0)" error:&error];
     XCTAssertNotNil(error, @"Divide by zero should throw an error.");
+}
+
+- (void)testMDivideDisplay
+{
+    NSString *exp = @"/";
+    NSString *expectedValue = @"#<Function />";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
 @end
