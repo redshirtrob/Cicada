@@ -48,6 +48,14 @@ static RJScheme *_scheme = nil;
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
+- (void)testListPredicateDisplay
+{
+    NSString *exp = @"list?";
+    NSString *expectedValue = @"#<Function list?>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
 // list
 - (void)testList
 {
@@ -87,6 +95,14 @@ static RJScheme *_scheme = nil;
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
+- (void)testListDisplay
+{
+    NSString *exp = @"list";
+    NSString *expectedValue = @"#<Function list>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
 // cons
 - (void)testCons
 {
@@ -103,6 +119,14 @@ static RJScheme *_scheme = nil;
     exp = @"(cons '(a) '(b))";
     expectedValue = @"((a) b)";
     actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
+- (void)testConsDisplay
+{
+    NSString *exp = @"cons";
+    NSString *expectedValue = @"#<Function cons>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
@@ -125,6 +149,14 @@ static RJScheme *_scheme = nil;
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
+- (void)testCarDisplay
+{
+    NSString *exp = @"car";
+    NSString *expectedValue = @"#<Function car>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
 // car
 - (void)testCdr
 {
@@ -141,6 +173,14 @@ static RJScheme *_scheme = nil;
     exp = @"(cdr '())";
     expectedValue = @"()";
     actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+}
+
+- (void)testCdrDisplay
+{
+    NSString *exp = @"cdr";
+    NSString *expectedValue = @"#<Function cdr>";
+    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
