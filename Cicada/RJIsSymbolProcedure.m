@@ -7,6 +7,7 @@
 //
 
 #import "RJIsSymbolProcedure.h"
+#import "RJSymbol.h"
 
 @implementation RJIsSymbolProcedure
 
@@ -16,7 +17,7 @@
 
     BOOL v = NO;
     if ([values count] == 1) {
-        v = [values[0] isKindOfClass:[NSString class]];
+        v = [values[0] isKindOfClass:[RJSymbol class]];
     }
     else {
         tmpError = [NSError rjschemeIncorrectNumberOfArgumentsErrorForSymbol:@"symbol?" expected:1 got:[values count]];
