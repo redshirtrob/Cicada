@@ -6,10 +6,8 @@
 //  Copyright (c) 2014 Robert Jones. All rights reserved.
 //
 
-
 #import "RJScheme.h"
 #import "RJPlusProcedure.h"
-#import "NSError+RJScheme.h"
 
 @implementation RJPlusProcedure
 
