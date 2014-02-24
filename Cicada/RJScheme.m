@@ -536,7 +536,12 @@ NSString *RJLocalDefinitions = @"(begin \
                         }
                     }
                     else {
-                        expandedExp = @[_define, v, exp];
+                        if (exp) {
+                            expandedExp = @[_define, v, exp];
+                        }
+                        else {
+                            tmpError = [NSError rjschemeParseErrorWithString:@"Invalid length"];
+                        }
                     }
                 }
             }
@@ -592,7 +597,12 @@ NSString *RJLocalDefinitions = @"(begin \
                     exp = [NSArray arrayWithArray:array];
                 }
                 id tmpExp = [self expand:exp topLevel:NO error:&tmpError];
-                expandedExp = @[_lambda, vars, tmpExp];
+                if (tmpExp) {
+                    expandedExp = @[_lambda, vars, tmpExp];
+                }
+                else {
+                    tmpError = [NSError rjschemeParseErrorWithString:@"Invalid length"];
+                }
             }
             else {
                 tmpError = [NSError rjschemeParseErrorWithString:@"illegal lambda argument list"];
