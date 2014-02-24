@@ -343,7 +343,7 @@ NSString *RJLocalDefinitions = @"(begin \
         atom = @NO;
     }
     else if ([token hasPrefix:@"\""]) {
-        atom = [[token substringWithRange:NSMakeRange(1, [token length]-2)] decodeBackslash];
+        atom = [NSMutableString stringWithString:[[token substringWithRange:NSMakeRange(1, [token length]-2)] decodeBackslash]];
     }
     else {
         float floatValue;
