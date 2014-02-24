@@ -343,6 +343,8 @@ NSString *RJLocalDefinitions = @"(begin \
         atom = @NO;
     }
     else if ([token hasPrefix:@"\""]) {
+        // To guarantee unique objects.  If we use NSString then we'll end up with
+        // instances of __NSCFConstantString
         atom = [NSMutableString stringWithString:[[token substringWithRange:NSMakeRange(1, [token length]-2)] decodeBackslash]];
     }
     else {
@@ -369,7 +371,11 @@ NSString *RJLocalDefinitions = @"(begin \
         NSMutableArray *array = [NSMutableArray array];
         while (!done) {
             token = [inPort nextToken];
-            if ([token isEqualToString:@")"]) {
+            if (token == [RJSymbol EOFSymbol]) {
+                done = YES;
+                value = nil;
+            }
+            else if ([token isEqualToString:@")"]) {
                 value = [NSArray arrayWithArray:array];
                 done = YES;
             }
