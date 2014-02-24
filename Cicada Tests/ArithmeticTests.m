@@ -34,28 +34,6 @@ static RJScheme *_scheme = nil;
     [super tearDown];
 }
 
-- (void)testAddInteger
-{
-    NSString *exp = @"(+ 2 2)";
-    NSNumber *number = [_scheme evalString:exp error:nil];
-    XCTAssertEqualObjects(number, @4, @"%@ != %@", exp, number);
-}
-
-- (void)testAddFloat
-{
-    NSString *exp = @"(+ 2.1 2.2)";
-    NSNumber *number = [_scheme evalString:exp error:nil];
-    XCTAssertEqualWithAccuracy([number floatValue], 4.3f, FLT_EPSILON, @"%@ !=~ %@", exp, number);
-}
-
-- (void)testAddDisplay
-{
-    NSString *exp = @"+";
-    NSString *expectedValue = @"#<Function +>";
-    NSString *actualValue = [_scheme testEvalWithString:exp error:nil];
-    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
-}
-
 - (void)testSubtractInteger
 {
     NSString *exp = @"(- 2 2)";

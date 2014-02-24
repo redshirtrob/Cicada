@@ -52,6 +52,7 @@
 		D414D03818BB14AB009A250F /* DefineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D414D03718BB14AB009A250F /* DefineTests.m */; };
 		D414D03A18BB1AF0009A250F /* BeginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D414D03918BB1AF0009A250F /* BeginTests.m */; };
 		D414D03C18BB1CC4009A250F /* LambdaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D414D03B18BB1CC4009A250F /* LambdaTests.m */; };
+		D414D03E18BB2B8A009A250F /* PlusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D414D03D18BB2B8A009A250F /* PlusTests.m */; };
 		D41D345918A1F8E2008167C2 /* RJPlusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */; };
 		D41D345C18A1F8FB008167C2 /* RJMinusProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345B18A1F8FB008167C2 /* RJMinusProcedure.m */; };
 		D41D345F18A1F916008167C2 /* RJMultiplyProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D41D345E18A1F916008167C2 /* RJMultiplyProcedure.m */; };
@@ -129,6 +130,7 @@
 		D414D03718BB14AB009A250F /* DefineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefineTests.m; sourceTree = "<group>"; };
 		D414D03918BB1AF0009A250F /* BeginTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeginTests.m; sourceTree = "<group>"; };
 		D414D03B18BB1CC4009A250F /* LambdaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LambdaTests.m; sourceTree = "<group>"; };
+		D414D03D18BB2B8A009A250F /* PlusTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlusTests.m; sourceTree = "<group>"; };
 		D41D345718A1F8E2008167C2 /* RJPlusProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJPlusProcedure.h; sourceTree = "<group>"; };
 		D41D345818A1F8E2008167C2 /* RJPlusProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJPlusProcedure.m; sourceTree = "<group>"; };
 		D41D345A18A1F8FB008167C2 /* RJMinusProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJMinusProcedure.h; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				D414D02918B9D2A2009A250F /* InequalityTests.m */,
 				D414D03B18BB1CC4009A250F /* LambdaTests.m */,
 				D414D01818B87D4E009A250F /* ListTests.m */,
+				D414D03D18BB2B8A009A250F /* PlusTests.m */,
 				D414D01A18B91BF1009A250F /* QuoteTests.m */,
 				D414D03518BB0CC6009A250F /* SetTests.m */,
 			);
@@ -537,6 +540,7 @@
 				D414CFF318B5BF9D009A250F /* RJGreaterThanProcedure.m in Sources */,
 				D414CFEF18B5BF8E009A250F /* RJMinusProcedure.m in Sources */,
 				D414D03818BB14AB009A250F /* DefineTests.m in Sources */,
+				D414D03E18BB2B8A009A250F /* PlusTests.m in Sources */,
 				D414CFED18B5BF81009A250F /* RJPrimitiveProcedure.m in Sources */,
 				D414CFF618B5BFA7009A250F /* RJLessThanEqualProcedure.m in Sources */,
 			);
