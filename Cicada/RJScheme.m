@@ -317,7 +317,13 @@ NSString *RJLocalDefinitions = @"(begin \
             if ([proc isKindOfClass:[RJProcedure class]]) {
                 RJProcedure *tmpProc = (RJProcedure *)proc;
                 sexp = tmpProc.expression;
-                environment = [[RJEnv alloc] initWithParameters:tmpProc.parameters values:exps outerEnvironment:tmpProc.environment];
+                if ([tmpProc.parameters count] == [exps count]) {
+                    environment = [[RJEnv alloc] initWithParameters:tmpProc.parameters values:exps outerEnvironment:tmpProc.environment];
+                }
+                else {
+                    tmpError = [NSError rjschemeEvalErrorWithString:@"invalid number of parameters"];
+                    done = YES;
+                }
             }
             else if ([proc isKindOfClass:[RJPrimitiveProcedure class]]) {
                 value = [((RJPrimitiveProcedure *)proc) evalWithValues:exps error:&tmpError];
