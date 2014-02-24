@@ -144,12 +144,15 @@ static RJScheme *_scheme = nil;
     actualValue = [_scheme testEvalWithString:exp error:nil];
     XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 
-#if 1
     exp = @"(eq? \"x\" \"x\")";
     expectedValue = @"#f";
     actualValue = [_scheme testEvalWithString:exp error:nil];
-    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue); // failing b/c __NSCFConstantString
-#endif
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
+
+    exp = @"(begin (define x \"x\") (define y x) (eq? x y))";
+    expectedValue = @"#t";
+    actualValue = [_scheme testEvalWithString:exp error:nil];
+    XCTAssertEqualObjects(actualValue, expectedValue, @"%@ != %@", exp, actualValue);
 }
 
 - (void)testEqPredicateErrors
