@@ -268,7 +268,13 @@ NSString *RJLocalDefinitions = @"(begin \
             id var = sexp[1];
             id exp = sexp[2];
             id val = [self eval:exp environment:environment error:&tmpError];
-            [environment find:var][var] = val;
+
+            if ([environment find:var]) {
+                [environment find:var][var] = val;
+            }
+            else {
+                tmpError = [NSError rjschemeUnboundSymbolError:var];
+            }
             done = YES;
         }
         else if (sexp[0] == _define) {

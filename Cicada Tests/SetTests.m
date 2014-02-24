@@ -57,7 +57,7 @@ static RJScheme *_scheme = nil;
     error = nil;
     exp = @"(set! z 1)";
     [_scheme evalString:exp error:&error];
-    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp); // failing
+    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
 }
 
 - (void)testSetDisplay
