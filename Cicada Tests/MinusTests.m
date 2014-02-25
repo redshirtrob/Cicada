@@ -72,6 +72,19 @@ static RJScheme *_scheme = nil;
     XCTAssertEqualWithAccuracy([number floatValue], -0.7f, FLT_EPSILON, @"%@ !=~ %@", exp, number);
 }
 
+- (void)testMinusErrors
+{
+    NSError *error = nil;
+    NSString *exp = @"(- 0 '())";
+    [_scheme evalString:exp error:&error];
+    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
+
+    error = nil;
+    exp = @"(- 0 \"\")";
+    [_scheme evalString:exp error:&error];
+    XCTAssertNotNil(error, @"Function should throw error for expression: %@", exp);
+}
+
 - (void)testSubtractDisplay
 {
     NSString *exp = @"-";
