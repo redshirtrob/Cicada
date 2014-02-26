@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Robert Jones. All rights reserved.
 //
 
+#import "RJScheme.h"
 #import "RJDivideProcedure.h"
 
 @implementation RJDivideProcedure
@@ -16,15 +17,27 @@
 
     float v = 1;
     if ([values count]) {
-        v = [values[0] floatValue];
-        for (NSInteger i = 1; i < [values count]; i++) {
-            float divisor = [values[i] floatValue];
-            if (divisor != 0) {
-                v /= [values[i] floatValue];
+        if ([values[0] isKindOfClass:[NSNumber class]]) {
+            v = [values[0] floatValue];
+            for (NSInteger i = 1; i < [values count]; i++) {
+                if ([values[i] isKindOfClass:[NSNumber class]]) {
+                    float divisor = [values[i] floatValue];
+                    if (divisor != 0) {
+                        v /= [values[i] floatValue];
+                    }
+                    else {
+                        tmpError = [NSError rjschemeEvalErrorWithString:@"Error /: attempt to divide by zero"];
+                        break;
+                    }
+                }
+                else {
+                    tmpError = [NSError rjschemeEvalErrorWithString:[NSString stringWithFormat:@"Error: expected number but got %@", [RJScheme toString:values[0]]]];
+                    break;
+                }
             }
-            else {
-                tmpError = [NSError rjschemeEvalErrorWithString:@"Error /: attempt to divide by zero"];
-            }
+        }
+        else {
+            tmpError = [NSError rjschemeEvalErrorWithString:[NSString stringWithFormat:@"Error: expected number but got %@", [RJScheme toString:values[0]]]];
         }
     }
     else {

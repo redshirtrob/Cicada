@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D4011A3618B48AD900710628 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4011A3518B48AD900710628 /* XCTest.framework */; };
 		D4011A3C18B48AD900710628 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4011A3A18B48AD900710628 /* InfoPlist.strings */; };
-		D4011A3E18B48AD900710628 /* ArithmeticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4011A3D18B48AD900710628 /* ArithmeticTests.m */; };
 		D414CFE318B5BF52009A250F /* NSError+RJScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D4561AA81881CC09005454CF /* NSError+RJScheme.m */; };
 		D414CFE418B5BF55009A250F /* NSFileHandle+RJScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D48F555118879CAC00250214 /* NSFileHandle+RJScheme.m */; };
 		D414CFE518B5BF59009A250F /* NSMutableString+RJScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B9444418AF37B20079C03E /* NSMutableString+RJScheme.m */; };
@@ -89,6 +88,8 @@
 		D4A307B6187FC0E600B3B619 /* RJEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A307B5187FC0E600B3B619 /* RJEnv.m */; };
 		D4B9444518AF37B20079C03E /* NSMutableString+RJScheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B9444418AF37B20079C03E /* NSMutableString+RJScheme.m */; };
 		D4C4057F18961A77000FB608 /* RJProcedure.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C4057E18961A77000FB608 /* RJProcedure.m */; };
+		D4F153AC18BDC02E005B36D7 /* MultiplyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F153AB18BDC02E005B36D7 /* MultiplyTests.m */; };
+		D4F153AE18BDC21C005B36D7 /* DivideTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F153AD18BDC21C005B36D7 /* DivideTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,7 +120,6 @@
 		D4011A3518B48AD900710628 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		D4011A3918B48AD900710628 /* Cicada Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cicada Tests-Info.plist"; sourceTree = "<group>"; };
 		D4011A3B18B48AD900710628 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D4011A3D18B48AD900710628 /* ArithmeticTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArithmeticTests.m; sourceTree = "<group>"; };
 		D4011A3F18B48AD900710628 /* Cicada Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cicada Tests-Prefix.pch"; sourceTree = "<group>"; };
 		D414D01818B87D4E009A250F /* ListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTests.m; sourceTree = "<group>"; };
 		D414D01A18B91BF1009A250F /* QuoteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuoteTests.m; sourceTree = "<group>"; };
@@ -203,6 +203,8 @@
 		D4B9444418AF37B20079C03E /* NSMutableString+RJScheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+RJScheme.m"; sourceTree = "<group>"; };
 		D4C4057D18961A77000FB608 /* RJProcedure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJProcedure.h; sourceTree = "<group>"; };
 		D4C4057E18961A77000FB608 /* RJProcedure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJProcedure.m; sourceTree = "<group>"; };
+		D4F153AB18BDC02E005B36D7 /* MultiplyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplyTests.m; sourceTree = "<group>"; };
+		D4F153AD18BDC21C005B36D7 /* DivideTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DivideTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,16 +231,17 @@
 			isa = PBXGroup;
 			children = (
 				D4011A3818B48AD900710628 /* Supporting Files */,
-				D4011A3D18B48AD900710628 /* ArithmeticTests.m */,
 				D414D03918BB1AF0009A250F /* BeginTests.m */,
 				D414D02B18B9D5A5009A250F /* BooleanTests.m */,
 				D414D02D18BABEEF009A250F /* ComparatorTests.m */,
 				D414D03718BB14AB009A250F /* DefineTests.m */,
+				D4F153AD18BDC21C005B36D7 /* DivideTests.m */,
 				D414D03318BAE52A009A250F /* IfTests.m */,
 				D414D02918B9D2A2009A250F /* InequalityTests.m */,
 				D414D03B18BB1CC4009A250F /* LambdaTests.m */,
 				D414D01818B87D4E009A250F /* ListTests.m */,
 				D414D04218BC8041009A250F /* MinusTests.m */,
+				D4F153AB18BDC02E005B36D7 /* MultiplyTests.m */,
 				D414D03D18BB2B8A009A250F /* PlusTests.m */,
 				D414D01A18B91BF1009A250F /* QuoteTests.m */,
 				D414D03518BB0CC6009A250F /* SetTests.m */,
@@ -505,11 +508,11 @@
 				D414CFE318B5BF52009A250F /* NSError+RJScheme.m in Sources */,
 				D414D01918B87D4E009A250F /* ListTests.m in Sources */,
 				D414D01B18B91BF1009A250F /* QuoteTests.m in Sources */,
+				D4F153AC18BDC02E005B36D7 /* MultiplyTests.m in Sources */,
 				D414D02C18B9D5A5009A250F /* BooleanTests.m in Sources */,
 				D414CFF418B5BFA0009A250F /* RJGreaterThanEqualProcedure.m in Sources */,
 				D414CFEA18B5BF72009A250F /* RJSymbolTable.m in Sources */,
 				D414CFF518B5BFA3009A250F /* RJLessThanProcedure.m in Sources */,
-				D4011A3E18B48AD900710628 /* ArithmeticTests.m in Sources */,
 				D414CFFF18B5BFCA009A250F /* RJEqProcedure.m in Sources */,
 				D414D03A18BB1AF0009A250F /* BeginTests.m in Sources */,
 				D414D02A18B9D2A2009A250F /* InequalityTests.m in Sources */,
@@ -537,6 +540,7 @@
 				D414CFF218B5BF9A009A250F /* RJNotProcedure.m in Sources */,
 				D414CFF818B5BFAE009A250F /* RJConsProcedure.m in Sources */,
 				D414D02E18BABEEF009A250F /* ComparatorTests.m in Sources */,
+				D4F153AE18BDC21C005B36D7 /* DivideTests.m in Sources */,
 				D414CFEC18B5BF78009A250F /* RJProcedure.m in Sources */,
 				D414CFE818B5BF6B009A250F /* RJEnv.m in Sources */,
 				D414CFFA18B5BFB9009A250F /* RJCdrProcedure.m in Sources */,
