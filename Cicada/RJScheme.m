@@ -739,6 +739,7 @@ NSString *RJLocalDefinitions = @"(begin \
     _globalEnvironment[[RJSymbol symbolWithName:@"append"]] = [[RJAppendProcedure alloc] initWithName:@"append"];
     _globalEnvironment[[RJSymbol symbolWithName:@"length"]] = [[RJLengthProcedure alloc] initWithName:@"length"];
     _globalEnvironment[[RJSymbol symbolWithName:@"boolean?"]] = [[RJIsBooleanProcedure alloc] initWithName:@"boolean?"];
+    _globalEnvironment[[RJSymbol symbolWithName:@"display"]] = [[RJDisplayProcedure alloc] initWithName:@"display"];
 }
 
 @end

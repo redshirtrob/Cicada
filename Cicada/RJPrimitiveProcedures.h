@@ -19,3 +19,4 @@
 #import "RJAppendProcedure.h"
 #import "RJLengthProcedure.h"
 #import "RJIsBooleanProcedure.h"
+#import "RJDisplayProcedure.h"
